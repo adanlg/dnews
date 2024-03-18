@@ -134,6 +134,7 @@ const handleAuth = async () => {
 
   renderUser(user);
   renderError();
+  document.getElementById('post-section').style.display = 'block'; 
 };
 
 const renderUser = (user) => {
@@ -143,6 +144,77 @@ const renderUser = (user) => {
 const renderError = (error) => {
   elError.innerHTML = error ? JSON.stringify(error.message, null, 2) : '';
 };
+
+async function submitPost() {
+  if (!_supabaseAuthenticated) {
+    window.alert('You need to authenticate first.');
+    return;
+  }
+
+  const postText = document.getElementById('post-text').value;
+  const postImageFile = document.getElementById('post-image').files[0];
+
+  try {
+    // Upload the image and get the URL
+    const imageUrl = await uploadImageToStorage(postImageFile);
+
+    // Prepare the JSON content for the 'post_content' column
+    const postContent = JSON.stringify({ text: postText, imageUrl: imageUrl });
+
+    // Insert post into Supabase
+    const { data: postData, error: postError } = await _supabaseAuthenticated
+      .from('publications')
+      .insert([{
+        address: globalEthereumAddress, // The user's address
+        image: imageUrl,                 // URL of the uploaded image
+        num_likes: 0,                    // Initial number of likes
+        time: new Date().toISOString(),  // Current timestamp
+        post_num: Date.now(),            // Use the timestamp as a post number (you might want a different logic for production)
+        post_content: postContent        // The JSON content
+      }]);
+
+    if (postError) throw postError;
+
+    window.alert('Post created successfully!');
+    document.getElementById('post-text').value = '';
+    document.getElementById('post-image').value = '';
+  } catch (error) {
+    console.error('Error creating post:', error);
+    window.alert('Failed to create post.');
+  }
+}
+
+
+// Placeholder function for image upload - replace this with your actual image upload logic
+// This function uploads an image to Supabase Storage and returns the public URL.
+async function uploadImageToStorage(imageFile) {
+  // Replace 'public' with your Supabase Storage Bucket name if it's different.
+  const bucketName = 'publications-images';
+
+  // Generate a unique file name - this example uses the current timestamp.
+  // You should use a more robust method in production.
+  const fileName = `${Date.now()}-${imageFile.name}`;
+
+  // Upload the image file to Supabase Storage
+  const { data, error } = await _supabaseAuthenticated.storage
+    .from(bucketName)
+    .upload(fileName, imageFile);
+
+  // Throw an error if the upload failed
+  if (error) {
+    throw error;
+  }
+
+  // Once the upload is successful, create a public URL for the file
+  const fileUrl = `${SUPABASE_URL.replace('.co', '.in')}/storage/v1/object/public/${bucketName}/${fileName}`;
+
+  // Return the public URL of the uploaded image
+  return fileUrl;
+}
+
+// Add event listener for the submit post button
+document.getElementById('submit-post').addEventListener('click', submitPost);
+
 
 function init() {
   elBtnMetamask.addEventListener('click', async () => {

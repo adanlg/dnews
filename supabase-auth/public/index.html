@@ -20,7 +20,14 @@
       <button class="btn" id="getUser">Get users as authenticated user</button>
       <button class="btn" id="getUserAnon">Get users as anon user</button>
       <button class="btn" id="like">Like</button>
-
+<!-- Place this section within the <main> tag -->
+      <div id="post-section" style="display: none;">
+        <h2>Create a Post</h2>
+        <textarea id="post-text" placeholder="What's on your mind?"></textarea>
+        <input type="file" id="post-image" accept="image/*" />
+        <button class="btn" id="submit-post">Submit Post</button>
+      </div>
+      
       <div id="user"></div>
     </main>
 
