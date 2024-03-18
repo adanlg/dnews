@@ -46,7 +46,7 @@
     "@types/jest": "^29.5.0",
     "@types/node": "^16.18.11",
     "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
+    "@types/react-dom": "^18.2.22",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
