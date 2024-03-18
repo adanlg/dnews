@@ -60,12 +60,12 @@ export async function verifyMessage({ networkType, signature, message }: VerifyM
 
   const authData = result.toJSON();
 
-  let { data: user } = await supabase.from('users').select('*').eq('moralis_provider_id', authData.profileId).single();
+  let { data: user } = await supabase.from('users').select('*').eq('moralis_provi', authData.profileId).single();
 
   if (!user) {
     const response = await supabase
       .from('users')
-      .insert({ moralis_provider_id: authData.profileId, metadata: authData })
+      .insert({ moralis_provi: authData.profileId, metadata: authData })
       .single();
     user = response.data;
   }
