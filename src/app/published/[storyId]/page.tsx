@@ -24,7 +24,7 @@ const page = async ({ params }: { params: { storyId: string } }) => {
         <div>
             <Navbar/>
             <RenderStory AuthorFirstName={Author.firstName} AuthorImage={Author.imageUrl} AuthorLastName={Author.lastName} PublishedStory={PublishedStory.response} />
-            <AuthorSpecific AuthorFirstName={Author.firstName} AuthorImage={Author.imageUrl} AuthorLastName={Author.lastName} PublishedStory={PublishedStory.response} AuthorEmail={Author.emailAddresses[0].emailAddress} />
+            <AuthorSpecific AuthorFirstName={Author.firstName} AuthorImage={Author.imageUrl} AuthorLastName={Author.lastName} PublishedStory={PublishedStory.response} AuthorEmail={Author.web3Wallets[0].Web3Wallet} />
         </div>
     )
 }

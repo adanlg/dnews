@@ -40,8 +40,8 @@ const StoryList = ({allTopics,UserTags}: Props) => {
         fetchStory()
     },[searchparams])
 
-  return (
-    <div>
+return (
+    <div className="flex flex-col items-center">
         <div className='flex items-center space-x-6 border-b-[1px] text-sm opacity-60'>
             <span onClick={() => setShowPopUp(!showPopup)} className='pb-3'>
                 <Plus size={20}/>
@@ -51,14 +51,20 @@ const StoryList = ({allTopics,UserTags}: Props) => {
                 <Link key={index} href={`/?tag=${Tag.value}`} className={`pb-3 ${Tag.value === `${tag}` ? "border-b-[1px] border-neutral-950":""}`}>{Tag.label}</Link>
             ))}
         </div>
-        {filteredStories.map((story) => (
-            <StoryItem key={story.id} story={story} />
-        ))}
+        
+        {/* This div centers the StoryItem components on medium and larger screens */}
+        <div className="w-full md:w-auto md:mx-auto">
+            {filteredStories.map((story) => (
+                <StoryItem key={story.id} story={story} />
+            ))}
+        </div>
+        
         {showPopup && (
             <AddTagComp allTopics={allTopics} setShowPopUp={setShowPopUp} UserTags={UserTags}/>
         )}
     </div>
-  )
+);
+
 }
 
 export default StoryList

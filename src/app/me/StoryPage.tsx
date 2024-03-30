@@ -44,8 +44,8 @@ const StoryPage = ({stories,TotalDrafts,TotalPublished,TotalSaved}: Props) => {
     }
 
   return (
-    <div className='max-w-[1000px] mx-auto mt-12'>
-        <div className='flex items-center justify-between'>
+    <div className='w-full mx-auto mt-12'>
+    <div className='flex items-center justify-between'>
             <h1 className='text-[42px] font-semibold'>Your Stories</h1>
             <button onClick={MakeNewStory} className='bg-green-600 hover:bg-green-700 px-4 py-[6px] rounded-full text-white text-sm'>New Story+</button>
         </div>

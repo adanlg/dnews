@@ -16,7 +16,11 @@ const config: Config = {
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: '100%', // add required value here
+            img: {
+              marginTop: '0',
+              marginBottom: '0',
+              maxWidth: '100%',
+            },
           }
       }
       }
