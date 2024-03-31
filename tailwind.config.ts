@@ -6,6 +6,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage: {
@@ -20,7 +21,7 @@ const config: Config = {
               marginTop: '0',
               marginBottom: '0',
               maxWidth: '100%',
-            },
+            },            
           }
       }
       }

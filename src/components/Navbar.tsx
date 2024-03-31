@@ -24,6 +24,8 @@ const Navbar = () => {
     }
 
     return (
+        <div className='dark:bg-white dark:text-black px-8 py-2 border-b-[1px]'>
+
         <div className='px-8 py-2 border-b-[1px]'>
             <div className='flex items-center justify-between'>
                 <div className='flex items-center space-x-3'>
@@ -61,6 +63,8 @@ const Navbar = () => {
                 </div>
             </div>
         </div>
+        </div>
+
     );
 };
 
