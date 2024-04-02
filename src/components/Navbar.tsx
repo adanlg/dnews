@@ -24,7 +24,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='dark:bg-white dark:text-black px-8 py-2 border-b-[1px]'>
+        // <div className='dark:bg-white dark:text-black px-8 py-2 border-b-[1px]'>
 
         <div className='px-8 py-2 border-b-[1px]'>
             <div className='flex items-center justify-between'>
@@ -63,7 +63,7 @@ const Navbar = () => {
                 </div>
             </div>
         </div>
-        </div>
+        // </div>
 
     );
 };

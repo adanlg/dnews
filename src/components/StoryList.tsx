@@ -41,6 +41,7 @@ const StoryList = ({allTopics,UserTags}: Props) => {
     },[searchparams])
 
 return (
+    
     <div className="flex flex-col items-center">
         <div className='flex items-center space-x-6 border-b-[1px] text-sm opacity-60'>
             <span onClick={() => setShowPopUp(!showPopup)} className='pb-3'>

@@ -14,7 +14,8 @@ export const getAllComments = async (storyId:string, parentCommentId?:string) =>
                     parentCommentId:null
                 }, 
                 include:{
-                    Clap:true,
+                    Claps:true,
+                    Likes:true,
                     replies:true
                 }
             })
@@ -27,7 +28,8 @@ export const getAllComments = async (storyId:string, parentCommentId?:string) =>
                 parentCommentId
             }, 
             include:{
-                Clap:true,
+                Claps:true,
+                Likes:true,
                 replies:true
             }
         })
@@ -53,3 +55,4 @@ export const NumberOfComments = async (storyId:string) => {
         return {error: "Error getting number oof comments"}
     }
 }
+

@@ -3,10 +3,13 @@ import Link from 'next/link';
 import React from 'react'
 import Image from 'next/image';
 import ClapComponent from './ClapComponent';
+import LikeDislikeComponent from './LikeDislikeComponent';
 import SaveComponent from './SaveComponent';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { ClapCount, ClapCountByUser } from '@/actions/Clap';
+import { likeCount, dislikeCount, userLikeStatus } from '@/actions/LikeDislike';
+
 import { CheckSaved } from '@/actions/Save';
 
 type Props = {
@@ -20,6 +23,7 @@ const AuthorStories = ({story,AuthorFirstName,AuthorImage,AuthorLastName}: Props
     const [userClaps, setUserclaps] = useState<number>(0)
     const [totalClaps, setTotalClaps] = useState<number>(0)
     const [SavedStatus, setSavedStatus] = useState<boolean>(false)
+    const [likeStatus, setLikeStatus] = useState<boolean | null>(null) 
 
 
     useEffect(() => {
@@ -73,8 +77,8 @@ const AuthorStories = ({story,AuthorFirstName,AuthorImage,AuthorLastName}: Props
 
     // Split the text into words and select the first 20
     const first10Words = textWithoutHtml.split(/\s+/).slice(0, 10).join(' ');
-  return (
-    <Link key={story.id} href={`/published/${story.id}`}>
+    return (
+        <Link key={story.id} href={`/published/${story.id}`}>
             <Image src={imgSrc ? imgSrc : "/no-image.jpg"} width={250} height={200} alt='Image' />
             <div className='flex items-center space-x-2 mt-5'>
                 <Image src={AuthorImage} width={20} height={20} alt='User' />
@@ -84,12 +88,13 @@ const AuthorStories = ({story,AuthorFirstName,AuthorImage,AuthorLastName}: Props
             <p className='mt-2 text-sm text-neutral-500'>{first10Words} ...</p>
             <div className='flex items-center justify-between mt-3'>
                 <div className='flex items-center space-x-4'>
-                    <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps}/>
+                    <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps} />
                     <SaveComponent storyId={story.id} SavedStatus={SavedStatus} />
+                    <LikeDislikeComponent storyId={story.id} initialLikeStatus={likeStatus} /> {/* Agregado */}
                 </div>
             </div>
         </Link>
-  )
-}
+    );
+};
 
-export default AuthorStories
+export default AuthorStories;

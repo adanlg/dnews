@@ -1,24 +1,28 @@
-import { Story } from '@prisma/client'
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { AuthorDetail } from '@/app/me/StoryPage'
-import ClapComponent from '@/app/published/ClapComponent'
-import SaveComponent from '@/app/published/SaveComponent'
-import { CheckSaved } from '@/actions/Save'
-import { ClapCount, ClapCountByUser } from '@/actions/Clap'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { Story } from '@prisma/client';
+import Image from 'next/image';
+import Link from 'next/link';
+import ClapComponent from '@/app/published/ClapComponent'; // Asegúrate de que este es el camino correcto
+import LikeDislikeComponent from '@/app/published/LikeDislikeComponent'; // Suponiendo que has creado este componente
+import { CheckSaved } from '@/actions/Save';
+import { ClapCount, ClapCountByUser } from '@/actions/Clap';
+import { likeCount, dislikeCount, userLikeStatus } from '@/actions/LikeDislike';
+
 
 type Props = {
-    key: string,
-    story:Story
+    //key: string,
+    story:Story;
+    initialLikeStatus: boolean | null; // Ajusta aquí
+
 }
 
-const StoryItem = ({key,story}: Props) => {
+const StoryItem = ({story}: Props) => {
     const [userClaps, setUserclaps] = useState<number>(0)
     const [totalClaps, setTotalClaps] = useState<number>(0)
     const [SavedStatus, setSavedStatus] = useState<boolean>(false)
+    const [initialLikeStatus, setInitialLikeStatus] = useState<boolean | null>(null);
+    const [totalDislikes, setTotalDislikes] =useState<number>(0)
+    const [totalLikes, setTotalLikes] =useState<number>(0)
 
 
     useEffect(() => {
@@ -74,32 +78,58 @@ const StoryItem = ({key,story}: Props) => {
 
 
 
-        return (
-            <div className='mt-5 mx-auto max-w-4xl'>
-                <Link href={`/published/${story.id}`} className='block my-8 border-b-[1px] pb-10 border-neutral-100'>
-                    {/* The grid layout changes from single column to two columns at the md breakpoint */}
-                    <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
-                        {/* Image container */}
-                        {/* On small screens, this will be full width. On md screens, it will take up the left half. */}
-                        <div className='w-full flex justify-center mb-4 md:mb-0 md:justify-end'>
+ 
+    useEffect(() => {
+        // Asunciones similares para obtener claps
+        const fetchLikesDislikes = async () => {
+            const totalLikes = await likeCount(story.id);
+            const totalDislikes = await dislikeCount(story.id);
+            const initialStatus = await userLikeStatus(story.id);
+            setTotalLikes(totalLikes);
+            setTotalDislikes(totalDislikes);
+            setInitialLikeStatus(initialStatus);
+        };
+
+        fetchLikesDislikes();
+    }, [story.id]);
+
+    return (
+        <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-900 dark:hover:bg-zinc-800">
+            <Link href={`/published/${story.id}`}>
+                <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
+                    <div className='md:w-full md:flex md:justify-center mb-4 md:mb-0 md:justify-end'>
+                        {/* En pantallas menores a md, la imagen ocupará todo el ancho sin redondear las esquinas o aplicar sombras. En md o mayores, se mantienen los estilos originales */}
+                        <div className="md:rounded-lg md:overflow-hidden w-full" style={{ width: '100%', paddingBottom: '56.25%', position: 'relative' }}>
                             <Image 
                                 src={imgSrc || "/no-image.jpg"} 
                                 alt='Story Image' 
-                                layout='responsive' 
-                                width={200} // These are for maintaining aspect ratio
-                                height={200} 
-                                objectFit='cover' // This will crop the image to fill the container
+                                layout='fill'
+                                objectFit='cover'
+                                className="w-full md:rounded-lg"
                             />
                         </div>
-                        {/* Title container */}
-                        {/* On small screens, the title is below the image. On md screens, it is to the right. */}
-                        <div className='w-full text-center md:text-left'>
-                            <h1 className='text-xl font-bold py-3'>{H1Element}</h1>
+                    </div>
+                    <div className='w-full text-center md:text-left'>
+                        <h1 className='text-xl font-bold py-3 text-black dark:text-white'>{H1Element}</h1>
+                        {/* Incluye otros elementos como descripción, autor, botones de acción, etc. */}
+                        <div className='flex space-x-4 justify-center md:justify-start'>
+                            <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps}/>
+                            <LikeDislikeComponent 
+                                storyId={story.id} 
+                                initialLikeStatus={initialLikeStatus} 
+                                totalLikes={totalLikes}
+                                totalDislikes={totalDislikes}
+                                // Puedes también pasar totalLikes y totalDislikes si tu componente los necesita
+                            />
+                            {/* Incluye otros componentes según sea necesario */}
                         </div>
                     </div>
-                </Link>
-            </div>
-        );
+                </div>
+            </Link>
+        </div>
+
+
+    );
     };
     
     export default StoryItem;

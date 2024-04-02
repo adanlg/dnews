@@ -1,13 +1,15 @@
 'use client'
 import { getAllComments } from '@/actions/Comments'
-import { Clap, Comment } from '@prisma/client'
+import { Clap, Comment,Like } from '@prisma/client'
 import axios from 'axios'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import UserBadge from './UserBadge'
 import { ClapCount, ClapCountByUser } from '@/actions/Clap'
+import { likeCount, dislikeCount, userLikeStatus } from '@/actions/LikeDislike';
 import ClapComponent from './ClapComponent'
+import LikeDislikeComponent from './LikeDislikeComponent';
 
 type Props = {
     AuthorImage:string
