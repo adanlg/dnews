@@ -94,7 +94,8 @@ const StoryItem = ({story}: Props) => {
     }, [story.id]);
 
     return (
-        <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-900 dark:hover:bg-zinc-800">
+        <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-800 md:dark:hover:scale-105 transition-transform duration-300
+          ">
             <Link href={`/published/${story.id}`}>
                 <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
                     <div className='md:w-full md:flex md:justify-center mb-4 md:mb-0 md:justify-end'>

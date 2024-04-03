@@ -1,6 +1,6 @@
 'use client'
 import { getAllComments } from '@/actions/Comments'
-import { Clap, Comment,Like } from '@prisma/client'
+import { Clap, Comment, Like } from '@prisma/client'
 import axios from 'axios'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -125,9 +125,9 @@ const RenderComments = ({storyId, parentCommentId}:{storyId:string, parentCommen
     return (
         <div className='mt-10 border-t-[1px]'>
             {comments.map((comment,index) => {
-                const clapCounts = comment.Clap.map((clap) => clap.clapCount)
+                const clapCounts = comment.Clap?.map((clap) => clap.clapCount) || [];
                 const totalClaps = clapCounts.reduce((acc,curr)=> acc + curr ,0)
-                return(
+                                return(
                     <div key={index} className='m-4 mt-5 py-4 border-b-[1px] border-neutral-100'>
                         <UserBadge userId={comment.userId} createdAt={comment.createdAt}/>
                         <p className='py-3 text-neutral-600 text-sm ml-3'>{comment.content}</p>
