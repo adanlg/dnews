@@ -7,11 +7,14 @@ import CommentComponent from './CommentComponent'
 import ShareComponent from './ShareComponent'
 import SaveComponent from './SaveComponent'
 import { ClapCount, ClapCountByUser } from '@/actions/Clap'
+import { likeCount, dislikeCount, userLikeStatus  } from '@/actions/LikeDislike'
+
 import { getCurrentuser } from '@/actions/User'
 import { NumberOfComments } from '@/actions/Comments'
 import { CheckSaved } from '@/actions/Save'
 import FollowComponent from './FollowComponent'
 import "highlight.js/styles/github.css"
+import LikeDislikeComponent from './LikeDislikeComponent'
 
 type Props = {
     AuthorFirstName:string | null
@@ -33,6 +36,10 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
     const h1elemntwithouttag = stripHtmlTags(h1Element)
     
     const clapCounts = await ClapCount(PublishedStory.id) 
+    const likeCounts = await likeCount(PublishedStory.id)
+    const dislikeCounts = await dislikeCount(PublishedStory.id)
+    const likeStatus = await userLikeStatus(PublishedStory.id)
+
     const UserClaps = await ClapCountByUser(PublishedStory.id)
 
     const CurrentUser = await getCurrentuser()
@@ -53,7 +60,10 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
     : content;
 
     const finalSanitizedContent = sanitizedContent.replace(/<h1[^>]*>[\s\S]*?<\/h1>|<select[^>]*>[\s\S]*?<\/select>|<textarea[^>]*>[\s\S]*?<\/textarea>/gi, '');
-  return (
+
+
+
+    return (
     <div className='flex items-center justify-center mt-6 max-w-[800px] mx-auto'>
         <div>
             <h1 className='text-4xl font-bold my-8'>{h1elemntwithouttag}</h1>
@@ -67,6 +77,8 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
             <div className='border-y-[1px] border-neutral-200 py-3 mt-6 flex items-center justify-between px-3'>
                 <div className='flex items-center space-x-4'>
                     <ClapComponent storyId={PublishedStory.id} ClapCount={clapCounts} UserClaps={UserClaps}/>
+                    <LikeDislikeComponent storyId={PublishedStory.id} totalLikes={likeCounts} totalDislikes={dislikeCounts} initialLikeStatus={likeStatus}/>
+
                     <CommentComponent NumberCommnets={NumberCommnets.reponse ? NumberCommnets.reponse : 0} AuthorFirstName={CurrentUser.firstName} AuthorImage={CurrentUser.imageUrl} AuthorLastName={CurrentUser.lastName}/>
                 </div>
                 <div className='flex items-center space-x-4'>
@@ -82,5 +94,7 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
     </div>
   )
 }
-
 export default RenderStory
+
+
+//hay que hacerlo con await y desde like actions
