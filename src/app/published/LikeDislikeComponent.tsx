@@ -17,7 +17,7 @@ const LikeDislikeComponent = ({ storyId, commentId, initialLikeStatus, totalLike
 
     const updateLikeStatus = async (newStatus: boolean) => {
         try {
-            const endpoint = commentId ? '/api/likeDislikeComment' : '/api/likeDislikeStory';
+            const endpoint = commentId ? '/api/likeDislikeComment' : '/api/likeDislike';
             await axios.post(endpoint, {
                 storyId,
                 commentId,
@@ -33,7 +33,7 @@ const LikeDislikeComponent = ({ storyId, commentId, initialLikeStatus, totalLike
 
     const updateLDislikeStatus = async (newStatus: boolean) => {
         try {
-            const endpoint = commentId ? '/api/likeDislikeComment' : '/api/likeDislikeStory';
+            const endpoint = commentId ? '/api/likeDislikeComment' : '/api/likeDislike';
             await axios.post(endpoint, {
                 storyId,
                 commentId,

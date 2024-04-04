@@ -10,4 +10,11 @@
   }
   
 
+  .cl-profilePage__security {
+    display: none;
+  }
 
+  .cl-navbarButton__security {
+    display: none;
+  }
+  

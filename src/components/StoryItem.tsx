@@ -94,7 +94,7 @@ const StoryItem = ({story}: Props) => {
     }, [story.id]);
 
     return (
-        <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-800 md:dark:hover:scale-105 transition-transform duration-300
+        <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-800 md:hover:scale-105 transition-transform duration-300
           ">
             <Link href={`/published/${story.id}`}>
                 <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
@@ -111,7 +111,7 @@ const StoryItem = ({story}: Props) => {
                         </div>
                     </div>
                     <div className='w-full text-center md:text-left'>
-                        <h1 className='text-xl font-bold py-3 text-black dark:text-white'>{H1Element}</h1>
+                        <h1 className='text-xl font-bold py-3  '>{H1Element}</h1>
                         {/* Incluye otros elementos como descripción, autor, botones de acción, etc. */}
                         <div className='flex space-x-4 justify-center md:justify-start'>
                             <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps}/>
