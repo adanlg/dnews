@@ -76,7 +76,7 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
             </div>
             <div className='border-y-[1px] border-neutral-200 py-3 mt-6 flex items-center justify-between px-3'>
                 <div className='flex items-center space-x-4'>
-                    <ClapComponent storyId={PublishedStory.id} ClapCount={clapCounts} UserClaps={UserClaps}/>
+                    {/* <ClapComponent storyId={PublishedStory.id} ClapCount={clapCounts} UserClaps={UserClaps}/> */}
                     <LikeDislikeComponent storyId={PublishedStory.id} totalLikes={likeCounts} totalDislikes={dislikeCounts} initialLikeStatus={likeStatus}/>
 
                     <CommentComponent NumberCommnets={NumberCommnets.reponse ? NumberCommnets.reponse : 0} AuthorFirstName={CurrentUser.firstName} AuthorImage={CurrentUser.imageUrl} AuthorLastName={CurrentUser.lastName}/>

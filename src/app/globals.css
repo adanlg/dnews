@@ -18,3 +18,12 @@
     display: none;
   }
   
+  :root {
+    --color-bg-default: #e8eaed; /* Light mode background */
+    --color-border-default: #bdc1c6; /* Light mode border */
+  }
+  
+  .dark {
+    --color-bg-default: #bdc1c6; /* Dark mode background (switched for demonstration) */
+    --color-border-default: #e8eaed; /* Dark mode border (switched for demonstration) */
+  }

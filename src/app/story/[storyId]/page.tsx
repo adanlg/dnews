@@ -1,5 +1,7 @@
 import Navbar from '@/components/Navbar'
 import React from 'react'
+// import NavbarStory , {NewStory} from '../AgregatedStory'
+
 import NewStory from '../New-Story'
 import NavbarStory from '../NavbarStory'
 import { getStoryById } from '@/actions/getStories'

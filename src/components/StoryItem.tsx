@@ -94,8 +94,11 @@ const StoryItem = ({story}: Props) => {
     }, [story.id]);
 
     return (
+    
         <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-800 md:hover:scale-105 transition-transform duration-300
           ">
+    {/* //     <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10" 
+    //  style={{ backgroundColor: '#e8eaed', borderColor: '#bdc1c6' }}> */}
             <Link href={`/published/${story.id}`}>
                 <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
                     <div className='md:w-full md:flex md:justify-center mb-4 md:mb-0 md:justify-end'>
@@ -114,7 +117,7 @@ const StoryItem = ({story}: Props) => {
                         <h1 className='text-xl font-bold py-3  '>{H1Element}</h1>
                         {/* Incluye otros elementos como descripción, autor, botones de acción, etc. */}
                         <div className='flex space-x-4 justify-center md:justify-start'>
-                            <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps}/>
+                            {/* <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps}/> */}
                             <LikeDislikeComponent 
                                 storyId={story.id} 
                                 initialLikeStatus={initialLikeStatus} 

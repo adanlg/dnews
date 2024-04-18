@@ -13,6 +13,7 @@
     "@heroicons/react": "^1.0.6",
     "@prisma/client": "^5.9.1",
     "axios": "^1.6.7",
+    "ethers": "^5.7.2",
     "highlight.js": "^11.9.0",
     "lucide-react": "^0.323.0",
     "medium-editor": "^5.23.3",

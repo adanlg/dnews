@@ -13,5 +13,9 @@ declare global {
       // Ejemplo de propiedades customizadas
       secretNotes?: string;
     }
+
+    interface Window {
+      ethereum?: any;
+    }
   }
   

@@ -47,18 +47,28 @@ const Navbar = () => {
                     animation: slideOut 0.5s forwards;
                 }
             `}</style>
-            <div className='px-8 py-2 border-b-[1px]'>
+            <div className='px-8 py-2 dark:bg-zinc-800'>
                 <div className='flex items-center justify-between'>
                     {/* Hamburger Menu Button */}
-                    <button className='z-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <button className= 'md:hidden z-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         <MenuIcon className="h-6 w-6" />
                     </button>
                     <div className='flex-grow'>
                         <Link href='/' passHref>
-                            <div className='flex justify-center'>
+                            <div className='flex justify-center md:justify-between w-full'>
                                 <Image src='/medium-icon.svg' width={40} height={40} alt='Medium Logo' />
                             </div>
                         </Link>
+                    </div>
+                    <div className='hidden md:flex items-center space-x-9 pr-8'>
+                    <button onClick={MakeNewStory} className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
+                        <p className='font-light text-sm'>Write</p>
+                    </button>
+                    <Link href='/me/drafts' passHref>
+                        <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
+                            <p className='font-light text-sm'>Me</p>
+                        </span>
+                    </Link>
                     </div>
                     <UserButton signInUrl='/' className='z-50' />
                 </div>
