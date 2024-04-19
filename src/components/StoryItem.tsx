@@ -7,6 +7,7 @@ import LikeDislikeComponent from '@/app/published/LikeDislikeComponent'; // Supo
 import { CheckSaved } from '@/actions/Save';
 import { ClapCount, ClapCountByUser } from '@/actions/Clap';
 import { likeCount, dislikeCount, userLikeStatus } from '@/actions/LikeDislike';
+import { AuthorDetail } from '@/app/me/StoryPage'
 
 
 type Props = {
@@ -118,6 +119,8 @@ const StoryItem = ({story}: Props) => {
                         {/* Incluye otros elementos como descripción, autor, botones de acción, etc. */}
                         <div className='flex space-x-4 justify-center md:justify-start'>
                             {/* <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps}/> */}
+                            <AuthorDetail story={story} />
+
                             <LikeDislikeComponent 
                                 storyId={story.id} 
                                 initialLikeStatus={initialLikeStatus} 

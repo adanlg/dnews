@@ -56,7 +56,7 @@ const Navbar = () => {
                     <div className='flex-grow'>
                         <Link href='/' passHref>
                             <div className='flex justify-center md:justify-between w-full'>
-                                <Image src='/medium-icon.svg' width={40} height={40} alt='Medium Logo' />
+                            <Image src='/TheSimpleNewspaper.gif' width={90} height={40} alt='Medium Logo'/>
                             </div>
                         </Link>
                     </div>
