@@ -10,7 +10,7 @@ import { Story } from '@prisma/client'
 import { getStoryById } from '@/actions/getStories'
 import Select from "react-select"
 import { ethers } from 'ethers';
-
+// import '../ethereum.d.ts'; 
 
 type Props = {
     storyId: string
@@ -29,12 +29,12 @@ const NavbarStory = ({ storyId, CurrentUserFirstName, CurrentUserLastName, Curre
     const approvalAmount = 5 // Asumiendo que el token tiene 18 decimales
 
     async function setupNetwork() {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.providers.Web3Provider((window as any).ethereum);
         const { chainId } = await provider.getNetwork();
         if (chainId !== 11155111) {
             try {
                 await provider.send('wallet_switchEthereumChain', [{ chainId: ethers.utils.hexlify(11155111) }]);
-            } catch (switchError) {
+            } catch (switchError: any) {
                 if (switchError.code === 4902) {
                     try {
                         await provider.send('wallet_addEthereumChain', [{

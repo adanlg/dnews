@@ -70,7 +70,8 @@ const Navbar = () => {
                         </span>
                     </Link>
                     </div>
-                    <UserButton signInUrl='/' className='z-50' />
+                    <UserButton signInUrl='/'/>
+                     {/* className='z-50'  */}
                 </div>
                 <div className={`fixed top-0 left-0 h-full w-64 bg-black transform ${isMenuOpen ? 'menu-container' : 'menu-hidden'} z-40`}>
                     <div className='text-white p-5'>

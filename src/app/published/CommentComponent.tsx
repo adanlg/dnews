@@ -101,7 +101,7 @@ export default CommentComponent
 
 interface Comments extends Comment {
     replies:Comment[]
-    Clap:Clap[]
+    Claps:Clap[]
 }
 
 const RenderComments = ({storyId, parentCommentId}:{storyId:string, parentCommentId?:string}) => {
@@ -127,7 +127,7 @@ const RenderComments = ({storyId, parentCommentId}:{storyId:string, parentCommen
     return (
         <div className='mt-10 border-t-[1px]'>
             {comments.map((comment,index) => {
-                const clapCounts = comment.Clap?.map((clap) => clap.clapCount) || [];
+                const clapCounts = comment.Claps?.map((clap) => clap.clapCount) || [];
                 const totalClaps = clapCounts.reduce((acc,curr)=> acc + curr ,0)
                                 return(
                     <div key={index} className='m-4 mt-5 py-4 border-b-[1px] border-neutral-100'>

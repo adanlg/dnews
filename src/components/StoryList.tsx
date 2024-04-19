@@ -56,7 +56,7 @@ return (
         {/* This div centers the StoryItem components on medium and larger screens */}
         <div className="w-full md:w-auto md:mx-auto">
             {filteredStories.map((story) => (
-                <StoryItem key={story.id} story={story} />
+                <StoryItem key={story.id} story={story} initialLikeStatus={null}/>
             ))}
         </div>
         

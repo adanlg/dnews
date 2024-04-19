@@ -90,7 +90,7 @@ const AuthorStories = ({story,AuthorFirstName,AuthorImage,AuthorLastName}: Props
                 <div className='flex items-center space-x-4'>
                     {/* <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps} /> */}
                     <SaveComponent storyId={story.id} SavedStatus={SavedStatus} />
-                    <LikeDislikeComponent storyId={story.id} initialLikeStatus={likeStatus} /> {/* Agregado */}
+                    {/* <LikeDislikeComponent storyId={story.id} initialLikeStatus={likeStatus} /> Agregado */}
                 </div>
             </div>
         </Link>

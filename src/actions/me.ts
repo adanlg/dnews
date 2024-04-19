@@ -43,7 +43,7 @@ export const getSavedStory = async () => {
         const stories = await prisma.story.findMany({
             where:{
                 publish:true,
-                Save:{
+                Saves:{
                     some:{
                         userId
                     }
