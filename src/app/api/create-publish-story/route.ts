@@ -1,3 +1,4 @@
+/*
 import { NextResponse, NextRequest } from "next/server";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/app/prismadb";
@@ -59,3 +60,4 @@ async function handler(request: NextRequest) {
 }
 
 export default handler;
+*/
