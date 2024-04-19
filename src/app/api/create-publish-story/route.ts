@@ -1,15 +1,15 @@
 import { NextResponse, NextRequest } from "next/server";
 import { auth } from "@clerk/nextjs";
-import prisma from "@/app/prismadb"
+import prisma from "@/app/prismadb";
 
 // Handle both creating/updating and publishing a story
-export async function handler(request: NextRequest) {
+async function handler(request: NextRequest) {
     const { userId } : { userId: string | null } = auth();
     const body = await request.json();
     const { storyId, content, topics, publish } = body;
 
     // Check user authentication
-    if(!userId) {
+    if (!userId) {
         throw new Error('No user is signed in');
     }
 
@@ -57,3 +57,5 @@ export async function handler(request: NextRequest) {
         }
     }
 }
+
+export default handler;
