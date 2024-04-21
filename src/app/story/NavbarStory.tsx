@@ -105,7 +105,7 @@ const NavbarStory = ({ storyId, CurrentUserFirstName, CurrentUserLastName, Curre
         <div className='flex items-center justify-between'>
             <div className='flex items-center space-x-3'>
             <Link href='/'>
-                <Image src='/SIMPLE.gif' width={40} height={40} alt='Medium Logo'/>
+                <Image src='/TheSimpleNewspaper.gif' width={90} height={40} alt='Medium Logo'/>
             </Link>
             </div>
             <div className='flex items-center space-x-7'>
