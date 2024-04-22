@@ -36,7 +36,7 @@ export const ClapCount = async (storyId:string, commentId?:string) => {
 
 export const ClapCountByUser = async (storyId:string, commentId?:string) => {
     const userId = await getCurrentUserId()
-    if(!userId) throw new Error("No logged user")
+    if(!userId) return 0;
 
     try {
         if(!commentId){

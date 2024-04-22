@@ -173,7 +173,6 @@ const NewStory = ({storyId, Storycontent}: Props) => {
 
   return (
     <main id='container' className='max-w-[800px] mx-auto relative font-mono mt-8'>
-        <p className='absolute -top-[72px] opacity-30'>{saving ? "saving...":"saved"}</p>
         <div
             id='editable'
             ref={contentEditabeRef}

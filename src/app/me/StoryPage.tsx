@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { getuser } from '@/actions/User'
+import { getUser } from '@/actions/User'
 import { User } from '@clerk/nextjs/server'
 Image
 
@@ -160,7 +160,7 @@ export const AuthorDetail = ({story}:{story:Story}) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const User = await getuser(story.authorId)
+                const User = await getUser(story.authorId)
                 setuser(User)
             } catch (error) {
                 console.log("Error getting user", error)

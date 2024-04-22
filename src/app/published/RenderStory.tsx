@@ -9,7 +9,7 @@ import SaveComponent from './SaveComponent'
 import { ClapCount, ClapCountByUser } from '@/actions/Clap'
 import { likeCount, dislikeCount, userLikeStatus  } from '@/actions/LikeDislike'
 
-import { getCurrentuser } from '@/actions/User'
+import { getCurrentUser } from '@/actions/User'
 import { NumberOfComments } from '@/actions/Comments'
 import { CheckSaved } from '@/actions/Save'
 import FollowComponent from './FollowComponent'
@@ -42,7 +42,7 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
 
     const UserClaps = await ClapCountByUser(PublishedStory.id)
 
-    const CurrentUser = await getCurrentuser()
+    const CurrentUser = await getCurrentUser()
 
     const NumberCommnets = await NumberOfComments(PublishedStory.id)
     
@@ -79,7 +79,12 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
                     {/* <ClapComponent storyId={PublishedStory.id} ClapCount={clapCounts} UserClaps={UserClaps}/> */}
                     <LikeDislikeComponent storyId={PublishedStory.id} totalLikes={likeCounts} totalDislikes={dislikeCounts} initialLikeStatus={likeStatus}/>
 
-                    <CommentComponent NumberCommnets={NumberCommnets.reponse ? NumberCommnets.reponse : 0} AuthorFirstName={CurrentUser.firstName} AuthorImage={CurrentUser.imageUrl} AuthorLastName={CurrentUser.lastName}/>
+                    <CommentComponent 
+  NumberCommnets={NumberCommnets.reponse ? NumberCommnets.reponse : 0} 
+  AuthorFirstName={CurrentUser?.firstName || 'Jonh'} // Usar encadenamiento opcional con un valor predeterminado
+  AuthorImage={CurrentUser?.imageUrl || '/randomUser.png'} // Proporciona una imagen predeterminada si imageUrl no está disponible
+  AuthorLastName={CurrentUser?.lastName || 'Doe'} // Valor predeterminado para lastName
+/>
                 </div>
                 <div className='flex items-center space-x-4'>
                     <SaveComponent storyId={PublishedStory.id} SavedStatus={SavedStatus.Status}/>

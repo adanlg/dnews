@@ -4,7 +4,7 @@ import { getCurrentUserId } from "./User"
 
 export const GetSelectedTopics = async () => {
     const UserId = await getCurrentUserId()
-    if(!UserId) throw new Error('User not logged in')
+    if(!UserId) return {Tags: []}
 
     try {
         const tags = await prisma.topics.findFirst({

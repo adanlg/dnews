@@ -1,5 +1,5 @@
 'use client';
-import { UserButton } from '@clerk/nextjs';
+import { UserButton, SignInButton, useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -10,6 +10,7 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline';
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const router = useRouter();
+    const { isSignedIn } = useUser(); 
 
     const MakeNewStory = async () => {
         try {
@@ -72,13 +73,15 @@ const Navbar = () => {
                     </div>
                     <UserButton signInUrl='/'/>
                      {/* className='z-50'  */}
+                    {!isSignedIn && <SignInButton />}
+
                 </div>
                 <div className={`fixed top-0 left-0 h-full w-64 bg-black transform ${isMenuOpen ? 'menu-container' : 'menu-hidden'} z-40`}>
                     <div className='text-white p-5'>
                         {/* Close button */}
                         <div className='flex justify-between items-start'>
                             <div className='text-left' style={{marginTop: '15%'}}>
-                                <Link href='/me/drafts'><span className='block py-2'>Drafts</span></Link>
+                                <Link href='/tokenomics'><span className='block py-2'>Tokenomics</span></Link>
                                 <span onClick={MakeNewStory} className='block text-left py-2 cursor-pointer'>Write</span>
                                 <Link href='/me/drafts'><span className='block py-2'>Me</span></Link>
                             </div>

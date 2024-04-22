@@ -4,7 +4,7 @@ import { NextResponse, NextRequest } from "next/server"
 
 export async function POST(request: NextRequest){
     const {userId} = auth()
-    if(!userId) throw new Error ('No user found')
+    if(!userId) return NextResponse.next()
 
     try {
         const body = await request.json()

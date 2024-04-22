@@ -1,4 +1,4 @@
-import { getuser } from "@/actions/User"
+import { getUser } from "@/actions/User"
 import { getPublishedStoryById } from "@/actions/getStories"
 import Navbar from "@/components/Navbar"
 import RenderStory from "../RenderStory"
@@ -18,7 +18,7 @@ const page = async ({ params }: { params: { storyId: string } }) => {
             </div>
         )
     }
-    const Author:User = await getuser(PublishedStory.response?.authorId)
+    const Author:User = await getUser(PublishedStory.response?.authorId)
 
     return (
         <div>
