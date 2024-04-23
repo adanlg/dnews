@@ -1,5 +1,6 @@
 'use server'
 // Utiliza el módulo de Clerk y sus funciones para manejar autenticación y obtención de datos de usuario.
+import { NextResponse } from "next/server"
 
 import { auth, clerkClient } from "@clerk/nextjs";
 
@@ -15,19 +16,12 @@ export const getCurrentUserId = async () => {
 }
 
 // Devuelve el objeto del usuario autenticado o null si no hay un usuario autenticado.
-export const getCurrentUser = async () => {
-    try {
-        const { userId } = auth();
-        if (!userId) return null;  // Retorna null si no hay usuario autenticado.
-        
-        const user = await clerkClient.users.getUser(userId);
-        return JSON.parse(JSON.stringify(user));  // Devuelve el usuario autenticado.
-    } catch (error) {
-        console.error("Error fetching user: ", error);
-        return null;  // Devuelve null si la obtención del usuario falla.
-    }
+export const getCurrentuser = async () => {
+    const {userId} = auth()
+    if(!userId) return NextResponse.next()
+    const User = await clerkClient.users.getUser(userId)
+    return JSON.parse(JSON.stringify(User))
 }
-
 // Devuelve el objeto del usuario dado un userId, o null si el userId no es válido.
 export const getUser = async (userId: string) => {
     if (!userId) return null;  // Retorna null si no se proporciona userId.

@@ -1,4 +1,4 @@
-import { getuser } from '@/actions/User'
+import { getUser } from '@/actions/User'
 import { User } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -14,7 +14,7 @@ const UserBadge = ({userId,createdAt}: Props) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const User = await getuser(userId)
+                const User = await getUser(userId)
                 if (User) setUser(User)
             } catch (error) {
                 console.log(error)

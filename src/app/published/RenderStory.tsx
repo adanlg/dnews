@@ -9,7 +9,7 @@ import SaveComponent from './SaveComponent'
 import { ClapCount, ClapCountByUser } from '@/actions/Clap'
 import { likeCount, dislikeCount, userLikeStatus  } from '@/actions/LikeDislike'
 
-import { getCurrentUser } from '@/actions/User'
+import { getCurrentuser } from '@/actions/User'
 import { NumberOfComments } from '@/actions/Comments'
 import { CheckSaved } from '@/actions/Save'
 import FollowComponent from './FollowComponent'
@@ -42,7 +42,7 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
 
     const UserClaps = await ClapCountByUser(PublishedStory.id)
 
-    const CurrentUser = await getCurrentUser()
+    const CurrentUser = await getCurrentuser()
 
     const NumberCommnets = await NumberOfComments(PublishedStory.id)
     

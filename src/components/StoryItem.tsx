@@ -96,7 +96,7 @@ const StoryItem = ({story}: Props) => {
 
     return (
     
-        <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-800 md:hover:scale-105 transition-transform duration-300
+        <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-700 md:hover:scale-105 transition-transform duration-300
           ">
     {/* //     <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10" 
     //  style={{ backgroundColor: '#e8eaed', borderColor: '#bdc1c6' }}> */}
@@ -115,7 +115,7 @@ const StoryItem = ({story}: Props) => {
                         </div>
                     </div>
                     <div className='w-full text-center md:text-left'>
-                        <h1 className='text-xl font-bold py-3  '>{H1Element}</h1>
+                    <h1 className='font-times text-xl font-bold py-3'>{H1Element}</h1>
                         {/* Incluye otros elementos como descripción, autor, botones de acción, etc. */}
                         <div className='flex space-x-4 justify-center md:justify-start'>
                             {/* <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps}/> */}
