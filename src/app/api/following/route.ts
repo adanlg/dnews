@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   const { userId }: { userId: string | null } = auth();
   if (!userId) {
     
-    return NextResponse.next;
+    return NextResponse.next();
   }
 
   try {
