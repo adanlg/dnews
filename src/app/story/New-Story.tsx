@@ -185,8 +185,8 @@ const NewStory = ({storyId, Storycontent}: Props) => {
                     <div dangerouslySetInnerHTML={{__html:Storycontent}}></div>
             ):(
                 <div>
-                    <h1 className='dark:text-white font-medium' data-h1-placeholder='New Story Title'></h1>
-                    <p className='dark:text-white' data-p-placeholder='Write your story ...'></p>
+                    <h1 className='font-medium' data-h1-placeholder='New Story Title'></h1>
+                    <p className='' data-p-placeholder='Write your story ...'></p>
                 </div>
             )}
         </div>
