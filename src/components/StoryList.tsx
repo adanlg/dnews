@@ -42,7 +42,7 @@ const StoryList = ({allTopics,UserTags}: Props) => {
 
 return (
     
-    <div className="flex flex-col items-center dark:bg bg-stone-800">
+<div className="flex flex-col items-center bg-stone-100">
         {/* <div className='flex items-center space-x-6 border-b-[1px] text-sm opacity-60'>
             <span onClick={() => setShowPopUp(!showPopup)} className='pb-3'>
                 <Plus size={20}/>

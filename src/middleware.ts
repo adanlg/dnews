@@ -7,7 +7,8 @@ export default authMiddleware({
   publicRoutes: [
     '/',               // Página de inicio
     '/published',
-    '/published/(.*)'      // Página general de publicaciones
+    '/published/(.*)',
+    '/tokenomics'     // Página general de publicaciones
         // Cualquier subruta bajo /published
   ]
 });

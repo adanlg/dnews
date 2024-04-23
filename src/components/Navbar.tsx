@@ -48,7 +48,7 @@ const Navbar = () => {
                     animation: slideOut 0.5s forwards;
                 }
             `}</style>
-            <div className='px-8 py-2 dark:bg-zinc-700'>
+            <div className='px-8 py-2 bg-zinc-500'>
                 <div className='flex items-center justify-between'>
                     {/* Hamburger Menu Button */}
                     <button className= 'md:hidden z-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>

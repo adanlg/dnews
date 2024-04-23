@@ -95,47 +95,37 @@ const StoryItem = ({story}: Props) => {
     }, [story.id]);
 
     return (
-    
-        <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10 md:dark:bg-zinc-700 md:hover:scale-105 transition-transform duration-300
-          ">
-    {/* //     <div className="max-w-4xl mx-auto my-5 md:p-4 rounded-lg shadow-md dark:shadow-white/5 md:dark:shadow-white/10" 
-    //  style={{ backgroundColor: '#e8eaed', borderColor: '#bdc1c6' }}> */}
+        <div className="max-w-4xl mx-auto p-2 md:rounded-lg md:my-5 shadow-md shadow-white/5 hover:scale-105 transition-transform duration-300 bg-zinc-300 md:shadow-white/10">
             <Link href={`/published/${story.id}`}>
                 <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
-                    <div className='md:w-full md:flex md:justify-center mb-4 md:mb-0 md:justify-end'>
-                        {/* En pantallas menores a md, la imagen ocupará todo el ancho sin redondear las esquinas o aplicar sombras. En md o mayores, se mantienen los estilos originales */}
-                        <div className="md:rounded-lg md:overflow-hidden w-full" style={{ width: '100%', paddingBottom: '56.25%', position: 'relative' }}>
+                    <div className='w-full flex justify-center mb-0'>  {/* Eliminamos el margen inferior mb-4 */}
+                        <div className="w-11/12 md:w-full rounded-lg overflow-hidden shadow-lg md:shadow-none relative" style={{ paddingBottom: '56.25%' }}>
                             <Image 
                                 src={imgSrc || "/no-image.jpg"} 
                                 alt='Story Image' 
                                 layout='fill'
                                 objectFit='cover'
-                                className="w-full md:rounded-lg"
+                                className="rounded-lg"
                             />
                         </div>
                     </div>
-                    <div className='w-full text-center md:text-left'>
-                    <h1 className='font-times text-xl font-bold py-3'>{H1Element}</h1>
-                        {/* Incluye otros elementos como descripción, autor, botones de acción, etc. */}
-                        <div className='flex space-x-4 justify-center md:justify-start'>
-                            {/* <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps}/> */}
+                    <div className='w-full text-center pl-4 pr-4'>
+                        <h1 className='text-gray-800 font-serif text-xl font-bold py-3'>{H1Element}</h1>
+                        <div className='text-gray-800 flex space-x-4 justify-center md:justify-start'>
                             <AuthorDetail story={story} />
-
                             <LikeDislikeComponent 
                                 storyId={story.id} 
                                 initialLikeStatus={initialLikeStatus} 
                                 totalLikes={totalLikes}
                                 totalDislikes={totalDislikes}
-                                // Puedes también pasar totalLikes y totalDislikes si tu componente los necesita
                             />
-                            {/* Incluye otros componentes según sea necesario */}
                         </div>
                     </div>
                 </div>
             </Link>
+            {/* Añadimos una línea delimitadora entre cada elemento de la lista */}
+            <hr className="border-t border-gray-600 md:hidden" />
         </div>
-
-
     );
     };
     
