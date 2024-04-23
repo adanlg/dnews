@@ -45,7 +45,7 @@ export const dislikeCount = async (storyId: string, commentId?: string) => {
 // Función para verificar si el usuario actual ha marcado "Me gusta" o "No me gusta" en una historia o comentario
 export const userLikeStatus = async (storyId: string, commentId?: string) => {
     const userId = await getCurrentUserId();
-    if (!userId) throw new Error("No logged user");
+    if (!userId) return null;
 
     try {
         const like = await prisma.like.findFirst({

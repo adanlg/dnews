@@ -105,7 +105,7 @@ const NavbarStory = ({ storyId, CurrentUserFirstName, CurrentUserLastName, Curre
         <div className='flex items-center justify-between'>
             <div className='flex items-center space-x-3'>
             <Link href='/'>
-                <Image src='/TheSimpleNewspaper.gif' width={90} height={40} alt='Medium Logo'/>
+                <Image src='/TheSimpleNewspaper.gif' width={40} height={40} alt='Medium Logo'/>
             </Link>
             </div>
             <div className='flex items-center space-x-7'>
@@ -121,6 +121,8 @@ const NavbarStory = ({ storyId, CurrentUserFirstName, CurrentUserLastName, Curre
 }
 
 export default NavbarStory
+////chek point i 
+//dont undestand why the other ckepoint didint work
 
 type SaveStoryPopUptypes = {
     storyId:string
@@ -192,7 +194,6 @@ const SaveStoryPopUp = ({storyId,PublishStory,setShowPopUp,CurrentUserFirstName,
                 &times;
             </span>
             <div className='max-w-[900px] mx-auto md:mt-28 mt-10 grid md:grid-cols-2 grid-cols-1 gap-14'>
-                <div className='max-md:hidden'>
                     <p className='font-semibold'>Story Preview</p>
                     <div className='w-full h-[250px] bg-gray-100 rounded my-3 border-b-[1px]'>
                         {imgSrc && (
@@ -201,8 +202,7 @@ const SaveStoryPopUp = ({storyId,PublishStory,setShowPopUp,CurrentUserFirstName,
                     </div>
                     <h1 className='border-b-[1px] text-[18px] font-semibold py-2'>{h1elemntwithouttag}</h1>
                     <p className='border-b-[1px] py-2 text-sm text-neutral-500 pt-3'>{first10Words}</p>
-                    <p className='font-medium text-sm pt-2'>Note: <span className='font-normal text-neutral-500'>Changes here will affect how your story appears in public places like Medium’s homepage and in subscribers’ inboxes — not the contents of the story itself.</span></p>
-                </div>
+
                 <div>
                     <p className='py-2'>Publishing to: <span>{CurrentUserFirstName} {CurrentUserLastName}</span></p>
                     <p className='text-sm pb-3 pt-1 '>Add or change topics (up to 5) so readers know what your story is about</p>

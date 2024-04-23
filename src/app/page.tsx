@@ -10,7 +10,7 @@ export default async function Home() {
   const allTopics = await getUniqueTopics()
   const UserTags = await GetSelectedTopics()
   return (
-    <main className="mx-auto ">
+    <main className="mx-auto bg-stone-800">
       <Navbar/>
       <div className="w-full mt-12">
       <ThemeProvider enableSystem ={true} attribute="class">

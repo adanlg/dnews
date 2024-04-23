@@ -4,7 +4,7 @@ import { getCurrentUserId } from "./User"
 
 export const CheckFollowing = async (authorId:string) => {
     const CurrentUserid = await getCurrentUserId()
-    if (!CurrentUserid) return 
+    if (!CurrentUserid) return {ifFollowing: false}
     try {
         const IsFollowed = await prisma.following.findFirst({
             where:{
