@@ -43,7 +43,7 @@ const StoryList = ({allTopics,UserTags}: Props) => {
 return (
     
     <div className="flex flex-col items-center dark:bg bg-stone-800">
-        <div className='flex items-center space-x-6 border-b-[1px] text-sm opacity-60'>
+        {/* <div className='flex items-center space-x-6 border-b-[1px] text-sm opacity-60'>
             <span onClick={() => setShowPopUp(!showPopup)} className='pb-3'>
                 <Plus size={20}/>
             </span>
@@ -51,7 +51,7 @@ return (
             {UserTags.map((Tag,index) => (
                 <Link key={index} href={`/?tag=${Tag.value}`} className={`pb-3 ${Tag.value === `${tag}` ? "border-b-[1px] border-neutral-950":""}`}>{Tag.label}</Link>
             ))}
-        </div>
+        </div> */}
         
         {/* This div centers the StoryItem components on medium and larger screens */}
         <div className="w-full md:w-auto md:mx-auto">
