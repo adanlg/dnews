@@ -124,9 +124,10 @@ const StoryItem = ({story}: Props) => {
                 </div>
             </Link>
             {/* Añadimos una línea delimitadora entre cada elemento de la lista */}
-            <hr className="border-t border-gray-600 md:hidden" />
+            <hr className="border-t border-gray-600 " />
         </div>
     );
     };
     
     export default StoryItem;
+    //chekkk
