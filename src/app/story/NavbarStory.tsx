@@ -139,7 +139,7 @@ const SaveStoryPopUp = ({storyId,PublishStory,setShowPopUp,CurrentUserFirstName,
     const [Story, setStory] = useState<Story>()
     const [selectedtopics, setSelectedTopics] = useState<string[]>([])
     // Dentro del componente SaveStoryPopUp
-    const [thumbnailUrl, setThumbnailUrl] = useState<string>('');
+    const [thumbnailUrl, setThumbnailUrl] = useState<string>('');  
 
     // Ref para el input de archivo
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -226,19 +226,62 @@ const SaveStoryPopUp = ({storyId,PublishStory,setShowPopUp,CurrentUserFirstName,
 
     const imgSrc = ImageMatch ? ImageMatch[1] : ''
     return(
+        <div className='px-4 py-2'>
+
         <div className='fixed bg-gray-50 w-full z-20 overflow-auto top-0 left-0 right-0 bottom-0'>
             <span onClick={(e) => {e.preventDefault() ;setShowPopUp(false)}} className='absolute top-4 right-6 text-3xl cursor-pointer'>
                 &times;
             </span>
             <div className='max-w-[900px] mx-auto md:mt-28 mt-10 grid md:grid-cols-2 grid-cols-1 gap-14'>
-                    <p className='font-semibold'>Story Preview</p>
-                    <div className='w-full h-[250px] bg-gray-100 rounded my-3 border-b-[1px]'>
-                        {imgSrc && (
-                            <Image src={imgSrc} width={250} height={250} alt='Preview Image' className='w-full h-full object-cover'/>
+
+            <p className='font-semibold'>Story Preview</p>
+            <div>
+            <div className='hidden md:flex items-center justify-center'> 
+            <button onClick={() => fileInputRef.current?.click()} className="px-4 py-2  padding-bottom:-5 bg-gray-600 hover:bg-gray-700 rounded-full text-white text-sm mt-8">
+                Add thumbnail +
+            </button>
+            <input
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                onChange={handleThumbnailChange}
+            />
+            {/* { (
+                <img src={thumbnailUrl} alt="Thumbnail" className="w-full h-auto mt-2" />
+            )} */}
+        </div>
+        </div>
+            </div>
+            <div className='max-w-[900px] mx-auto md:mt-28 mt-10 grid md:grid-cols-2 grid-cols-1 gap-14'>
+            <div>
+                    <h1 className='border-b-[1px] text-[18px] font-semibold py-2'>{h1elemntwithouttag}</h1>
+                    {/* <p className='border-b-[1px] py-2 text-sm text-neutral-500 pt-3'>{first10Words}</p> */}
+                    </div>
+                    <div className='w-full h-[250px] bg-gray-400 rounded my-3 border-b-[1px] flex items-center justify-center'>
+                        {thumbnailUrl ? (
+                            <Image src={thumbnailUrl} width={250} height={250} alt='Preview Image' className='w-full h-full object-cover'/>
+                        ) : (
+                            <span className='text-white text-lg'>No Image</span> // Mensaje cuando no hay imagen
                         )}
                     </div>
-                    <h1 className='border-b-[1px] text-[18px] font-semibold py-2'>{h1elemntwithouttag}</h1>
-                    <p className='border-b-[1px] py-2 text-sm text-neutral-500 pt-3'>{first10Words}</p>
+
+
+                    <div className='flex items-center justify-center md:hidden '> 
+            <button onClick={() => fileInputRef.current?.click()} className="px-4 py-2  padding-bottom:-5 bg-gray-600 hover:bg-gray-700 rounded-full text-white text-sm mt-8">
+                Add thumbnail +
+            </button>
+            <input
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                onChange={handleThumbnailChange}
+            />
+            {/* { (
+                <img src={thumbnailUrl} alt="Thumbnail" className="w-full h-auto mt-2" />
+            )} */}
+        </div>
 
                 <div>
                     <p className='py-2'>Publishing to: <span>{CurrentUserFirstName} {CurrentUserLastName}</span></p>
@@ -259,26 +302,26 @@ const SaveStoryPopUp = ({storyId,PublishStory,setShowPopUp,CurrentUserFirstName,
                     className='basic-multi-select'
                     classNamePrefix='Add a topic ...'
                     />
-                    <button onClick={() => PublishStory(selectedtopics)} className='px-4 py-2 bg-green-600 hover:bg-green-700 rounded-full text-white text-sm mt-8'>
-                        Publish now
-                    </button>
+
+                <div className="flex items-center space-x-3">
+                <button
+                    onClick={() => PublishStory(selectedtopics)}
+                    className={`px-4 py-2 rounded-full text-white text-sm mt-8 ${thumbnailUrl ? 'bg-green-600 hover:bg-green-700' : 'bg-green-300 cursor-not-allowed'}`}
+                    disabled={!thumbnailUrl} // El botón se desactiva si no hay thumbnailUrl
+                >
+                    Publish now
+                </button>
+                {!thumbnailUrl && ( // Solo muestra el mensaje de advertencia si no hay thumbnailUrl
+                    <span className="text-red-500 text-sm mt-8">
+                    Add a thumbnail before publishing.
+                    </span>
+                )}
+                </div>  
+
                 </div>
             </div>
-            <div>
-            <button onClick={() => fileInputRef.current?.click()} className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Añadir Miniatura
-            </button>
-            <input
-                type="file"
-                accept="image/*"
-                style={{ display: 'none' }}
-                ref={fileInputRef}
-                onChange={handleThumbnailChange}
-            />
-            {thumbnailUrl && (
-                <img src={thumbnailUrl} alt="Thumbnail" className="w-full h-auto mt-2" />
-            )}
-        </div>
+            </div>
+
         </div>
     )
 }

@@ -13,6 +13,7 @@ export default async function Home() {
     <main className="mx-auto bg-stone-100">
       <Navbar/>
       <div className="">
+        
       {/* <ThemeProvider enableSystem ={true} attribute="class"> */}
 
         <StoryList allTopics={allTopics.response} UserTags={UserTags.Tags}/>
