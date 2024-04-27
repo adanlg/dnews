@@ -2,7 +2,7 @@
 import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {Search} from "lucide-react"
 import axios from "axios"
 import { useRouter } from 'next/navigation'
@@ -11,6 +11,8 @@ import { getStoryById } from '@/actions/getStories'
 import Select from "react-select"
 import { ethers } from 'ethers';
 // import '../ethereum.d.ts'; 
+import { ImageUpload } from '@/actions/cloudinary';
+
 
 type Props = {
     storyId: string
@@ -136,6 +138,41 @@ type SaveStoryPopUptypes = {
 const SaveStoryPopUp = ({storyId,PublishStory,setShowPopUp,CurrentUserFirstName,CurrentUserId,CurrentUserLastName}:SaveStoryPopUptypes) => {
     const [Story, setStory] = useState<Story>()
     const [selectedtopics, setSelectedTopics] = useState<string[]>([])
+    // Dentro del componente SaveStoryPopUp
+    const [thumbnailUrl, setThumbnailUrl] = useState<string>('');
+
+    // Ref para el input de archivo
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleThumbnailChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            // Usar la función ImageUpload para cargar la imagen
+            const formData = new FormData();
+            formData.append('file', file);
+            try {
+                const uploadedImageUrl = await ImageUpload(formData);
+                setThumbnailUrl(uploadedImageUrl);
+                updateThumbnailUrl(storyId, uploadedImageUrl);
+            } catch (error) {
+                console.error('Error uploading image', error);
+            }
+        }
+    };
+
+    // Función para actualizar la URL de la miniatura en la base de datos
+    const updateThumbnailUrl = async (storyId: string, thumbnailUrl: string) => {
+        try {
+            const response = await axios.patch('/api/new-thumbnail', {
+                storyId,
+                thumbnailUrl
+            });            if (response.status === 200) {
+                console.log('Thumbnail updated successfully');
+            }
+        } catch (error) {
+            console.error('Error updating thumbnail', error);
+        }
+    };
     useEffect(() => {
         const fetchStoryById = async () => {
             try {
@@ -227,6 +264,21 @@ const SaveStoryPopUp = ({storyId,PublishStory,setShowPopUp,CurrentUserFirstName,
                     </button>
                 </div>
             </div>
+            <div>
+            <button onClick={() => fileInputRef.current?.click()} className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Añadir Miniatura
+            </button>
+            <input
+                type="file"
+                accept="image/*"
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                onChange={handleThumbnailChange}
+            />
+            {thumbnailUrl && (
+                <img src={thumbnailUrl} alt="Thumbnail" className="w-full h-auto mt-2" />
+            )}
+        </div>
         </div>
     )
 }

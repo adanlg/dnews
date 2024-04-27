@@ -8,18 +8,20 @@ datasource db {
 }
 
 model Story {
-  id        String    @id @default(dbgenerated("concat('story_', replace(cast(gen_random_uuid() as text), '-', ''))")) @db.Text
-  authorId  String
-  content   String?
-  topics    String[]
-  publish   Boolean   @default(false)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Claps     Clap[]
-  Comments  Comment[]
-  Saves     Save[]
-  Likes     Like[] // Relación uno a muchos con Like
+  id           String    @id @default(dbgenerated("concat('story_', replace(cast(gen_random_uuid() as text), '-', ''))")) @db.Text
+  authorId     String
+  content      String?
+  topics       String[]
+  thumbnailUrl String?   // Campo opcional para almacenar la URL de la miniatura
+  publish      Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  Claps        Clap[]
+  Comments     Comment[]
+  Saves        Save[]
+  Likes        Like[] // Relación uno a muchos con Like
 }
+
 
 model Comment {
   id              String    @id @default(dbgenerated("concat('comment_', replace(cast(gen_random_uuid() as text), '-', ''))")) @db.Text

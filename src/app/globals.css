@@ -22,10 +22,13 @@
     --color-bg-default: #e8eaed; /* Light mode background */
     --color-border-default: #bdc1c6; /* Light mode border */
   }
-  
+  .body {
+    color-scheme: light;
+}
+
+
   /* .dark {
     --color-bg-default: #bdc1c6; 
     --color-border-default: #e8eaed;  
   } 
-  
   */
