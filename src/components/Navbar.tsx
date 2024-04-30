@@ -1,16 +1,30 @@
-'use client';
+
+'use client'
+
 import { UserButton, SignInWithMetamaskButton, useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import WalletConnectButton from './WalletConnect'; // Ensure the path is correct
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const router = useRouter();
-    const { isSignedIn } = useUser(); 
+    const { isSignedIn } = useUser();
+
+    useEffect(() => {
+        // Update the device type upon mounting and resizing
+        const handleResize = () => {
+            setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const MakeNewStory = async () => {
         try {
@@ -77,9 +91,13 @@ const Navbar = () => {
                     </div>
                     <UserButton signInUrl='/'/>
                     {!isSignedIn && (
-                      <SignInWithMetamaskButton>
-                        Sign in with Metamask
-                      </SignInWithMetamaskButton>
+                        isMobile ? (
+                            <WalletConnectButton className="wallet-connect-btn" onConnect={(account) => console.log(`Connected to ${account}`)} />
+                        ) : (
+                            <SignInWithMetamaskButton>
+                                Sign in with Metamask
+                            </SignInWithMetamaskButton>
+                        )
                     )}
                 </div>
                 <div className={`fixed top-0 left-0 h-full w-64 bg-zinc-500 transform ${isMenuOpen ? 'menu-container' : 'menu-hidden'} z-40`}>
