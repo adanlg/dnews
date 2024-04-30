@@ -1,6 +1,6 @@
 import React from 'react';
 import Web3 from 'web3';
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import WalletConnectProvider from '@walletconnect/web3-provider';
 
 // Define an interface for the component props
 interface WalletConnectButtonProps {
@@ -10,7 +10,7 @@ interface WalletConnectButtonProps {
 
 const WalletConnectButton: React.FC<WalletConnectButtonProps> = ({ className, onConnect }) => {
     const connectWallet = async () => {
-        // Create a WalletConnect Provider with Sepolia configuration
+        // Initialize WalletConnect provider with options
         const provider = new WalletConnectProvider({
             rpc: {
                 // Sepolia's public RPC URL
