@@ -15,6 +15,7 @@ import { CheckSaved } from '@/actions/Save'
 import FollowComponent from './FollowComponent'
 import "highlight.js/styles/github.css"
 import LikeDislikeComponent from './LikeDislikeComponent'
+import styles from './RenderStory.module.css';  // Adjust the path if necessary
 
 type Props = {
     AuthorFirstName:string | null
@@ -64,6 +65,7 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
 
 
     return (
+        
     <div className='flex items-center justify-center mt-6 max-w-[800px] mx-auto'>
         <div>
             <h1 className='text-4xl font-bold my-8'>{h1elemntwithouttag}</h1>
@@ -87,15 +89,15 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
 />
                 </div>
                 <div className='flex items-center space-x-4'>
-                    <SaveComponent storyId={PublishedStory.id} SavedStatus={SavedStatus.Status}/>
+                    {/* <SaveComponent storyId={PublishedStory.id} SavedStatus={SavedStatus.Status}/> */}
                     <ShareComponent/>
-                    <button>
+                    {/* <button>
                         <MoreHorizontal size={24} className='opacity-80 text-green-800'/>
-                    </button>
+                    </button> */}
                 </div>
             </div>
-            <div className='prose my-5 font-mono' dangerouslySetInnerHTML={{__html:finalSanitizedContent}}></div>
-        </div>
+            <div className={`prose my-5 font-mono ${styles.roundedImage}`} dangerouslySetInnerHTML={{ __html:  finalSanitizedContent  }}></div>        
+            </div>
     </div>
   )
 }

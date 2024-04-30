@@ -1,96 +1,43 @@
-import { Story } from '@prisma/client';
-import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 import Image from 'next/image';
-import ClapComponent from './ClapComponent';
-import LikeDislikeComponent from './LikeDislikeComponent';
-import SaveComponent from './SaveComponent';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { ClapCount, ClapCountByUser } from '@/actions/Clap';
-import { likeCount, dislikeCount, userLikeStatus } from '@/actions/LikeDislike';
-
-import { CheckSaved } from '@/actions/Save';
+import Link from 'next/link';
 
 type Props = {
-    story:Story
-    AuthorFirstName:string | null
-    AuthorLastName:string | null
-    AuthorImage: string
+    story: Story;
+    AuthorFirstName: string | null;
+    AuthorLastName: string | null;
+    AuthorImage: string;
 }
 
-const AuthorStories = ({story,AuthorFirstName,AuthorImage,AuthorLastName}: Props) => {
-    const [userClaps, setUserclaps] = useState<number>(0)
-    const [totalClaps, setTotalClaps] = useState<number>(0)
-    const [SavedStatus, setSavedStatus] = useState<boolean>(false)
-    const [likeStatus, setLikeStatus] = useState<boolean | null>(null) 
-
-
-    useEffect(() => {
-        const fetchClapCountByUser = async () => {
-            try {
-                const claps = await ClapCountByUser(story.id)
-                setUserclaps(claps)
-            } catch (error) {
-                console.log("Error fetching the user claps")
-            }
-        }
-        
-        const fetchTotalClaps = async () => {
-            try {
-                const claps = await ClapCount(story.id)
-                setTotalClaps(claps)
-            } catch (error) {
-                console.log("Error fetching the  claps")
-            }
-        }
-
-        const fetchSavedStatus = async () => {
-            try {
-                const Savedstatus = await CheckSaved(story.id)
-                if(Savedstatus.Status)
-                setSavedStatus(Savedstatus.Status)
-            } catch (error) {
-                console.log("Error fetching the saved status")
-            }
-        }
-
-        fetchSavedStatus()
-        fetchTotalClaps()
-        fetchClapCountByUser()
-    },[story.id])
-
-
-    
-    const stripHtmlTags = (htmlString:string) => {
+const AuthorStories = ({ story, AuthorFirstName, AuthorLastName, AuthorImage }: Props) => {
+    const stripHtmlTags = (htmlString: string) => {
         return htmlString.replace(/<[^>]*>/g, '');
     };
-    const match = story.content!.match(/<img[^>]*src=["']([^"']*)["'][^>]*>/);
-    const imgSrc = match ? match[1] : '';
-    const h1match = story.content!.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
 
-    const h1Element = h1match ? h1match[1] : '';
+    const match = story.content?.match(/<img[^>]*src=["']([^"']*)["'][^>]*>/);
+    const imgSrc = match ? match[1] : '/no-image.jpg';
+    const h1match = story.content?.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+    const h1Element = h1match ? stripHtmlTags(h1match[1]) : '';
 
-    const finalh1Element = stripHtmlTags(h1Element)
-    // Use stripHtmlTags to remove HTML tags
-    const textWithoutHtml = stripHtmlTags(story.content!);
-
-    // Split the text into words and select the first 20
-    const first10Words = textWithoutHtml.split(/\s+/).slice(0, 10).join(' ');
     return (
-        <Link key={story.id} href={`/published/${story.id}`}>
-            <Image src={imgSrc ? imgSrc : "/no-image.jpg"} width={250} height={200} alt='Image' />
-            <div className='flex items-center space-x-2 mt-5'>
-                <Image src={AuthorImage} width={20} height={20} alt='User' />
-                <p className='text-xs font-medium'>{AuthorFirstName} {AuthorLastName}</p>
-            </div>
-            <p className='font-bold mt-4'>{finalh1Element}</p>
-            <p className='mt-2 text-sm text-neutral-500'>{first10Words} ...</p>
-            <div className='flex items-center justify-between mt-3'>
-                <div className='flex items-center space-x-4'>
-                    {/* <ClapComponent storyId={story.id} UserClaps={userClaps} ClapCount={totalClaps} /> */}
-                    <SaveComponent storyId={story.id} SavedStatus={SavedStatus} />
-                    {/* <LikeDislikeComponent storyId={story.id} initialLikeStatus={likeStatus} /> Agregado */}
+        <Link href={`/published/${story.id}`}>
+            <div className="max-w-4xl mx-auto p-2 md:rounded-lg md:my-5 shadow-md shadow-black/5 hover:scale-105 transition-transform duration-300 md:shadow-black/10">
+              <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
+                    <div className='w-full flex justify-center'>
+                        <div className="w-11/12 md:w-full rounded-lg overflow-hidden  md:shadow-none relative" style={{ paddingBottom: '56.25%' }}>
+                            <Image 
+                                src={imgSrc || "/no-image.jpg"} 
+                                alt='Story Image' 
+                                layout='fill'
+                                objectFit='cover'
+                                className="rounded-lg"
+                            />
+                        </div>
+                    </div>
+                    <div className='w-full text-center pl-4 pr-4'>
+                        <h1 className=' py-3'>{h1Element}</h1>
+                        <p className=' text-sm'>{AuthorFirstName} {AuthorLastName}</p>
+                    </div>
                 </div>
             </div>
         </Link>

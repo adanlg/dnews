@@ -23,9 +23,12 @@ const page = async ({ params }: { params: { storyId: string } }) => {
     return (
         <div>
             <Navbar/>
+            <div className='px-4 md:px-0'>
+
             <RenderStory AuthorFirstName={Author.firstName} AuthorImage={Author.imageUrl} AuthorLastName={Author.lastName} PublishedStory={PublishedStory.response} />
             <AuthorSpecific AuthorFirstName={Author.firstName} AuthorImage={Author.imageUrl} AuthorLastName={Author.lastName} PublishedStory={PublishedStory.response} AuthorEmail={Author.web3Wallets[0].web3Wallet} />
-        </div>
+            </div>
+            </div>
     )
 }
 

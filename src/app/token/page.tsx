@@ -5,9 +5,14 @@ const BuyTokenPage = () => {
   return (
     <div>
       <Navbar />
-      <h1>Buy Token</h1>
-      <p>Here you would buy your tokens.</p>
-    </div>
+      <div className="flex-grow flex items-center justify-center ">  
+        <div className="max-w-4xl w-full p-6 md:rounded-lg shadow-lg bg-white mt-12 md:mt-24">  
+          <h1 className="text-center text-2xl font-bold text-gray-800 mb-4">Buy Token</h1>
+          <p className="text-center text-gray-600">Coming soon! Stay up to date on social media!</p>
+        </div>
+      </div>
+      </div>
+
   );
 };
 

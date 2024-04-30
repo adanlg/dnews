@@ -1,5 +1,5 @@
 'use client';
-import { UserButton, SignInButton, useUser } from '@clerk/nextjs';
+import { UserButton, SignInWithMetamaskButton, useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -76,7 +76,11 @@ const Navbar = () => {
                         </button>
                     </div>
                     <UserButton signInUrl='/'/>
-                    {!isSignedIn && <SignInButton />}
+                    {!isSignedIn && (
+                      <SignInWithMetamaskButton>
+                        Sign in with Metamask
+                      </SignInWithMetamaskButton>
+                    )}
                 </div>
                 <div className={`fixed top-0 left-0 h-full w-64 bg-zinc-500 transform ${isMenuOpen ? 'menu-container' : 'menu-hidden'} z-40`}>
                     <div className='text-white p-5'>

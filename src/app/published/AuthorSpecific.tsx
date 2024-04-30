@@ -107,7 +107,7 @@ const AuthorSpecific = ({AuthorFirstName,AuthorImage,AuthorLastName,PublishedSto
                 </div>
             </div>
             <p className='text-sm py-5 font-medium'>More from {AuthorFirstName} {AuthorLastName}</p>
-            <div className='grid md:grid-cols-2 grid-cols-1 gap-10'>
+            <div className='grid grid-cols-1 gap-10'>
                 {Stories.map((story,index) => (
                     <AuthorStories key={story.id} AuthorFirstName={AuthorFirstName} AuthorImage={AuthorImage} AuthorLastName={AuthorLastName} story={story}/>
                 ))}
