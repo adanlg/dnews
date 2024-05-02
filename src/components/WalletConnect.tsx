@@ -14,7 +14,7 @@ const WalletConnectButton: React.FC<WalletConnectButtonProps> = ({ className, on
         const provider = new WalletConnectProvider({
             rpc: {
                 // Sepolia's public RPC URL
-                11155111: 'https://rpc.sepolia.dev'
+                11155111: 'https://ethereum-sepolia-rpc.publicnode.com'
             },
             chainId: 11155111, // Sepolia's chain ID
             bridge: "https://bridge.walletconnect.org" // Default bridge
