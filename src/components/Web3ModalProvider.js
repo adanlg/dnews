@@ -2,7 +2,7 @@ import { createWeb3Modal } from '@web3modal/wagmi/react'
 
 import { http, createConfig, WagmiProvider } from 'wagmi'
 import { mainnet, sepolia } from 'wagmi/chains'
-import { walletConnect, injected, coinbaseWallet } from 'wagmi/connectors'
+import { walletConnect, injected, coinbaseWallet} from 'wagmi/connectors'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -28,13 +28,13 @@ const config = createConfig({
   },
   connectors: [
     walletConnect({ projectId, metadata, showQrModal: false }),
-    injected({ shimDisconnect: true }),
+    injected({ shimDisconnect: true , target: 'metaMask' }),
     coinbaseWallet({
       appName: metadata.name,
       appLogoUrl: metadata.icons[0]
-    })
+    }),
   ]
-})
+});
 
 // 3. Create modal
 createWeb3Modal({
