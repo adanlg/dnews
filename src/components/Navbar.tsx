@@ -8,7 +8,8 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import WalletConnectButton from './WalletConnect'; // Ensure the path is correct
+// import WalletConnectButton from './WalletConnect'; // Ensure the path is correct
+import ConnectButton from './Web3ModalProvider';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,18 +63,18 @@ const Navbar = () => {
                     animation: slideOut 0.5s forwards;
                 }
             `}</style>
-            <div className='px-8 py-2 bg-zinc-500'>
-                <div className='flex items-center justify-between'>
-                    <button className='md:hidden z-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                        <MenuIcon className="h-6 w-6" />
-                    </button>
-                    <div className='flex-grow'>
-                        <Link href='/' passHref>
-                            <div className='flex justify-center md:justify-between w-full'>
-                                <Image src='/TheSimpleNewspaper.gif' width={90} height={40} alt='Medium Logo'/>
-                            </div>
-                        </Link>
-                    </div>
+                <div className='px-8 py-2 bg-zinc-500'>
+                    <div className='flex items-center justify-between'>
+                        <button className='md:hidden z-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                            <MenuIcon className="h-6 w-6" />
+                        </button>
+                        <div className='flex-grow'>
+                            <Link href='/' passHref>
+                                <div className='flex justify-center md:justify-between w-full'>
+                                    <Image src='/TheSimpleNewspaper.gif' width={90} height={40} alt='Medium Logo'/>
+                                </div>
+                            </Link>
+                        </div>
                     <div className='hidden md:flex items-center space-x-9 pr-8'>
                         <Link href='/tokenomics' passHref>
                             <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
@@ -88,18 +89,21 @@ const Navbar = () => {
                         <button onClick={MakeNewStory} className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
                             <p className='font-light text-sm'>Write</p>
                         </button>
-                    </div>
-                    <UserButton signInUrl='/'/>
-                    {!isSignedIn && (
-                        isMobile ? (
-                            <WalletConnectButton className="wallet-connect-btn" onConnect={(account) => console.log(`Connected to ${account}`)} />
-                        ) : (
-                            <SignInWithMetamaskButton>
-                                Sign in with Metamask
-                            </SignInWithMetamaskButton>
-                        )
-                    )}
-                </div>
+                        </div>
+                        <UserButton signInUrl='/'/>
+                        {!isSignedIn && (
+                            isMobile ? (
+                            <div className=" wallet-connect-btn ">
+                            <ConnectButton />
+                            </div>
+
+                            ) : (
+                                <SignInWithMetamaskButton>
+                                    Sign in with Metamask
+                                </SignInWithMetamaskButton>
+                            )
+                        )}
+                        </div>
                 <div className={`fixed top-0 left-0 h-full w-64 bg-zinc-500 transform ${isMenuOpen ? 'menu-container' : 'menu-hidden'} z-40`}>
                     <div className='text-white p-5'>
                         <div className='flex justify-between items-start'>

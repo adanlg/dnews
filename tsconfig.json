@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/story/NavbarStory.tsx", "custom-types.d.ts", "ethereum.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/story/NavbarStory.tsx", "custom-types.d.ts", "ethereum.d.ts", "src/components/Web3ModalProvider.js"],
   "exclude": ["node_modules"]
 }
