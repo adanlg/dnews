@@ -51,3 +51,4 @@ const WalletConnectButton: React.FC<WalletConnectButtonProps> = ({ className, on
 };
 
 export default WalletConnectButton;
+
