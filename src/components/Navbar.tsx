@@ -9,7 +9,8 @@ import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 // import WalletConnectButton from './WalletConnect'; // Ensure the path is correct
-import ConnectButton from './Web3ModalProvider';
+import {ConnectButton} from '@rainbow-me/rainbowkit';
+
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
