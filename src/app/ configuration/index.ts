@@ -10,6 +10,7 @@ import {
   base,
   zora,
   goerli,
+  sepolia,
 } from 'wagmi/chains';
 
 // Ensure the project ID is a string
@@ -37,8 +38,8 @@ const avalanche: Chain = {
 // Create wagmiConfig
 export const config = getDefaultConfig({
   appName: "App",
-  chains: [avalanche, mainnet, goerli, polygon, optimism, arbitrum, base, zora],
-  ssr: true,
+  chains: [avalanche, mainnet, goerli, polygon, optimism, arbitrum, base, zora, sepolia],
+  ssr: false,
   projectId,
   storage: createStorage({
     storage: cookieStorage,

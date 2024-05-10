@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState, useEffect } from 'react';
 import config from '../ configuration'
 import {
   RainbowKitProvider,
@@ -18,7 +18,13 @@ export function ContextProvider({
   children: ReactNode
   initialState?: State
 }) {
-  return (
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    setReady(true);  // This will set `ready` once the component mounts on the client-side.
+  }, []);
+
+  return ready ? (
     <WagmiProvider config={config} initialState={initialState}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
@@ -26,5 +32,5 @@ export function ContextProvider({
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
-  )
+  ) : null;
 }

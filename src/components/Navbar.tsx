@@ -10,6 +10,10 @@ import { useRouter } from 'next/navigation';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 // import WalletConnectButton from './WalletConnect'; // Ensure the path is correct
 import {ConnectButton} from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
+// import { useWalletAccessControl } from '@/actions/checks';
+
+import { checkWalletAccess } from '@/actions/checks';
 
 
 const Navbar = () => {
@@ -17,16 +21,8 @@ const Navbar = () => {
     const [isMobile, setIsMobile] = useState(false);
     const router = useRouter();
     const { isSignedIn } = useUser();
+    const { isConnected, address } = useAccount();
 
-    useEffect(() => {
-        // Update the device type upon mounting and resizing
-        const handleResize = () => {
-            setIsMobile(/Mobi|Android/i.test(navigator.userAgent));
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     const MakeNewStory = async () => {
         try {
@@ -34,6 +30,30 @@ const Navbar = () => {
             router.push(`/story/${response.data.id}`);
         } catch (error) {
             console.error("Error creating new story", error);
+        }
+    };
+    const showAddressOrMessage = () => {
+        if (isConnected && address) {
+            alert(`Connected with address: ${address}`);
+        } else {
+            alert("No connected address.");
+        }
+    };
+
+    const handleAccessCheck = async () => {
+        if (isConnected && address) {
+            try {
+                const { hasAccess, message } = await checkWalletAccess(address);
+                alert(`Access status: ${hasAccess ? "Granted" : "Denied"}. ${message}`);
+            } catch (error) {
+                if (error instanceof Error) {  // Type guard for Error
+                    alert(`Error checking access: ${error.message}`);
+                } else {
+                    alert("An unexpected error occurred");
+                }
+            }
+        } else {
+            alert("Please connect your wallet.");
         }
     };
 
@@ -64,18 +84,18 @@ const Navbar = () => {
                     animation: slideOut 0.5s forwards;
                 }
             `}</style>
-                <div className='px-8 py-2 bg-zinc-500'>
-                    <div className='flex items-center justify-between'>
-                        <button className='md:hidden z-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                            <MenuIcon className="h-6 w-6" />
-                        </button>
-                        <div className='flex-grow'>
-                            <Link href='/' passHref>
-                                <div className='flex justify-center md:justify-between w-full'>
-                                    <Image src='/TheSimpleNewspaper.gif' width={90} height={40} alt='Medium Logo'/>
-                                </div>
-                            </Link>
-                        </div>
+            <div className='px-8 py-2 bg-zinc-500'>
+                <div className='flex items-center justify-between'>
+                    <button className='md:hidden z-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                        <MenuIcon className="h-6 w-6" />
+                    </button>
+                    <div className='flex-grow'>
+                        <Link href='/' passHref>
+                            <div className='flex justify-center md:justify-between w-full'>
+                                <Image src='/TheSimpleNewspaper.gif' width={90} height={40} alt='Medium Logo'/>
+                            </div>
+                        </Link>
+                    </div>
                     <div className='hidden md:flex items-center space-x-9 pr-8'>
                         <Link href='/tokenomics' passHref>
                             <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
@@ -90,21 +110,19 @@ const Navbar = () => {
                         <button onClick={MakeNewStory} className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
                             <p className='font-light text-sm'>Write</p>
                         </button>
-                        </div>
-                        <UserButton signInUrl='/'/>
-                        {!isSignedIn && (
-                            isMobile ? (
-                            <div className=" wallet-connect-btn ">
+                    </div>
+                    <UserButton signInUrl='/'/>
+                    {!isSignedIn && (
+                        <div onClick={showAddressOrMessage} className=" wallet-connect-btn ">
                             <ConnectButton />
-                            </div>
-
-                            ) : (
-                                <SignInWithMetamaskButton>
-                                    Sign in with Metamask
-                                </SignInWithMetamaskButton>
-                            )
-                        )}
                         </div>
+                    )}
+                </div>
+                <div>
+                <button onClick={handleAccessCheck} className='text-white bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 transition duration-300'>
+                        Check Access
+                    </button>
+                </div>
                 <div className={`fixed top-0 left-0 h-full w-64 bg-zinc-500 transform ${isMenuOpen ? 'menu-container' : 'menu-hidden'} z-40`}>
                     <div className='text-white p-5'>
                         <div className='flex justify-between items-start'>
@@ -122,6 +140,7 @@ const Navbar = () => {
             </div>
         </>
     );
+    
 };
 
 export default Navbar;
