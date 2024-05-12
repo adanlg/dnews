@@ -13,7 +13,7 @@ import {ConnectButton} from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 // import { useWalletAccessControl } from '@/actions/checks';
 
-import { checkWalletAccess } from '@/actions/checks';
+// import { checkWalletAccess } from '@/actions/checks';
 
 
 const Navbar = () => {
@@ -40,22 +40,22 @@ const Navbar = () => {
         }
     };
 
-    const handleAccessCheck = async () => {
-        if (isConnected && address) {
-            try {
-                const { hasAccess, message } = await checkWalletAccess(address);
-                alert(`Access status: ${hasAccess ? "Granted" : "Denied"}. ${message}`);
-            } catch (error) {
-                if (error instanceof Error) {  // Type guard for Error
-                    alert(`Error checking access: ${error.message}`);
-                } else {
-                    alert("An unexpected error occurred");
-                }
-            }
-        } else {
-            alert("Please connect your wallet.");
-        }
-    };
+    // const handleAccessCheck = async () => {
+    //     if (isConnected && address) {
+    //         try {
+    //             const { hasAccess, message } = await checkWalletAccess(address);
+    //             alert(`Access status: ${hasAccess ? "Granted" : "Denied"}. ${message}`);
+    //         } catch (error) {
+    //             if (error instanceof Error) {  // Type guard for Error
+    //                 alert(`Error checking access: ${error.message}`);
+    //             } else {
+    //                 alert("An unexpected error occurred");
+    //             }
+    //         }
+    //     } else {
+    //         alert("Please connect your wallet.");
+    //     }
+    // };
 
     return (
         <>
@@ -118,11 +118,11 @@ const Navbar = () => {
                         </div>
                     )}
                 </div>
-                <div>
+                {/* <div>
                 <button onClick={handleAccessCheck} className='text-white bg-blue-500 px-4 py-2 rounded hover:bg-blue-600 transition duration-300'>
                         Check Access
                     </button>
-                </div>
+                </div> */}
                 <div className={`fixed top-0 left-0 h-full w-64 bg-zinc-500 transform ${isMenuOpen ? 'menu-container' : 'menu-hidden'} z-40`}>
                     <div className='text-white p-5'>
                         <div className='flex justify-between items-start'>

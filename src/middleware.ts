@@ -10,7 +10,8 @@ export default authMiddleware({
     '/published/(.*)', // Any specific published content
     '/tokenomics',     // Tokenomics information page
     '/api/likeDislike',  // API route for updating like/dislike status
-    '/api/likeDislikeComment'  // API route for updating like/dislike status on comments
+    '/api/likeDislikeComment',
+    '/(.*)'  // API route for updating like/dislike status on comments
   ],
 });
 export const config = {

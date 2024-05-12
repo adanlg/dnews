@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAccount } from 'wagmi'; // Import useAccount from wagmi
 import { ThumbUpIcon, ThumbDownIcon } from '@heroicons/react/outline';
 import { checkWalletAccess } from '@/actions/checks';  // Import your check function
+import { useRouter } from 'next/navigation'; // Import useRouter from Next.js for redirection
 
 type Props = {
     storyId: string;
@@ -18,6 +19,7 @@ const LikeDislikeComponent = ({ storyId, commentId, initialLikeStatus, totalLike
     const [accessGranted, setAccessGranted] = useState<boolean>(false);
     const [userId, setUserId] = useState<string | null>(null);
     const { address, isConnected } = useAccount(); // Use useAccount to get the connected wallet address
+    const router = useRouter(); // Use the useRouter hook for redirection
 
     useEffect(() => {
         // Call the check access function on component mount
@@ -25,7 +27,7 @@ const LikeDislikeComponent = ({ storyId, commentId, initialLikeStatus, totalLike
             if (isConnected && address) {
                 const access = await checkWalletAccess(address); // Pass the address to the check function
                 setAccessGranted(access.hasAccess);
-                setUserId(access.userIdAddress|| null);
+                setUserId(access.userIdAddress || null);
                 if (!access.hasAccess) {
                     alert('Access Denied: ' + access.message);
                 }
@@ -38,9 +40,14 @@ const LikeDislikeComponent = ({ storyId, commentId, initialLikeStatus, totalLike
         verifyAccess();
     }, [address, isConnected]); // Depend on address and isConnected to re-run when they change
 
-    const updateLikeStatus = async (newStatus: boolean) => {
-        if (!accessGranted || !userId) {
-            console.error('Access denied or wallet not connected');
+    const handleLikeClick = async (newStatus: boolean) => {
+        if (!accessGranted) {
+            router.push('/token'); // Redirect to buy token page
+            return;
+        }
+
+        if (!userId) {
+            console.error('Wallet not connected');
             return;
         }
         
@@ -62,16 +69,14 @@ const LikeDislikeComponent = ({ storyId, commentId, initialLikeStatus, totalLike
     return (
         <div className='flex space-x-2'>
             <button 
-                onClick={() => updateLikeStatus(true)}
-                disabled={!accessGranted}  // Disable button if access is not granted
+                onClick={() => handleLikeClick(true)}
                 className="p-2 rounded flex items-center space-x-1"
             >
                 <ThumbUpIcon className={`w-6 h-6 ${likeStatus === true ? 'text-green-500' : 'text-gray-400'}`} />
                 <span>{totalLikes}</span>
             </button>
             <button 
-                onClick={() => updateLikeStatus(false)}
-                disabled={!accessGranted}  // Disable button if access is not granted
+                onClick={() => handleLikeClick(false)}
                 className="p-2 rounded flex items-center space-x-1"
             >
                 <ThumbDownIcon className={`w-6 h-6 ${likeStatus === false ? 'text-red-500' : 'text-gray-400'}`} />

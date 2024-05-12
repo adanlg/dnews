@@ -45,8 +45,8 @@ export const dislikeCount = async (storyId: string, commentId?: string) => {
 };
 
 // Función para verificar si el usuario actual ha marcado "Me gusta" o "No me gusta" en una historia o comentario
-export const userLikeStatus = async (storyId: string, commentId?: string) => {
-    const userId = await getCurrentUserId();
+export const userLikeStatus = async (storyId: string, commentId?: string, userIdAddress?: string) => {
+    const userId = userIdAddress
     // const userId = await checkWalletAccess();
 
     if (!userId) return null;

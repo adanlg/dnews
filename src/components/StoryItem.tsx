@@ -3,7 +3,7 @@ import { Story } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import ClapComponent from '@/app/published/ClapComponent'; // Asegúrate de que este es el camino correcto
-import LikeDislikeComponent from '@/app/published/LikeDislikeComponent'; // Suponiendo que has creado este componente
+import CountLikedDisliked from '@/app/published/countLikeDislikeComponent'; // Suponiendo que has creado este componente
 import { CheckSaved } from '@/actions/Save';
 import { ClapCount, ClapCountByUser } from '@/actions/Clap';
 import { likeCount, dislikeCount, userLikeStatus } from '@/actions/LikeDislike';
@@ -113,9 +113,8 @@ const StoryItem = ({story}: Props) => {
                         <h1 className=' font-serif text-xl py-3'>{H1Element}</h1>
                         <div className='text-gray-800 flex space-x-4 justify-center md:justify-start'>
                             <AuthorDetail story={story} />
-                            <LikeDislikeComponent 
-                                storyId={story.id} 
-                                initialLikeStatus={initialLikeStatus} 
+                            <CountLikedDisliked 
+                                // storyId={story.id} 
                                 totalLikes={totalLikes}
                                 totalDislikes={totalDislikes}
                             />
