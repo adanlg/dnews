@@ -1,6 +1,8 @@
 "use server"
 import prisma from "@/app/prismadb"
 import { getCurrentUserId } from "./User"
+import { checkWalletAccess } from "./checks";
+
 
 // Función para contar los "Me gusta" de una historia o comentario
 export const likeCount = async (storyId: string, commentId?: string) => {
@@ -45,6 +47,8 @@ export const dislikeCount = async (storyId: string, commentId?: string) => {
 // Función para verificar si el usuario actual ha marcado "Me gusta" o "No me gusta" en una historia o comentario
 export const userLikeStatus = async (storyId: string, commentId?: string) => {
     const userId = await getCurrentUserId();
+    // const userId = await checkWalletAccess();
+
     if (!userId) return null;
 
     try {

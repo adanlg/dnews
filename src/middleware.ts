@@ -5,12 +5,13 @@ import { authMiddleware } from "@clerk/nextjs";
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
   publicRoutes: [
-    '/',               // Página de inicio
-    '/published',
-    '/published/(.*)',
-    '/tokenomics'     // Página general de publicaciones
-        // Cualquier subruta bajo /published
-  ]
+    '/',               // Home page
+    '/published',      // Any published content page
+    '/published/(.*)', // Any specific published content
+    '/tokenomics',     // Tokenomics information page
+    '/api/likeDislike',  // API route for updating like/dislike status
+    '/api/likeDislikeComment'  // API route for updating like/dislike status on comments
+  ],
 });
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", '/(api|trpc)(.*)'],

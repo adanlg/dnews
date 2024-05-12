@@ -1,59 +1,59 @@
 import prisma from "@/app/prismadb"
-import { auth } from "@clerk/nextjs"
 import { NextResponse, NextRequest } from "next/server"
 
 export async function POST(request: NextRequest){
-    const {userId} = auth()
-    if(!userId) return NextResponse.next()
+    const { userId, storyId, commentId, like } = await request.json(); // Now expecting `userId` to be the wallet address
+
+    if(!userId) return NextResponse.json({message: "Wallet address is required."});
 
     try {
-        const { storyId, commentId, like } = await request.json() // 'like' es un booleano
-
+        // Check if the specified comment exists
         const commentExist = await prisma.comment.findUnique({
             where:{
                 id:commentId
             }
-        })
+        });
 
         if(!commentExist){
-            throw new Error ('No Comment was found for like/dislike')
+            throw new Error ('No Comment was found for like/dislike');
         }
 
+        // Check if there's an existing like/dislike record for the given user and comment
         const likeStatus = await prisma.like.findFirst({
             where:{
                 storyId,
-                userId,
+                userId, // This is now assumed to be the wallet address
                 commentId
             }
-        })
+        });
 
-        // Si el usuario ya ha marcado "Me gusta" o "No me gusta" en el comentario, actualiza el estado
+        // If the user has already marked "like" or "dislike" on the comment, update the existing record
         if(likeStatus){
             await prisma.like.update({
                 where:{
                     id:likeStatus.id
                 },
                 data:{
-                    liked: like
+                    liked: like // Update the 'liked' state
                 }
-            })
+            });
 
-            return NextResponse.json({message: 'Like status for comment updated!'})
+            return NextResponse.json({message: 'Like status for comment updated!'});
         }
         else{
-            // Si el usuario aún no ha marcado "Me gusta" o "No me gusta", crea un nuevo registro en Like
+            // If there is no existing record, create a new like/dislike record
             await prisma.like.create({
                 data:{
-                    userId,
+                    userId, // Use the wallet address as the user identifier
                     storyId,
                     commentId,
                     liked: like
                 }
-            })
-            return NextResponse.json({message: 'Like status for comment created'})
+            });
+            return NextResponse.json({message: 'Like status for comment created'});
         }
     } catch (error) {
-        console.log("Error updating like/dislike status for comment", error)
-        return NextResponse.error()
+        console.log("Error updating like/dislike status for comment", error);
+        return NextResponse.error();
     }
 }
