@@ -84,7 +84,7 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
                     <CommentComponent 
   NumberCommnets={NumberCommnets.reponse ? NumberCommnets.reponse : 0} 
   AuthorFirstName={CurrentUser?.firstName || 'Jonh'} // Usar encadenamiento opcional con un valor predeterminado
-  AuthorImage={CurrentUser?.imageUrl || '/randomUser.png'} // Proporciona una imagen predeterminada si imageUrl no está disponible
+  AuthorImage={CurrentUser?.imageUrl || '/random-user.png'} // Proporciona una imagen predeterminada si imageUrl no está disponible
   AuthorLastName={CurrentUser?.lastName || 'Doe'} // Valor predeterminado para lastName
 />
                 </div>

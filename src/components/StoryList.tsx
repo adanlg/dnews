@@ -104,7 +104,7 @@ const AddTagComp = ({allTopics,setShowPopUp,UserTags}:TagsTyps) => {
 
     
     return(
-        <div className='fixed bg-gray-50 w-full z-20 overflow-auto top-0 left-0 right-0 bottom-0'>
+        <div className='fixed w-full z-20 overflow-auto top-0 left-0 right-0 bottom-0'>
             <span onClick={(e) => {e.preventDefault() ;setShowPopUp(false)}} className='absolute top-4 right-6 text-3xl cursor-pointer'>
                 &times;
             </span>

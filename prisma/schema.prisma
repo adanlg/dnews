@@ -78,3 +78,10 @@ model Like {
 
   @@unique([storyId, userId])
 }
+
+model Profile {
+  id           String   @id @default(dbgenerated("gen_random_uuid()"))
+  userId       String   @unique
+  firstname    String?  // Optional field for first name
+  imageProfile String?  // Optional field for profile image URL
+}

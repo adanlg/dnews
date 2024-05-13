@@ -97,7 +97,7 @@ const StoryPage = ({stories,TotalDrafts,TotalPublished,TotalSaved}: Props) => {
                                 </div>
                                 <div className='flex items-center space-x-5'>
                                     <span className='text-sm opacity-60'>{new Date(story.updatedAt).toDateString()}</span>
-                                    <button onClick={() => EditStory(story.id)} className='px-5 py-1 text-sm rounded-full bg-gray-500 text-white'>Edit</button>
+                                    <button onClick={() => EditStory(story.id)} className='px-5 py-1 text-sm rounded-full'>Edit</button>
                                 </div>
                             </div>
                         </Link>

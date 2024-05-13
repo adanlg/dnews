@@ -22,6 +22,7 @@ const Navbar = () => {
     const router = useRouter();
     const { isSignedIn } = useUser();
     const { isConnected, address } = useAccount();
+    const [isActive, setIsActive] = useState(false); // Add this state for managing active link state
 
 
     const MakeNewStory = async () => {
@@ -39,6 +40,14 @@ const Navbar = () => {
             alert("No connected address.");
         }
     };
+    const handleLinkClick = (path: string) => {
+        setIsActive(true); // Activate the link
+        setTimeout(() => {
+            router.push(path);
+            setIsActive(false); // Deactivate after navigation
+        }, 150); // Adjust timing as needed
+    };
+    
 
     // const handleAccessCheck = async () => {
     //     if (isConnected && address) {
@@ -83,12 +92,37 @@ const Navbar = () => {
                 .menu-hidden {
                     animation: slideOut 0.5s forwards;
                 }
+                .interactive-link {
+                    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+                    display: block;
+                    padding: 8px; /* More padding for better touch target */
+                }
+                @media (max-width: 768px) {
+                    .interactive-link:active {
+                        transform: scale(1.05); /* More subtle scale */
+                        background-color: rgba(255, 255, 255, 0.3); /* Light background effect */
+                    }
+                }   
+                .nav-link {
+                    color: white; /* Set text color to white */
+                    transition: color 0.2s ease-in-out; /* Smooth transition for hover effects */
+                }
+                .nav-link:hover {
+                    color: #ccc; /* Lighter color on hover for better interaction feedback */
+                }
             `}</style>
             <div className='px-8 py-2 bg-zinc-500'>
                 <div className='flex items-center justify-between'>
-                    <button className='md:hidden z-50' onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                        <MenuIcon className="h-6 w-6" />
-                    </button>
+                {isMenuOpen ? (
+                        <div className='md:hidden z-50' onClick={() => setIsMenuOpen(false)}>
+                            <XIcon className="h-6 w-6 text-white" />
+                        </div>
+                    ) : (
+                        <button className='md:hidden z-50' onClick={() => setIsMenuOpen(true)}>
+                            <MenuIcon className="h-6 w-6 text-white" />
+                        </button>
+                    )}
+
                     <div className='flex-grow'>
                         <Link href='/' passHref>
                             <div className='flex justify-center md:justify-between w-full'>
@@ -97,25 +131,106 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className='hidden md:flex items-center space-x-9 pr-8'>
+                    <Link href='/' passHref>
+                            <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
+                                <p className=''>Home</p>
+                            </span>
+                        </Link>
                         <Link href='/tokenomics' passHref>
                             <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
-                                <p className='font-light text-sm'>Tokenomics</p>
+                                <p className=''>Tokenomics</p>
                             </span>
                         </Link>
                         <Link href='/token' passHref>
                             <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
-                                <p className='font-light text-sm'>Buy token</p>
+                                <p className=''>Buy token</p>
                             </span>
                         </Link>
                         <button onClick={MakeNewStory} className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
-                            <p className='font-light text-sm'>Write</p>
+                            <p className=''>Write</p>
                         </button>
                     </div>
                     <UserButton signInUrl='/'/>
                     {!isSignedIn && (
                         <div onClick={showAddressOrMessage} className=" wallet-connect-btn ">
-                            <ConnectButton />
-                        </div>
+<ConnectButton.Custom>
+  {({
+    account,
+    chain,
+    openAccountModal,
+    openChainModal,
+    openConnectModal,
+    authenticationStatus,
+    mounted,
+  }) => {
+    const ready = mounted && authenticationStatus !== 'loading';
+    const connected = ready && account && chain;
+
+    return (
+      <div
+        {...(!ready && {
+          'aria-hidden': true,
+          style: {
+            opacity: 0,
+            pointerEvents: 'none',
+            userSelect: 'none',
+          },
+        })}
+      >
+        {(() => {
+          if (!connected) {
+            return (
+              <button
+                onClick={openConnectModal}
+                type="button"
+                className="bg-white p-2 rounded-full shadow-lg hover:bg-gray-100"
+              >
+                Connect Wallet
+              </button>
+            );
+          }
+
+          if (chain.unsupported) {
+            return (
+              <button
+                onClick={openChainModal}
+                type="button"
+                className="bg-white p-2 rounded-full shadow-lg hover:bg-gray-100"
+              >
+                Wrong network
+              </button>
+            );
+          }
+
+          return (
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button
+                onClick={openAccountModal}
+                className="bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 flex items-center space-x-2"
+                type="button"
+              >
+                <span className="block bg-blue-500 rounded-full p-1">
+                  {/* {account.hasIcon && (
+                    <img
+                      alt={account.displayName ?? 'Account icon'}
+                      src={account.iconUrl}
+                      className="h-6 w-6 rounded-full"
+                    />
+                  )} */}
+                </span>
+                <span>{account.displayName}</span>
+                {/* {account.displayBalance && (
+                  <span> ({account.displayBalance})</span>
+                )} */}
+              </button>
+            </div>
+          );
+        })()}
+      </div>
+    );
+  }}
+</ConnectButton.Custom>
+            </div>
                     )}
                 </div>
                 {/* <div>
@@ -125,16 +240,20 @@ const Navbar = () => {
                 </div> */}
                 <div className={`fixed top-0 left-0 h-full w-64 bg-zinc-500 transform ${isMenuOpen ? 'menu-container' : 'menu-hidden'} z-40`}>
                     <div className='text-white p-5'>
-                        <div className='flex justify-between items-start'>
-                            <div className='text-left' style={{marginTop: '15%'}}>
-                                <Link href='/tokenomics'><span className='block py-2'>Tokenomics</span></Link>
-                                <Link href='/token'><span className='block py-2'>Buy token</span></Link>
-                                <span onClick={MakeNewStory} className='block text-left py-2 cursor-pointer'>Write</span>
-                            </div>
-                            <button onClick={() => setIsMenuOpen(false)} className="mb-5">
-                                <XIcon className="h-8 w-8" />
-                            </button>
-                        </div>
+                    <div className='flex justify-between items-start'>
+                    <div className='text-left' style={{marginTop: '15%'}}>
+                    <a onClick={(e) => handleLinkClick('/')} className='interactive-link'>Home</a>
+
+    <a onClick={(e) => handleLinkClick('/tokenomics')} className='interactive-link'>Tokenomics</a>
+    <a onClick={(e) => handleLinkClick('/token')} className='interactive-link'>Buy token</a>
+    <span onClick={() => { setIsMenuOpen(false); MakeNewStory(); }} className='interactive-link'>
+        Write
+    </span>
+</div>
+
+                    </div>
+
+
                     </div>
                 </div>
             </div>
