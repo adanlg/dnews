@@ -14,9 +14,12 @@ type Props = {
     AuthorImage: string
     PublishedStory: Story
     AuthorEmail: string
+    AuthorFirstName:string | null
+    AuthorLastName:string | null
+
 }
 
-const AuthorSpecific = ({ AuthorImage, PublishedStory, AuthorEmail }: Props) => {
+const AuthorSpecific = ({  AuthorImage,AuthorLastName, PublishedStory, AuthorEmail }: Props) => {
     const [Stories, setStories] = useState<Story[]>([])
     const [NoOfFollowings, setFollowing] = useState<number>()
     const [isfollowed, setisfollowed] = useState<boolean>(false)
@@ -102,7 +105,7 @@ const AuthorSpecific = ({ AuthorImage, PublishedStory, AuthorEmail }: Props) => 
                 <p className='text-sm py-5 font-medium'>More from {PublishedStory.authorId}</p>
                 <div className='grid grid-cols-1 gap-10'>
                     {Stories.map((story, index) => (
-                        <AuthorStories key={story.id} userId={PublishedStory.authorId} AuthorImage={AuthorImage} story={story} />
+                        <AuthorStories key={story.id} AuthorFirstName={null} AuthorLastName={null} AuthorImage={AuthorImage} story={story} />
                     ))}
                 </div>
             </div>

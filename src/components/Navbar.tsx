@@ -105,7 +105,7 @@ const Navbar = () => {
                 }   
                 .nav-link {
                     color: white; /* Set text color to white */
-                    transition: color 0.2s ease-in-out; /* Smooth transition for hover effects */
+                    transition: color 1s ease-in-out; /* Smooth transition for hover effects */
                 }
                 .nav-link:hover {
                     color: #ccc; /* Lighter color on hover for better interaction feedback */
@@ -133,21 +133,21 @@ const Navbar = () => {
                     <div className='hidden md:flex items-center space-x-9 pr-8'>
                     <Link href='/' passHref>
                             <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
-                                <p className=''>Home</p>
+                                <p className='nav-link'>Home</p>
                             </span>
                         </Link>
                         <Link href='/tokenomics' passHref>
                             <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
-                                <p className=''>Tokenomics</p>
+                                <p className='nav-link'>Tokenomics</p>
                             </span>
                         </Link>
                         <Link href='/token' passHref>
                             <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
-                                <p className=''>Buy token</p>
+                                <p className='nav-link'>Buy token</p>
                             </span>
                         </Link>
                         <button onClick={MakeNewStory} className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
-                            <p className=''>Write</p>
+                            <p className='nav-link'>Write</p>
                         </button>
                     </div>
                     <UserButton signInUrl='/'/>
