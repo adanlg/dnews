@@ -4,7 +4,6 @@ import { NextResponse, NextRequest } from "next/server";
 export async function POST(request: NextRequest) {
     // Extracting the wallet address and the 'like' status from the request payload
     const { userId, storyId, like } = await request.json(); // `userId` is now expected to be the wallet address
-    console.log("llego al back 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
     if (!userId) return NextResponse.next(); // Ensure a wallet address is provided
 
     try {

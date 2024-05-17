@@ -13,7 +13,7 @@ import {ConnectButton} from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 // import { useWalletAccessControl } from '@/actions/checks';
 
-// import { checkWalletAccess } from '@/actions/checks';
+import { checkWalletAccess } from '@/actions/checks';
 
 
 const Navbar = () => {
@@ -26,13 +26,30 @@ const Navbar = () => {
 
 
     const MakeNewStory = async () => {
-        try {
-            const response = await axios.post('/api/new-story');
-            router.push(`/story/${response.data.id}`);
-        } catch (error) {
-            console.error("Error creating new story", error);
-        }
-    };
+      if (!isConnected || !address) {
+          alert("Please connect your wallet.");
+          return;
+      }
+
+      try {
+          const { hasAccess, message } = await checkWalletAccess(address);
+          if (!hasAccess) {
+              alert(`Access Denied: ${message}`);
+              router.push('/token'); // Redirect to buy token page if access is not granted
+              return;
+          }
+
+          const response = await axios.post('/api/new-story', { userId: address });
+          router.push(`/story/${response.data.id}`);
+      } catch (error) {
+          console.error("Error creating new story", error);
+          if (error instanceof Error) {
+              alert(`Error: ${error.message}`);
+          } else {
+              alert("An unexpected error occurred");
+          }
+      }
+  };
     const showAddressOrMessage = () => {
         if (isConnected && address) {
             alert(`Connected with address: ${address}`);

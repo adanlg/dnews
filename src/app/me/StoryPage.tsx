@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { getUser } from '@/actions/User'
 import { User } from '@clerk/nextjs/server'
+
 Image
 
 type Props = {
@@ -35,6 +36,7 @@ const StoryPage = ({stories,TotalDrafts,TotalPublished,TotalSaved}: Props) => {
 
     const MakeNewStory = async () => {
         try {
+            //aquiiiiii check 
             const response = await axios.post('/api/new-story')
             router.push(`/story/${response.data.id}`)
             console.log(response)
