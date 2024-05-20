@@ -72,7 +72,7 @@ const RenderStory = async ({AuthorFirstName,AuthorImage,AuthorLastName,Published
             <div className='flex items-center space-x-5'>
                 <Image src={AuthorImage} className='rounded-full ' width={44} height={44} alt='User'/>
                 <div className='text-sm'>
-                    <p>{AuthorFirstName} {AuthorLastName} <FollowComponent AuthorId={PublishedStory.authorId}/></p>
+                    <p>{PublishedStory.authorId}  <FollowComponent AuthorId={PublishedStory.authorId}/></p>
                     <p className='opacity-60'>Published on {new Date(PublishedStory.updatedAt).toDateString().split(' ').slice(1,4).join(' ')}</p>
                 </div>
             </div>

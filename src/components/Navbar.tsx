@@ -40,8 +40,8 @@ const Navbar = () => {
           }
 
           const response = await axios.post('/api/new-story', { userId: address });
-          router.push(`/story/${response.data.id}`);
-      } catch (error) {
+          router.push(`/story/${response.data.id}?address=${address}`);
+        } catch (error) {
           console.error("Error creating new story", error);
           if (error instanceof Error) {
               alert(`Error: ${error.message}`);
@@ -280,3 +280,9 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
+//cekkekekkek c d  sa  d a
