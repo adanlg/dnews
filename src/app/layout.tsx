@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider, SignIn } from '@clerk/nextjs'
+// import { ClerkProvider, SignIn } from '@clerk/nextjs'
 
 import "@rainbow-me/rainbowkit/styles.css";
 import { headers } from 'next/headers'
@@ -28,14 +28,14 @@ const RootLayout: React.FC<LayoutProps> = ({children}) => {
     <html lang="en">
       <body>
         <ContextProvider initialState={initialState}>
-            <ClerkProvider>
+            {/* <ClerkProvider> */}
 
               <html lang="en">
 
                 <body className={inter.className}>{children}</body>
 
               </html>
-              </ClerkProvider>
+              {/* </ClerkProvider> */}
         </ContextProvider>
       </body>
     </html>

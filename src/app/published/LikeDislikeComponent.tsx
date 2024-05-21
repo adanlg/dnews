@@ -29,10 +29,9 @@ const LikeDislikeComponent = ({ storyId, commentId, initialLikeStatus, totalLike
                 setAccessGranted(access.hasAccess);
                 setUserId(access.userIdAddress || null);
                 if (!access.hasAccess) {
-                    alert('Access Denied: ' + access.message);
+                    // alert('Access Denied: ' + access.message);
                 }
             } else {
-                alert('Wallet is not connected.');
                 setAccessGranted(false);
             }
         };

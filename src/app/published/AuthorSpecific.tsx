@@ -14,12 +14,11 @@ type Props = {
     AuthorImage: string
     PublishedStory: Story
     AuthorEmail: string
-    AuthorFirstName:string | null
-    AuthorLastName:string | null
-
+    AuthorFirstName: string | null
+    AuthorLastName: string | null
 }
 
-const AuthorSpecific = ({  AuthorImage,AuthorLastName, PublishedStory, AuthorEmail }: Props) => {
+const AuthorSpecific = ({ AuthorImage, AuthorLastName, PublishedStory, AuthorEmail }: Props) => {
     const [Stories, setStories] = useState<Story[]>([])
     const [NoOfFollowings, setFollowing] = useState<number>()
     const [isfollowed, setisfollowed] = useState<boolean>(false)
@@ -87,13 +86,17 @@ const AuthorSpecific = ({  AuthorImage,AuthorLastName, PublishedStory, AuthorEma
         }
     }
 
+    const shortenAddress = (address: string) => {
+        return `${address.slice(0, 6)}...${address.slice(-4)}`;
+    }
+
     return (
-        <div className=' py-10'>
+        <div className='py-10'>
             <div className='max-w-[700px] mx-auto'>
                 <Image src={AuthorImage} width={72} height={72} className='rounded-full' alt='Author' />
                 <div className='flex items-center justify-between border-b-[1px] pb-4'>
                     <div>
-                        <p className='text-xl font-medium mt-5'>Written By {PublishedStory.authorId}</p>
+                        <p className='text-xl font-medium mt-5'>Written By {shortenAddress(PublishedStory.authorId)}</p>
                         <p className='text-sm opacity-60 mt-1 '>{NoOfFollowings} followers</p>
                     </div>
                     {/* <div className='flex items-center space-x-4'>
@@ -102,7 +105,7 @@ const AuthorSpecific = ({  AuthorImage,AuthorLastName, PublishedStory, AuthorEma
                         </button>
                     </div> */}
                 </div>
-                <p className='text-sm py-5 font-medium'>More from {PublishedStory.authorId}</p>
+                <p className='text-sm py-5 font-medium'>More from {shortenAddress(PublishedStory.authorId)}</p>
                 <div className='grid grid-cols-1 gap-10'>
                     {Stories.map((story, index) => (
                         <AuthorStories key={story.id} AuthorFirstName={null} AuthorLastName={null} AuthorImage={AuthorImage} story={story} />

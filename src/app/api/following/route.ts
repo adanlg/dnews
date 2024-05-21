@@ -1,9 +1,10 @@
 import prisma from "@/app/prismadb";
-import { auth } from "@clerk/nextjs";
+// import { auth } from "@clerk/nextjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const { userId }: { userId: string | null } = auth();
+  const { userId }: { userId: string | null } =await request.json();
+  //  auth();
   if (!userId) {
     
     return NextResponse.next();

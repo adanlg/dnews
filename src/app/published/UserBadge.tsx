@@ -1,56 +1,62 @@
-import { getUser } from '@/actions/User'
-import { User } from '@clerk/nextjs/server'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import { getUser } from '@/actions/User'
 
 type Props = {
-    userId:string
-    createdAt:Date
+    userId: string;
+    createdAt: Date;
 }
 
-const UserBadge = ({userId,createdAt}: Props) => {
-    const [User, setUser] = useState<User>()
+interface User {
+    imageUrl?: string;
+    firstName?: string;
+    lastName?: string;
+}
+
+const UserBadge = ({ userId, createdAt }: Props) => {
+    const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const User = await getUser(userId)
-                if (User) setUser(User)
+                const user = await getUser(userId);
+                if (user) setUser(user);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
 
-        fetchUser()
-    },[userId])
+        fetchUser();
+    }, [userId]);
 
-    const calculateDaysAgo = (createdAt:Date) => {
-        const currentDate = new Date()
-        const createdDate = new Date(createdAt)
-        const timeDifference:number = currentDate.getTime() - createdDate.getTime()
+    const calculateDaysAgo = (createdAt: Date) => {
+        const currentDate = new Date();
+        const createdDate = new Date(createdAt);
+        const timeDifference: number = currentDate.getTime() - createdDate.getTime();
 
-        const daysAgo = Math.floor(timeDifference/(1000*60*60*24))
+        const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
-        return daysAgo
+        return daysAgo;
     }
-  return (
-    <div className='px-4 text-sm'>
-        <div className='flex items-center space-x-3'>
-            <Image
-                src={User?.imageUrl ? User.imageUrl:"/no-image.jpg"}
-                width={32}
-                height={32}
-                alt='User'
-                className='rounded-full object-cover'
-                priority
-            />
-            <div>
-                <p>{User?.firstName} {User?.lastName}</p>
-                <p className='text-xs opacity-60'>{calculateDaysAgo(createdAt)} days ago</p>
+
+    return (
+        <div className='px-4 text-sm'>
+            <div className='flex items-center space-x-3'>
+                <Image
+                    src={user?.imageUrl ? user.imageUrl : "/no-image.jpg"}
+                    width={32}
+                    height={32}
+                    alt='User'
+                    className='rounded-full object-cover'
+                    priority
+                />
+                <div>
+                    <p>{user?.firstName} {user?.lastName}</p>
+                    <p className='text-xs opacity-60'>{calculateDaysAgo(createdAt)} days ago</p>
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
-export default UserBadge
+export default UserBadge;

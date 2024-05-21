@@ -1,5 +1,5 @@
 'use client'
-import { UserButton } from '@clerk/nextjs'
+// import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState, useRef } from 'react'
@@ -113,7 +113,7 @@ const NavbarStory = ({ userId, storyId }: Props) => {
             </div>
             <div className='flex items-center space-x-7'>
             <button onClick={() => setShowPopup(!showPopup)} className='flex items-center opacity-90 hover:opacity-100 duration-100 ease-in cursor-pointer bg-green-600 hover:bg-green-700 rounded-full px-3 py-1 text-[13px] text-white'>Publish</button>
-            <UserButton signInUrl='/'/>
+            {/* <UserButton signInUrl='/'/> */}
             </div>
         </div>
         {showPopup && (

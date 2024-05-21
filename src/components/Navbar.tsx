@@ -1,7 +1,7 @@
 
 'use client'
 
-import { UserButton, SignInWithMetamaskButton, useUser } from '@clerk/nextjs';
+// import { UserButton, SignInWithMetamaskButton, useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
@@ -20,7 +20,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const router = useRouter();
-    const { isSignedIn } = useUser();
+    // const { isSignedIn } = useUser();
     const { isConnected, address } = useAccount();
     const [isActive, setIsActive] = useState(false); // Add this state for managing active link state
 
@@ -44,17 +44,13 @@ const Navbar = () => {
         } catch (error) {
           console.error("Error creating new story", error);
           if (error instanceof Error) {
-              alert(`Error: ${error.message}`);
           } else {
-              alert("An unexpected error occurred");
           }
       }
   };
     const showAddressOrMessage = () => {
         if (isConnected && address) {
-            alert(`Connected with address: ${address}`);
         } else {
-            alert("No connected address.");
         }
     };
     const handleLinkClick = (path: string) => {
@@ -167,8 +163,8 @@ const Navbar = () => {
                             <p className='nav-link'>Write</p>
                         </button>
                     </div>
-                    <UserButton signInUrl='/'/>
-                    {!isSignedIn && (
+                    {/* <UserButton signInUrl='/'/> */}
+                    { (
                         <div onClick={showAddressOrMessage} className=" wallet-connect-btn ">
 <ConnectButton.Custom>
   {({
