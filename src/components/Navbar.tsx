@@ -99,11 +99,12 @@ const Navbar = () => {
                     }
                 }
                 .menu-container {
-                    animation: slideIn 0.5s forwards;
+                    transform: translateX(-100%);
+                    animation: ${isMenuOpen ? 'slideIn' : 'slideOut'} 0.5s forwards;
                     width: 100%;
                 }
                 .menu-hidden {
-                    animation: slideOut 0.5s forwards;
+                    display: none;
                 }
                 .interactive-link {
                     transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
