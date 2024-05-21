@@ -9,26 +9,26 @@ import { Story } from '@prisma/client';
 import { usePathname, useSearchParams } from 'next/navigation';
 import NavbarStory from '../NavbarStory';
 
-
 interface PageProps {
-  storyId?: string;
-  address?: string;
-  story?: any;
+  params: {
+    storyId: string;
+  };
+  searchParams: {
+    address?: string;
+  };
 }
 
-const Page: React.FC<PageProps> = ({ storyId: initialStoryId, address: initialAddress, story }) => {
+const Page: React.FC<PageProps> = ({ params, searchParams }) => {
   const { address: userAddress } = useAccount();
-  const [storyContent, setStoryContent] = useState<string>(story?.content || '');
+  const [storyContent, setStoryContent] = useState<string>('');
   const [storyData, setStoryData] = useState<Story | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  
-  const routerStoryId = pathname.split('/').pop();
-  const routerAddress = searchParams.get('address');
+  const routerStoryId = params.storyId;
+  const routerAddress = searchParams.address;
 
-  const storyId = initialStoryId || routerStoryId || '';
-  const address = initialAddress || routerAddress || userAddress || '';
+  const storyId = routerStoryId || '';
+  const address = routerAddress || userAddress || '';
 
   useEffect(() => {
     const fetchStory = async () => {
@@ -61,9 +61,10 @@ const Page: React.FC<PageProps> = ({ storyId: initialStoryId, address: initialAd
       <Navbar />
       <div className='max-w-[1000px] mx-auto' role='textbox' data-length>
         <div className='max-w-[1000px] mx-auto p-4 md:p-0'>
-          <NavbarStory            
+          <NavbarStory
             userId={address}
-            storyId={storyId}/>
+            storyId={storyId}
+          />
           <NewStory
             userId={address}
             storyId={storyId}

@@ -106,11 +106,11 @@ const NavbarStory = ({ userId, storyId }: Props) => {
   return (
     <div className='px-8 py-2 border-b-[1px]'>
         <div className='flex items-center justify-between'>
-            <div className='flex items-center space-x-3'>
+            {/* <div className='flex items-center space-x-3'>
             <Link href='/'>
                 <Image src='/TheSimpleNewspaper.gif' width={40} height={40} alt='Medium Logo'/>
             </Link>
-            </div>
+            </div> */}
             <div className='flex items-center space-x-7'>
             <button onClick={() => setShowPopup(!showPopup)} className='flex items-center opacity-90 hover:opacity-100 duration-100 ease-in cursor-pointer bg-green-600 hover:bg-green-700 rounded-full px-3 py-1 text-[13px] text-white'>Publish</button>
             {/* <UserButton signInUrl='/'/> */}
