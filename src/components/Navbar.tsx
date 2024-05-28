@@ -27,7 +27,7 @@ const Navbar = () => {
 
     const MakeNewStory = async () => {
       if (!isConnected || !address) {
-          alert("Please connect your wallet.");
+          alert("Before writting you have to connect your wallet and have at least 1 TSN token");
           return;
       }
 
