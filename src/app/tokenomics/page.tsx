@@ -36,7 +36,7 @@ const TokenomicsPage = () => {
               <li><strong>For the writers:</strong> Earn visibility, reputation, and tokens—if the content is well-received.</li>
               <li><strong>For the readers with tokens:</strong> Earn tokens while staying informed.</li>
               <li><strong>For the readers without tokens:</strong> Access quality news that focuses on substance rather than clickbait.</li>
-              <li><strong>For all holders:</strong> Better news &rarr; more readers &rarr; increase value of the token that runs the newspaper &rarr; Better news... and the cycle keeps going</li>
+              <li><strong>For all holders:</strong> Better news → more readers → increase value of the token that runs the newspaper → Better news... and the cycle keeps going</li>
             </ul>
           </div>
         </div>
