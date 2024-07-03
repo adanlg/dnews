@@ -33,7 +33,7 @@ const TokenomicsPage = () => {
               <Image src="/reading.jpg" alt="Tokenomics" layout='fill' objectFit='contain' />
             </div>
             <ul className="list-disc list-inside space-y-2 text-gray-600 text-center">
-              <li><strong>For the writers:</strong> Earn visibility, reputation, and tokens—if the content is well-received.</li>
+              <li><strong>For the writers:</strong> Earn visibility, reputation, and tokens if the content is good.</li>
               <li><strong>For the readers with tokens:</strong> Earn tokens while staying informed.</li>
               <li><strong>For the readers without tokens:</strong> Access quality news that focuses on substance rather than clickbait.</li>
               <li><strong>For all holders:</strong> Better news - More readers - Increase value of the token that runs the newspaper - Better news... and the cycle keeps going</li>
