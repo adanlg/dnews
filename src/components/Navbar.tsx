@@ -125,7 +125,7 @@ const Navbar = () => {
                     color: #ccc; /* Lighter color on hover for better interaction feedback */
                 }
             `}</style>
-            <div className='px-8 py-2 bg-zinc-500'>
+<div className='px-8 py-2 bg-gradient-to-b from-zinc-600 from-10% via-zinc-500 via-90% to-stone-100 to-110% '>
                 <div className='flex items-center justify-between'>
                 {isMenuOpen ? (
                         <div className='md:hidden z-50' onClick={() => setIsMenuOpen(false)}>

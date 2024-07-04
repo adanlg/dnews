@@ -22,7 +22,7 @@ const AuthorStories = ({ story, AuthorFirstName, AuthorLastName, AuthorImage }: 
 
     return (
         <Link href={`/published/${story.id}`}>
-            <div className="max-w-4xl mx-auto p-2 md:rounded-lg md:my-5 shadow-md shadow-black/5 hover:scale-105 transition-transform duration-300 md:shadow-black/10">
+            <div className="max-w-4xl mx-auto p-2 md:rounded-lg md:my-5 shadow-md shadow-black/5 hover:scale-105 transition-transform duration-300 md:shadow-black/10 md:bg-gradient-to-tr from-zinc-300 to-white">
               <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
                     <div className='w-full flex justify-center'>
                         <div className="w-11/12 md:w-full rounded-lg overflow-hidden  md:shadow-none relative" style={{ paddingBottom: '56.25%' }}>

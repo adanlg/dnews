@@ -95,11 +95,11 @@ const StoryItem = ({story}: Props) => {
     }, [story.id]);
 
     return (
-        <div className="max-w-4xl mx-auto p-2 md:rounded-lg md:my-4 hover:scale-105 transition-transform duration-300 md:shadow-md md:shadow-black/45" >
+        <div className="max-w-4xl mx-auto p-2 md:rounded-lg md:my-4 hover:scale-105 transition-transform duration-300 md:shadow-md md:shadow-black/45 md:bg-gradient-to-br from-zinc-200 to-white" >
             <Link href={`/published/${story.id}`}>
                 <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-4'>
                     <div className='w-full flex justify-center mb-0'>
-                        <div className="w-11/12 md:w-full rounded-lg overflow-hidden md:shadow-none relative" style={{ paddingBottom: '55.25%' }}>
+                        <div className="w-11/12 md:w-full rounded-lg overflow-hidden md:shadow-none relative " style={{ paddingBottom: '55.25%' }}>
                             <Image 
                                 src={imgSrc || "/no-image.jpg"} 
                                 alt='Story Image' 
