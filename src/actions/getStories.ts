@@ -1,6 +1,8 @@
 "use server"
 import prisma from "@/app/prismadb"
 import { getCurrentUserId } from "./User"
+import { Story } from "@prisma/client";
+import { likeCount, dislikeCount } from "@/actions/LikeDislike"; 
 
 export const getStoryById = async (storyId:string) => {
     if(!storyId){
@@ -79,26 +81,38 @@ export const getUniqueTopics = async () =>{
     }
 }
 
-export const getStoryByTag = async (tag:string) => {
+export const getStoryByTag = async (tag: string) => {
     try {
-        if(tag === 'All'){
-            const AllStories = await prisma.story.findMany({
-                where:{
-                    publish:true
+        let stories: Story[] = [];
+        
+        if (tag === 'All') {
+            stories = await prisma.story.findMany({
+                where: { publish: true }
+            });
+        } else {
+            stories = await prisma.story.findMany({
+                where: {
+                    topics: {
+                        has: tag
+                    },
+                    publish: true
                 }
-            })
-            return {stories: AllStories}
+            });
         }
-        const taggedStories = await prisma.story.findMany({
-            where:{
-                topics:{
-                    has:tag
-                },
-                publish:true
-            }
-        })
-        return {stories: taggedStories}
+
+        // Fetch likes and dislikes for each story
+        const storiesWithNetLikes = await Promise.all(stories.map(async (story) => {
+            const likes = await likeCount(story.id);
+            const dislikes = await dislikeCount(story.id);
+            const netLikes = likes - dislikes;
+            return { ...story, netLikes };
+        }));
+
+        // Sort stories by net likes
+        storiesWithNetLikes.sort((a, b) => b.netLikes - a.netLikes);
+
+        return { stories: storiesWithNetLikes };
     } catch (error) {
-        return {stories: []}
+        return { stories: [] };
     }
-}
+};
