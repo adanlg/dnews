@@ -81,7 +81,7 @@ export const getUniqueTopics = async () =>{
     }
 }
 
-export const getStoryByTag = async (tag: string) => {
+export const getStoryByTag = async (tag: string, page: number = 1, limit: number = 7) => {
     try {
         let stories: Story[] = [];
         
@@ -111,7 +111,11 @@ export const getStoryByTag = async (tag: string) => {
         // Sort stories by net likes
         storiesWithNetLikes.sort((a, b) => b.netLikes - a.netLikes);
 
-        return { stories: storiesWithNetLikes };
+        // Paginate the sorted stories
+        const paginatedStories = storiesWithNetLikes.slice((page - 1) * limit, page * limit);
+        console.log("Paginated Stories: ", paginatedStories); // Debug log
+
+        return { stories: paginatedStories };
     } catch (error) {
         return { stories: [] };
     }

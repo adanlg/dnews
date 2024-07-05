@@ -1,12 +1,11 @@
 'use client'
 import { GetSelectedTopics } from '@/actions/Topics'
-import { getStoryByTag } from '@/actions/getStories'
 import { Story } from '@prisma/client'
 import axios from 'axios'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
 import Select from "react-select"
 import StoryItem from './StoryItem'
 
@@ -24,47 +23,86 @@ type Props = {
 const StoryList = ({allTopics,UserTags}: Props) => {
     const [filteredStories, setFilteredStories] = useState<Story[]>([])
     const [showPopup, setShowPopUp] = useState<boolean>(false)
+    const [page, setPage] = useState<number>(1)
+    const [hasMore, setHasMore] = useState<boolean>(true)
     const searchparams = useSearchParams()
     const tag = searchparams.get('tag')
+    const initialFetchDone = useRef(false)
+
+    const fetchStories = useCallback(async (page: number) => {
+        try {
+            const response = await axios.get(`/api/stories`, {
+                params: {
+                    tag: tag || 'All',
+                    page,
+                    limit: 7,
+                },
+            });
+            console.log("Fetched Stories: ", response.data.stories); // Debug log
+            if (response.data.stories.length > 0) {
+                setFilteredStories(prevStories => [...prevStories, ...response.data.stories]);
+            } else {
+                setHasMore(false);
+            }
+        } catch (error) {
+            console.error("Error in fetching the data", error);
+        }
+    }, [tag]);
 
     useEffect(() => {
-        const fetchStory = async () => {
-            try {
-                const response = await getStoryByTag(tag || 'All')
-                setFilteredStories(response.stories)
-            } catch (error) {
-                console.log("Error in fetching teh data")
-            }
+        if (!initialFetchDone.current) {
+            setPage(1);
+            setFilteredStories([]);
+            setHasMore(true);
+            fetchStories(1);
+            initialFetchDone.current = true;
         }
+    }, [tag, fetchStories]);
 
-        fetchStory()
-    },[searchparams])
+    useEffect(() => {
+        if (!hasMore) return;
 
-return (
-    
-<div className="flex flex-col items-center bg-stone-100">
-        {/* <div className='flex items-center space-x-6 border-b-[1px] text-sm opacity-60'>
-            <span onClick={() => setShowPopUp(!showPopup)} className='pb-3'>
-                <Plus size={20}/>
-            </span>
-            <Link href='/' className={`pb-3 ${tag === null ? "border-b-[1px] border-neutral-950":""}`}>For you</Link>
-            {UserTags.map((Tag,index) => (
-                <Link key={index} href={`/?tag=${Tag.value}`} className={`pb-3 ${Tag.value === `${tag}` ? "border-b-[1px] border-neutral-950":""}`}>{Tag.label}</Link>
-            ))}
-        </div> */}
-        
-        {/* This div centers the StoryItem components on medium and larger screens */}
-        <div className="w-full md:w-auto md:mx-auto">
-            {filteredStories.map((story) => (
-                <StoryItem key={story.id} story={story} initialLikeStatus={null}/>
-            ))}
+        const handleScroll = () => {
+            if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+                setPage(prevPage => prevPage + 1);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [hasMore]);
+
+    useEffect(() => {
+        if (page > 1) {
+            fetchStories(page);
+        }
+    }, [page, fetchStories]);
+
+    return (
+        <div className="flex flex-col items-center bg-stone-100">
+            {/* <div className='flex items-center space-x-6 border-b-[1px] text-sm opacity-60'>
+                <span onClick={() => setShowPopUp(!showPopup)} className='pb-3'>
+                    <Plus size={20}/>
+                </span>
+                <Link href='/' className={`pb-3 ${tag === null ? "border-b-[1px] border-neutral-950":""}`}>For you</Link>
+                {UserTags.map((Tag,index) => (
+                    <Link key={index} href={`/?tag=${Tag.value}`} className={`pb-3 ${Tag.value === `${tag}` ? "border-b-[1px] border-neutral-950":""}`}>{Tag.label}</Link>
+                ))}
+            </div> */}
+            
+            {/* This div centers the StoryItem components on medium and larger screens */}
+            <div className="w-full md:w-auto md:mx-auto">
+                {filteredStories.map((story) => (
+                    <StoryItem key={story.id} story={story} initialLikeStatus={null}/>
+                ))}
+                {!hasMore && <p>No more stories</p>}
+            </div>
+            
+            {showPopup && (
+                <AddTagComp allTopics={allTopics} setShowPopUp={setShowPopUp} UserTags={UserTags}/>
+            )}
         </div>
-        
-        {showPopup && (
-            <AddTagComp allTopics={allTopics} setShowPopUp={setShowPopUp} UserTags={UserTags}/>
-        )}
-    </div>
-);
+    );
 
 }
 
