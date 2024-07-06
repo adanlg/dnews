@@ -1,7 +1,7 @@
+# Decentralized Newspaper
 
- 
-Decentralized Newspaper  **thesimplenewspaper** 
+Welcome to [The Simple Newspaper](https://thesimplenewspaper.com)!
 
--No clickbait
--No spam
--Quality news no time spending
+- **No clickbait**: Stay focused with straightforward news titles.
+- **No spam**: Enjoy a clean reading experience without unwanted distractions.
+- **Quality news, no time wasted**: Quickly access news that matters, without unnecessary fluff.
