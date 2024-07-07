@@ -41,10 +41,11 @@ const LikeDislikeComponent = ({ storyId, commentId, initialLikeStatus, totalLike
 
     const handleLikeClick = async (newStatus: boolean) => {
         if (!accessGranted) {
-            router.push('/token'); // Redirect to buy token page
+            if (confirm('You need to buy tokens to like or dislike. Click OK to proceed to the buy token page.')) {
+                router.push('/token'); // Redirect to buy token page
+            }
             return;
         }
-
         if (!userId) {
             console.error('Wallet not connected');
             return;
