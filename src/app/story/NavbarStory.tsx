@@ -1,5 +1,5 @@
 'use client'
-// import { UserButton } from '@clerk/nextjs'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState, useRef } from 'react'
@@ -10,7 +10,6 @@ import { Story } from '@prisma/client'
 import { getStoryById } from '@/actions/getStories'
 import Select from "react-select"
 import { ethers } from 'ethers';
-// import '../ethereum.d.ts'; 
 import { ImageUpload } from '@/actions/cloudinary';
 
 
@@ -160,6 +159,7 @@ const SaveStoryPopUp = ({storyId,PublishStory,setShowPopUp,CurrentUserFirstName,
             }
         }
     };
+    
 
     // Función para actualizar la URL de la miniatura en la base de datos
     const updateThumbnailUrl = async (storyId: string, thumbnailUrl: string) => {
