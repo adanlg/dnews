@@ -421,6 +421,7 @@ const PublishStory = async (topics: string[]): Promise<void> => {
         storyId,
         topics,
       })
+      
       console.log('Story published:', response.data)
 
       router.push(`/published/${response.data.id}`)
