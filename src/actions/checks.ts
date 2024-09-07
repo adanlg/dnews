@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { JsonRpcProvider } from '@ethersproject/providers';
 
 const tokenAddress = "0xe828723E3179fEcf45F501a6C1A90E8e09126f55";
-const provider = new JsonRpcProvider('https://ethereum-sepolia-rpc.publicnode.com');
+const provider = new JsonRpcProvider('https://polygon-bor-rpc.publicnode.com');
 
 export async function checkWalletAccess(address: string): Promise<{ hasAccess: boolean; message?: string; userIdAddress?: string }> {
   if (!address) {

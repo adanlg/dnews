@@ -38,7 +38,7 @@ const avalanche: Chain = {
 // Create wagmiConfig
 export const config = getDefaultConfig({
   appName: "App",
-  chains: [avalanche, mainnet, goerli, polygon, optimism, arbitrum, base, zora, sepolia],
+  chains: [ polygon],
   ssr: false,
   projectId,
   storage: createStorage({

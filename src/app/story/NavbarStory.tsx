@@ -337,7 +337,7 @@ import { useRouter } from 'next/navigation'
 import { useAccount, useConnect, useWriteContract } from 'wagmi'
 import { injected } from '@wagmi/connectors'
 import { contractABI, erc20ABI } from './abi'
-import { sepolia } from 'viem/chains';
+import { polygon } from 'viem/chains';
 import Select from "react-select"
 import { Story } from '@prisma/client'
 import { getStoryById } from '@/actions/getStories'
@@ -352,7 +352,7 @@ type Props = {
 }
 
 const NavbarStory = ({ userId, storyId }: Props) => {
-  const provider = new JsonRpcProvider('https://ethereum-sepolia-rpc.publicnode.com');
+  const provider = new JsonRpcProvider('https://polygon-bor-rpc.publicnode.com');
 
   const router = useRouter()
   const [showPopup, setShowPopup] = useState<boolean>(false)
@@ -390,7 +390,7 @@ const PublishStory = async (topics: string[]): Promise<void> => {
       console.log('Approval transaction is going:', isConnected)
 
       const txHash = await writeContractAsync({
-        chainId: sepolia.id,
+        chainId: polygon.id,
         address: erc20Address,
         functionName: 'approve',
         abi: erc20ABI,
@@ -404,7 +404,7 @@ const PublishStory = async (topics: string[]): Promise<void> => {
 
       // Call contract function
       const txHash2 = await writeContractAsync({
-        chainId: sepolia.id,
+        chainId: polygon.id,
         address: contractAddress,
         functionName: 'receiveTokenAndUpdateOwner',
         abi: contractABI,
