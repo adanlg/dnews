@@ -170,9 +170,26 @@ export const AuthorDetail = ({ story }: { story: Story }) => {
     }, [story])
     return (
         <div className='flex items-center space-x-2'>
-            <Image className='rounded-full' src={user?.imageUrl ? user.imageUrl : '/no-image.jpg'} width={24} height={24} alt='User Image' />
-            <p className='text-sm'>{user?.firstName} {user?.lastName}. </p>
-            <p className='text-sm opacity-60'>{new Date(story.updatedAt).toDateString().split(' ').slice(1, 4).join(' ')}</p>
+          {user?.imageUrl ? (
+            <Image
+              className='rounded-full'
+              src={user.imageUrl}
+              width={24}
+              height={24}
+              alt='User Image'
+            />
+          ) : (
+            <div style={{ width: 24, height: 24 }} />
+          )}
+          
+          <p className='text-sm'>
+            {user?.firstName ? user.firstName : ''} {user?.lastName ? user.lastName : ''}
+          </p>
+          
+          <p className='text-sm opacity-60'>
+            {story?.updatedAt ? new Date(story.updatedAt).toDateString().split(' ').slice(1, 4).join(' ') : ''}
+          </p>
         </div>
-    )
+      )
+      
 }
