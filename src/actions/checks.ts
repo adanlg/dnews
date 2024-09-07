@@ -2,7 +2,7 @@
 import { ethers } from 'ethers';
 import { JsonRpcProvider } from '@ethersproject/providers';
 
-const tokenAddress = "0xe828723E3179fEcf45F501a6C1A90E8e09126f55";
+const tokenAddress = "0x817F1D1F9c249021b70BAEBD0377a3E721298dEB";
 const provider = new JsonRpcProvider('https://polygon-bor-rpc.publicnode.com');
 
 export async function checkWalletAccess(address: string): Promise<{ hasAccess: boolean; message?: string; userIdAddress?: string }> {
