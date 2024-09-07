@@ -357,7 +357,7 @@ const NavbarStory = ({ userId, storyId }: Props) => {
   const router = useRouter()
   const [showPopup, setShowPopup] = useState<boolean>(false)
   const erc20Address = '0x817F1D1F9c249021b70BAEBD0377a3E721298dEB'
-  const approvalAmount = 5
+  const approvalAmount = 10000000000000000000
   const { writeContractAsync } = useWriteContract()
   const contractAddress = '0x18646844190D918C55201354149b2A8817B64538'
   const { address, isConnected } = useAccount()
