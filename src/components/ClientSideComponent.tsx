@@ -3,21 +3,20 @@ import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 
 const BuyTokenPage = () => {
-  const inputTokenAddress = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"; // Replace with your input token address
-  const outputTokenAddress = "0x817F1D1F9c249021b70BAEBD0377a3E721298dEB"; // Replace with your output token address
+  const inputTokenAddress = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270"; 
+  const outputTokenAddress = "0x817F1D1F9c249021b70BAEBD0377a3E721298dEB"; 
   const chain = "polygon";
 
-  // Adding 'locale' parameter to enforce English
   const uniswapLink = `https://app.uniswap.org/#/swap?inputCurrency=${inputTokenAddress}&outputCurrency=${outputTokenAddress}&chain=${chain}&locale=en`;
 
-  const tokenAddress = "0x817F1D1F9c249021b70BAEBD0377a3E721298dEB"; // Replace with your token address
+  const tokenAddress = "0x817F1D1F9c249021b70BAEBD0377a3E721298dEB"; 
   
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(tokenAddress);
     setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 2000); // Hide message after 2 seconds
+    setTimeout(() => setCopySuccess(false), 2000); 
   };
 
   return (
