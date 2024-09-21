@@ -15,7 +15,6 @@ import {
 } from "@heroicons/react/outline"; // Importing Heroicons
 
 const LandingPage = () => {
-  // Correctly type the refs as HTMLDivElement or null
   const heroRef = useRef<HTMLDivElement | null>(null);
   const featuresRef = useRef<HTMLDivElement | null>(null);
   const demoRef = useRef<HTMLDivElement | null>(null);
@@ -92,7 +91,6 @@ const LandingPage = () => {
     const walk = (x - startX) * 2; // Adjust scroll speed
     carouselRef.current.scrollLeft = scrollLeft - walk;
   };
-
 
   return (
     <div className="bg-gray-50 font-sans">
@@ -245,26 +243,26 @@ const LandingPage = () => {
 
           {/* Nueva tarjeta: "Todo el mundo puede publicar" */}
           <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
-            <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
-              <PencilAltIcon className="text-white w-8 h-8" />
+          <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+          <PencilAltIcon className="text-white w-8 h-8" />
             </div>
             <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
-              Todo el mundo puede publicar
+              Todos publicamos
             </p>
           </div>
         </div>
       </section>
 
       {/* Sección "Si eres redactor" */}
-      <section className="container mx-auto px-6 py-20">
-        <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
+      <section className="w-full mx-auto px-6 py-20 bg-gray-100">
+      <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
           Si eres redactor...
         </h2>
         <div className="flex flex-col lg:flex-row items-center lg:justify-between">
           {/* Imagen */}
           <div className="lg:w-1/2 mb-12 lg:mb-0">
             <img
-              src="/redactor.jpg" // Imagen de ejemplo
+              src="/redactor.png" // Imagen de ejemplo
               alt="Redactor"
               className="w-full rounded-lg shadow-lg"
             />
@@ -295,8 +293,8 @@ const LandingPage = () => {
       </section>
 
       {/* Sección "Si eres lector" */}
-      <section className="container mx-auto px-6 py-20 bg-gray-100">
-        <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
+      <section className="w-full mx-auto px-6 py-20 bg-gradient-to-r from-blue-500 to-teal-400">
+      <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
           Si eres lector...
         </h2>
         <div className="flex flex-col lg:flex-row items-center lg:justify-between">
@@ -325,7 +323,7 @@ const LandingPage = () => {
           {/* Imagen */}
           <div className="lg:w-1/2 mt-12 lg:mt-0">
             <img
-              src="/lector.jpg" // Imagen de ejemplo
+              src="/lector.png" // Imagen de ejemplo
               alt="Lector"
               className="w-full rounded-lg shadow-lg"
             />
