@@ -11,22 +11,26 @@ import {
   BanIcon,
   ShieldCheckIcon,
   PencilAltIcon,
+  CheckCircleIcon,
 } from "@heroicons/react/outline"; // Importing Heroicons
 
 const LandingPage = () => {
-  const heroRef = useRef(null);
-  const featuresRef = useRef(null);
-  const demoRef = useRef(null);
-  const testimonialsRef = useRef(null);
-  const contactRef = useRef(null);
-  const carouselRef = useRef(null);
+  // Correctly type the refs as HTMLDivElement or null
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const featuresRef = useRef<HTMLDivElement | null>(null);
+  const demoRef = useRef<HTMLDivElement | null>(null);
+  const testimonialsRef = useRef<HTMLDivElement | null>(null);
+  const contactRef = useRef<HTMLDivElement | null>(null);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
-  const scrollToSection = (ref) => {
-    window.scrollTo({
-      top: ref.current.offsetTop - 50,
-      behavior: "smooth",
-    });
+  const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
+    if (ref.current) {
+      window.scrollTo({
+        top: ref.current.offsetTop - 50,
+        behavior: "smooth",
+      });
+    }
   };
 
   const handleLaunchApp = () => {
@@ -37,20 +41,22 @@ const LandingPage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (carouselRef.current) {
-        const firstChild = carouselRef.current.firstChild;
-        carouselRef.current.scrollBy({
-          left: firstChild.clientWidth + 24, // Adding 24px for margin
-          behavior: "smooth",
-        });
+        const firstChild = carouselRef.current.firstChild as HTMLElement;
+        if (firstChild) {
+          carouselRef.current.scrollBy({
+            left: firstChild.clientWidth + 24, // Adding 24px for margin
+            behavior: "smooth",
+          });
 
-        // Restart the scroll when the last item is out of view
-        if (
-          carouselRef.current.scrollLeft + carouselRef.current.clientWidth >=
-          carouselRef.current.scrollWidth
-        ) {
-          setTimeout(() => {
-            carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
-          }, 1000);
+          // Restart the scroll when the last item is out of view
+          if (
+            carouselRef.current.scrollLeft + carouselRef.current.clientWidth >=
+            carouselRef.current.scrollWidth
+          ) {
+            setTimeout(() => {
+              carouselRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+            }, 1000);
+          }
         }
       }
     }, 3000); // Move every 3 seconds
@@ -60,13 +66,15 @@ const LandingPage = () => {
 
   // Handle manual mouse drag for the carousel
   let isDown = false;
-  let startX;
-  let scrollLeft;
+  let startX: number;
+  let scrollLeft: number;
 
-  const mouseDownHandler = (e) => {
-    isDown = true;
-    startX = e.pageX - carouselRef.current.offsetLeft;
-    scrollLeft = carouselRef.current.scrollLeft;
+  const mouseDownHandler = (e: React.MouseEvent) => {
+    if (carouselRef.current) {
+      isDown = true;
+      startX = e.pageX - carouselRef.current.offsetLeft;
+      scrollLeft = carouselRef.current.scrollLeft;
+    }
   };
 
   const mouseLeaveHandler = () => {
@@ -77,13 +85,14 @@ const LandingPage = () => {
     isDown = false;
   };
 
-  const mouseMoveHandler = (e) => {
-    if (!isDown) return;
+  const mouseMoveHandler = (e: React.MouseEvent) => {
+    if (!isDown || !carouselRef.current) return;
     e.preventDefault();
     const x = e.pageX - carouselRef.current.offsetLeft;
     const walk = (x - startX) * 2; // Adjust scroll speed
     carouselRef.current.scrollLeft = scrollLeft - walk;
   };
+
 
   return (
     <div className="bg-gray-50 font-sans">
@@ -236,12 +245,90 @@ const LandingPage = () => {
 
           {/* Nueva tarjeta: "Todo el mundo puede publicar" */}
           <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
-          <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
-          <PencilAltIcon className="text-white w-8 h-8" />
+            <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <PencilAltIcon className="text-white w-8 h-8" />
             </div>
             <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
-            Todos escriben
+              Todo el mundo puede publicar
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección "Si eres redactor" */}
+      <section className="container mx-auto px-6 py-20">
+        <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
+          Si eres redactor...
+        </h2>
+        <div className="flex flex-col lg:flex-row items-center lg:justify-between">
+          {/* Imagen */}
+          <div className="lg:w-1/2 mb-12 lg:mb-0">
+            <img
+              src="/redactor.jpg" // Imagen de ejemplo
+              alt="Redactor"
+              className="w-full rounded-lg shadow-lg"
+            />
+          </div>
+
+          {/* Lista de Tics */}
+          <div className="lg:w-1/2 lg:pl-12">
+            <ul className="space-y-4">
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">Gana dinero escribiendo artículos.</span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">Publica tus ideas libremente.</span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">Llega a miles de lectores.</span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">Acceso a una comunidad activa.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección "Si eres lector" */}
+      <section className="container mx-auto px-6 py-20 bg-gray-100">
+        <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
+          Si eres lector...
+        </h2>
+        <div className="flex flex-col lg:flex-row items-center lg:justify-between">
+          {/* Lista de Tics */}
+          <div className="lg:w-1/2 lg:pr-12">
+            <ul className="space-y-4">
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">Disfruta de noticias de calidad.</span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">Contenido sin clickbait ni anuncios.</span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">Comparte y comenta libremente.</span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">Acceso gratuito a artículos exclusivos.</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Imagen */}
+          <div className="lg:w-1/2 mt-12 lg:mt-0">
+            <img
+              src="/lector.jpg" // Imagen de ejemplo
+              alt="Lector"
+              className="w-full rounded-lg shadow-lg"
+            />
           </div>
         </div>
       </section>
