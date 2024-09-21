@@ -6,15 +6,23 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
-        'times': ['"Times New Roman"', 'serif'], // Adding Times New Roman
+        'times': ['"Times New Roman"', 'serif'], // Adding Times New Roman font
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 15s linear infinite',
       },
       typography: {
         DEFAULT: {
@@ -24,14 +32,14 @@ const config: Config = {
               marginBottom: '0',
               maxWidth: '100%',
             },
-          }
-        }
-      }
+          },
+        },
+      },
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
-    // other plugins...
+    // Add other plugins here if needed...
   ],
 };
 

@@ -1,5 +1,17 @@
-"use client"
-import React, { useRef } from 'react';
+"use client";
+import React, { useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import {
+  CurrencyEuroIcon,
+  NewspaperIcon,
+  UsersIcon,
+  GlobeAltIcon,
+  BadgeCheckIcon,
+  XCircleIcon,
+  BanIcon,
+  ShieldCheckIcon,
+  PencilAltIcon,
+} from "@heroicons/react/outline"; // Importing Heroicons
 
 const LandingPage = () => {
   const heroRef = useRef(null);
@@ -7,72 +19,247 @@ const LandingPage = () => {
   const demoRef = useRef(null);
   const testimonialsRef = useRef(null);
   const contactRef = useRef(null);
+  const carouselRef = useRef(null);
+  const router = useRouter();
 
-  const scrollToSection = (ref: any) => {
+  const scrollToSection = (ref) => {
     window.scrollTo({
-      top: ref.current.offsetTop - 50, // Adjust this value to account for navbar height
-      behavior: 'smooth',
+      top: ref.current.offsetTop - 50,
+      behavior: "smooth",
     });
   };
 
+  const handleLaunchApp = () => {
+    router.push("/"); // Redirect to the homepage
+  };
+
+  // Automatic carousel movement
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (carouselRef.current) {
+        const firstChild = carouselRef.current.firstChild;
+        carouselRef.current.scrollBy({
+          left: firstChild.clientWidth + 24, // Adding 24px for margin
+          behavior: "smooth",
+        });
+
+        // Restart the scroll when the last item is out of view
+        if (
+          carouselRef.current.scrollLeft + carouselRef.current.clientWidth >=
+          carouselRef.current.scrollWidth
+        ) {
+          setTimeout(() => {
+            carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
+          }, 1000);
+        }
+      }
+    }, 3000); // Move every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Handle manual mouse drag for the carousel
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  const mouseDownHandler = (e) => {
+    isDown = true;
+    startX = e.pageX - carouselRef.current.offsetLeft;
+    scrollLeft = carouselRef.current.scrollLeft;
+  };
+
+  const mouseLeaveHandler = () => {
+    isDown = false;
+  };
+
+  const mouseUpHandler = () => {
+    isDown = false;
+  };
+
+  const mouseMoveHandler = (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - carouselRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust scroll speed
+    carouselRef.current.scrollLeft = scrollLeft - walk;
+  };
+
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 font-sans">
       {/* Navigation Bar */}
       <nav className="bg-white fixed w-full z-10 shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold text-gray-800">
-            YourApp
-          </div>
-          <div className="hidden md:flex space-x-6">
-            <button onClick={() => scrollToSection(heroRef)} className="cursor-pointer text-gray-600 hover:text-blue-600">
-              Home
+          <div className="text-2xl font-bold text-gray-800">The Simple Newspaper</div>
+          <div className="hidden md:flex space-x-6 items-center">
+            <button
+              onClick={() => scrollToSection(heroRef)}
+              className="cursor-pointer text-gray-600 hover:text-blue-600"
+            >
+              Inicio
             </button>
-            <button onClick={() => scrollToSection(featuresRef)} className="cursor-pointer text-gray-600 hover:text-blue-600">
-              Features
+            <button
+              onClick={() => scrollToSection(featuresRef)}
+              className="cursor-pointer text-gray-600 hover:text-blue-600"
+            >
+              Características
             </button>
-            <button onClick={() => scrollToSection(demoRef)} className="cursor-pointer text-gray-600 hover:text-blue-600">
+            <button
+              onClick={() => scrollToSection(demoRef)}
+              className="cursor-pointer text-gray-600 hover:text-blue-600"
+            >
               Demo
             </button>
-            <button onClick={() => scrollToSection(testimonialsRef)} className="cursor-pointer text-gray-600 hover:text-blue-600">
-              Testimonials
+            <button
+              onClick={() => scrollToSection(testimonialsRef)}
+              className="cursor-pointer text-gray-600 hover:text-blue-600"
+            >
+              Testimonios
             </button>
-            <button onClick={() => scrollToSection(contactRef)} className="cursor-pointer text-gray-600 hover:text-blue-600">
-              Contact
+            <button
+              onClick={() => scrollToSection(contactRef)}
+              className="cursor-pointer text-gray-600 hover:text-blue-600"
+            >
+              Contacto
+            </button>
+
+            {/* Launch App Button */}
+            <button
+              onClick={handleLaunchApp}
+              className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 ml-4"
+            >
+              Lanzar App
             </button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <header ref={heroRef} className="pt-24 bg-gradient-to-r from-blue-500 to-teal-400">
-        <div className="container mx-auto px-6 py-20 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white">
-            Welcome to YourApp
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-gray-200">
-            Discover the future of productivity with our innovative app.
-          </p>
-          <button className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100">
-            Get Started
-          </button>
+      <header
+        ref={heroRef}
+        className="pt-28 bg-gradient-to-r from-blue-500 to-teal-400"
+      >
+        <div className="container mx-auto px-6 py-20 flex flex-col lg:flex-row items-center lg:justify-between">
+          {/* Text Column */}
+          <div className="lg:w-1/2 text-center lg:text-left">
+            <h1 className="text-5xl md:text-6xl font-bold text-white">
+              Bienvenido a The Simple Newspaper
+            </h1>
+            <p className="mt-6 text-lg md:text-xl text-gray-200">
+              Descubre el futuro de las noticias con nuestra plataforma innovadora.
+            </p>
+            <button className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100">
+              Comenzar
+            </button>
+          </div>
+
+          {/* Image Column */}
+          <div className="lg:w-1/2 mt-12 lg:mt-0">
+            <img
+              src="/newspaper-34126_1280.webp"
+              alt="Ilustración del periódico"
+              className="w-full rounded-lg"
+            />
+          </div>
         </div>
       </header>
 
-      {/* Features Section */}
+      {/* Features Section with Carousel */}
       <section ref={featuresRef} className="container mx-auto px-6 py-20">
-        <h2 className="text-4xl font-bold text-gray-800">Features</h2>
-        {/* Feature content */}
+        <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
+          ¿Por qué es el futuro?
+        </h2>
+
+        {/* Single Carousel - Interleaving Good and Bad Features */}
+        <div
+          ref={carouselRef}
+          className="overflow-x-auto flex whitespace-nowrap cursor-pointer scroll-smooth space-x-6"
+          onMouseDown={mouseDownHandler}
+          onMouseLeave={mouseLeaveHandler}
+          onMouseUp={mouseUpHandler}
+          onMouseMove={mouseMoveHandler}
+        >
+          {/* Positive and Negative Cards */}
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+            <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <CurrencyEuroIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+              Ganas € por leer
+            </p>
+          </div>
+
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+            <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <XCircleIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+              Sin anuncios
+            </p>
+          </div>
+
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+            <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <NewspaperIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+              Noticias de Calidad
+            </p>
+          </div>
+
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+            <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <BanIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+              Sin clickbait
+            </p>
+          </div>
+
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+            <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <UsersIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+              Comunidad activa
+            </p>
+          </div>
+
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+            <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <ShieldCheckIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+              Sin noticias falsas
+            </p>
+          </div>
+
+          {/* Nueva tarjeta: "Todo el mundo puede publicar" */}
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+          <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+          <PencilAltIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+            Todos escriben
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* Demo Video Section */}
+      {/* Demo Section */}
       <section ref={demoRef} className="bg-gray-100 py-20">
         <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center text-gray-800">Watch Our Demo</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-800">
+            Mira nuestra Demo
+          </h2>
+          <p className="mt-4 text-center text-gray-600">
+            Aprende cómo The Simple Newspaper puede transformar la manera en que consumes noticias.
+          </p>
           <div className="mt-8">
             <iframe
               className="w-full h-64 md:h-96 rounded-lg shadow-lg"
               src="https://www.youtube.com/embed/your-video-id"
-              title="Demo Video"
+              title="Video Demo"
               frameBorder="0"
               allowFullScreen
             ></iframe>
@@ -82,16 +269,26 @@ const LandingPage = () => {
 
       {/* Testimonials Section */}
       <section ref={testimonialsRef} className="container mx-auto px-6 py-20">
-        <h2 className="text-4xl font-bold text-center text-gray-800">What Our Users Say</h2>
-        {/* Testimonial content */}
+        <h2 className="text-4xl font-bold text-center text-gray-800">
+          Lo que dicen nuestros lectores
+        </h2>
+        <p className="mt-4 text-center text-gray-600">
+          Miles de lectores ya están disfrutando de una experiencia informativa mejorada con The Simple Newspaper.
+        </p>
       </section>
 
       {/* Contact Section */}
-      <section ref={contactRef} className="bg-gradient-to-r from-teal-400 to-blue-500 py-20">
+      <section
+        ref={contactRef}
+        className="bg-gradient-to-r from-teal-400 to-blue-500 py-20"
+      >
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-white">Get in Touch</h2>
-          <button className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100">
-            Contact Us
+          <h2 className="text-4xl font-bold text-white">Lanzar la App</h2>
+          <button
+            onClick={handleLaunchApp}
+            className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100"
+          >
+            Lanzar App
           </button>
         </div>
       </section>
@@ -99,7 +296,7 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="bg-gray-800">
         <div className="container mx-auto px-6 py-8 text-center text-gray-400">
-          &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+          &copy; {new Date().getFullYear()} The Simple Newspaper. Todos los derechos reservados.
         </div>
       </footer>
     </div>
