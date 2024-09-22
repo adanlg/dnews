@@ -36,7 +36,6 @@ const LandingPage = () => {
     router.push("/"); // Redirect to the homepage
   };
 
-  // Automatic carousel movement
   useEffect(() => {
     const interval = setInterval(() => {
       if (carouselRef.current) {
