@@ -186,23 +186,6 @@ const LandingPage = () => {
           onMouseMove={mouseMoveHandler}
         >
           {/* Positive and Negative Cards */}
-          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
-            <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
-              <CurrencyEuroIcon className="text-white w-8 h-8" />
-            </div>
-            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
-              Ganas € por leer
-            </p>
-          </div>
-
-          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
-            <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
-              <XCircleIcon className="text-white w-8 h-8" />
-            </div>
-            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
-              Sin anuncios
-            </p>
-          </div>
 
           <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
             <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
@@ -212,10 +195,27 @@ const LandingPage = () => {
               Noticias de Calidad
             </p>
           </div>
-
           <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
             <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
-              <BanIcon className="text-white w-8 h-8" />
+              <XCircleIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+              Sin anuncios
+            </p>
+          </div>
+
+
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+            <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <CurrencyEuroIcon className="text-white w-8 h-8" />
+            </div>
+            <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
+              Ganas € por leer
+            </p>
+          </div>
+          <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
+            <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+            <BanIcon className="text-white w-8 h-8" />
             </div>
             <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
               Sin clickbait
@@ -242,8 +242,8 @@ const LandingPage = () => {
 
           {/* Nueva tarjeta: "Todo el mundo puede publicar" */}
           <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
-          <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
-          <PencilAltIcon className="text-white w-8 h-8" />
+            <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
+              <PencilAltIcon className="text-white w-8 h-8" />
             </div>
             <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
               Todos publicamos
@@ -254,37 +254,44 @@ const LandingPage = () => {
 
       {/* Sección "Si eres redactor" */}
       <section className="w-full mx-auto px-6 py-20 bg-gray-100">
-      <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
-          Si eres redactor...
-        </h2>
-        <div className="flex flex-col lg:flex-row items-center lg:justify-between">
-          {/* Imagen */}
-          <div className="lg:w-1/2 mb-12 lg:mb-0">
-            <img
-              src="/redactor.png" // Imagen de ejemplo
-              alt="Redactor"
-              className="w-full rounded-lg shadow-lg"
-            />
-          </div>
-
+  <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
+    Si eres redactor...
+  </h2>
+  <div className="flex flex-col lg:flex-row items-center justify-around text-center lg:space-x-12">
+    {/* Imagen */}
+    <div className="lg:w-1/3 mb-12 lg:mb-0">
+      <img
+        src="/redactor.png" // Imagen de ejemplo
+        alt="Redactor"
+        className="w-full rounded-lg"
+      />
+    </div>
           {/* Lista de Tics */}
           <div className="lg:w-1/2 lg:pl-12">
             <ul className="space-y-4">
               <li className="flex items-center">
                 <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">Gana dinero escribiendo artículos.</span>
+                <span className="text-gray-700 text-lg">
+                  Gana dinero escribiendo artículos.
+                </span>
               </li>
               <li className="flex items-center">
                 <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">Publica tus ideas libremente.</span>
+                <span className="text-gray-700 text-lg">
+                  Publica tus ideas libremente.
+                </span>
               </li>
               <li className="flex items-center">
                 <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">Llega a miles de lectores.</span>
+                <span className="text-gray-700 text-lg">
+                  Llega a miles de lectores.
+                </span>
               </li>
               <li className="flex items-center">
                 <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">Acceso a una comunidad activa.</span>
+                <span className="text-gray-700 text-lg">
+                  Acceso a una comunidad activa.
+                </span>
               </li>
             </ul>
           </div>
@@ -293,42 +300,51 @@ const LandingPage = () => {
 
       {/* Sección "Si eres lector" */}
       <section className="w-full mx-auto px-6 py-20 bg-gradient-to-r from-blue-500 to-teal-400">
-      <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
-          Si eres lector...
-        </h2>
-        <div className="flex flex-col lg:flex-row items-center lg:justify-between">
-          {/* Lista de Tics */}
-          <div className="lg:w-1/2 lg:pr-12">
-            <ul className="space-y-4">
-              <li className="flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">Disfruta de noticias de calidad.</span>
-              </li>
-              <li className="flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">Contenido sin clickbait ni anuncios.</span>
-              </li>
-              <li className="flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">Comparte y comenta libremente.</span>
-              </li>
-              <li className="flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">Acceso gratuito a artículos exclusivos.</span>
-              </li>
-            </ul>
-          </div>
+  <h2 className="text-4xl font-bold text-white text-center mb-10">
+    Si eres lector...
+  </h2>
+  <div className="flex flex-col lg:flex-row items-center justify-center text-center">
+    {/* Lista de Tics */}
+    <div className="lg:w-1/2 lg:pr-12">
+      <ul className="space-y-4">
+        <li className="flex items-center">
+          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+          <span className="text-white text-lg">
+            Disfruta de noticias de calidad.
+          </span>
+        </li>
+        <li className="flex items-center">
+          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+          <span className="text-white text-lg">
+            Contenido sin clickbait ni anuncios.
+          </span>
+        </li>
+        <li className="flex items-center">
+          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+          <span className="text-white text-lg">
+            Comparte y comenta libremente.
+          </span>
+        </li>
+        <li className="flex items-center">
+          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+          <span className="text-white text-lg">
+            Acceso gratuito a artículos exclusivos.
+          </span>
+        </li>
+      </ul>
+    </div>
 
-          {/* Imagen */}
-          <div className="lg:w-1/2 mt-12 lg:mt-0">
-            <img
-              src="/lector.png" // Imagen de ejemplo
-              alt="Lector"
-              className="w-full rounded-lg shadow-lg"
-            />
-          </div>
-        </div>
-      </section>
+    {/* Imagen */}
+    <div className="lg:w-1/4 mt-12 lg:mt-0">
+      <img
+        src="/lector.png" // Imagen de ejemplo
+        alt="Lector"
+        className="w-full rounded-lg"
+      />
+    </div>
+  </div>
+</section>
+
 
       {/* Demo Section */}
       <section ref={demoRef} className="bg-gray-100 py-20">
@@ -378,11 +394,34 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
+      {/* Footer */}
       <footer className="bg-gray-800">
-        <div className="container mx-auto px-6 py-8 text-center text-gray-400">
-          &copy; {new Date().getFullYear()} The Simple Newspaper. Todos los derechos reservados.
-        </div>
-      </footer>
+  <div className="container mx-auto px-6 py-8 text-center text-gray-400">
+    <div className="mt-4 flex justify-center items-center space-x-4">
+      <span>Do you have any question?</span>
+      <a 
+        href="YOUR_DISCORD_LINK_HERE" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="hover:underline hover:text-blue-500 transition duration-300"
+      >
+        Join our discord server!
+      </a>
+      <a href="YOUR_DISCORD_LINK_HERE" target="_blank" rel="noopener noreferrer">
+        <img
+          src="/discord-icon.svg" // Ensure you have the Discord icon SVG in your public folder
+          alt="Discord"
+          className="w-6 h-6 inline-block"
+        />
+      </a>
+    </div>
+
+    <div className="mt-4">
+      &copy; {new Date().getFullYear()} The Simple Newspaper. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
     </div>
   );
 };
