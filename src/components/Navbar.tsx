@@ -146,21 +146,21 @@ const Navbar = () => {
                     </div>
                     <div className='hidden md:flex items-center space-x-9 pr-8'>
                     <Link href='/' passHref>
-                            <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
+                            <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer font-bold'>
                                 <p className='nav-link'>Home</p>
                             </span>
                         </Link>
                         <Link href='/tokenomics' passHref>
-                            <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
+                            <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer font-bold'>
                                 <p className='nav-link'>Tokenomics</p>
                             </span>
                         </Link>
                         <Link href='/token' passHref>
-                            <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
+                            <span className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer font-bold'>
                                 <p className='nav-link'>Buy token</p>
                             </span>
                         </Link>
-                        <button onClick={MakeNewStory} className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer'>
+                        <button onClick={MakeNewStory} className='flex items-center space-x-2 opacity-70 hover:opacity-100 duration-100 ease-in cursor-pointer font-bold'>
                             <p className='nav-link'>Write</p>
                         </button>
                     </div>
