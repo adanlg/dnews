@@ -309,7 +309,7 @@ const LandingPage = () => {
               <li className="flex items-center">
                 <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
                 <span className="text-gray-700 text-lg">
-                  Acceso a una comunidad activa.
+                  Sin intermediarios, el periódico no se lleva comisión.
                 </span>
               </li>
             </ul>
@@ -335,19 +335,19 @@ const LandingPage = () => {
         <li className="flex items-center">
           <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
           <span className="text-white text-lg">
-            Contenido sin clickbait ni anuncios.
+            Contenido sin clickbait ni fake news.
           </span>
         </li>
         <li className="flex items-center">
           <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
           <span className="text-white text-lg">
-            Comparte y comenta libremente.
+            No pierde tiempo con anuncios.
           </span>
         </li>
         <li className="flex items-center">
           <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
           <span className="text-white text-lg">
-            Acceso gratuito a artículos exclusivos.
+            Gana dinero por tu opinión.
           </span>
         </li>
       </ul>
