@@ -134,7 +134,7 @@ const LandingPage = () => {
               onClick={handleLaunchApp}
               className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 ml-4"
             >
-              Lanzar App
+              Versión Alpha
             </button>
           </div>
         </div>
@@ -149,14 +149,24 @@ const LandingPage = () => {
           {/* Text Column */}
           <div className="lg:w-1/2 text-center lg:text-left">
             <h1 className="text-5xl md:text-6xl font-bold text-white">
-              Bienvenido a The Simple Newspaper
+              TSN el futuro de los medios digitales
             </h1>
             <p className="mt-6 text-lg md:text-xl text-gray-200">
-              Descubre el futuro de las noticias con nuestra plataforma innovadora.
+              Súbete a la ola y disfruta de las ventajas por ser pionero
             </p>
-            <button className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100">
-              Comenzar
+            <div className="flex justify-center lg:justify-start">
+            <button 
+              className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
+              onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
+            >
+              <img
+                src="/blue-discord.svg" // Asegúrate de tener este archivo en tu carpeta pública
+                alt="Discord"
+                className="w-6 h-6 mr-2"
+              />
+              Únete a la comunidad
             </button>
+            </div>
           </div>
 
           {/* Image Column */}
@@ -369,13 +379,22 @@ const LandingPage = () => {
 
       {/* Testimonials Section */}
       <section ref={testimonialsRef} className="container mx-auto px-6 py-20">
-        <h2 className="text-4xl font-bold text-center text-gray-800">
-          Lo que dicen nuestros lectores
-        </h2>
-        <p className="mt-4 text-center text-gray-600">
-          Miles de lectores ya están disfrutando de una experiencia informativa mejorada con The Simple Newspaper.
-        </p>
-      </section>
+  <h2 className="text-4xl font-bold text-center text-gray-800">
+    Utilidad del token
+  </h2>
+  <p className="mt-4 text-center text-gray-600">
+    Nuestro token permite a los usuarios ganar recompensas por leer, escribir y participar activamente en la comunidad de The Simple Newspaper. También se puede usar para desbloquear contenido exclusivo y obtener descuentos en futuros servicios.
+  </p>
+  
+  <div className="mt-8 flex justify-center">
+    <img 
+      src="/tokenomics2.png"  // Asegúrate de tener esta imagen en tu carpeta pública
+      alt="Tokenomics del proyecto"
+      className="w-full max-w-md rounded-lg shadow-lg"
+    />
+  </div>
+</section>
+
 
       {/* Contact Section */}
       <section
@@ -398,14 +417,15 @@ const LandingPage = () => {
       <footer className="bg-gray-800">
   <div className="container mx-auto px-6 py-8 text-center text-gray-400">
     <div className="mt-4 flex justify-center items-center space-x-4">
-      <span>Do you have any question?</span>
+      <span>¿Tienes alguna pregunta?</span>
       <a 
         href="https://discord.gg/49sVc6eK" 
         target="_blank" 
         rel="noopener noreferrer"
         className="hover:underline hover:text-blue-500 transition duration-300"
       >
-        Join our discord server!
+          ¡Pregúntanos en Discord!
+
       </a>
       <a href="https://discord.gg/49sVc6eK" target="_blank" rel="noopener noreferrer">
         <img
