@@ -419,26 +419,41 @@ const LandingPage = () => {
 
       {/* Contact Section */}
       <section
-        ref={contactRef}
-        className="bg-gradient-to-r from-teal-400 to-blue-500 py-20"
+  ref={contactRef}
+  className="bg-gradient-to-r from-teal-400 to-blue-500 py-20"
+>
+  <div className="container mx-auto px-6 text-center">
+    <h2 className="text-4xl font-bold text-white">Gana regalos y acceso a la preventa</h2>
+    
+    <div className="flex justify-center">
+      {/* Botón de Discord */}
+      <button 
+        className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
+        onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
       >
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-white">Gana regalos y acceso a la preventa</h2>
-          <div className="flex justify-center">
-            <button 
-              className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
-              onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
-            >
-              <img
-                src="/blue-discord.svg" // Asegúrate de tener este archivo en tu carpeta pública
-                alt="Discord"
-                className="w-6 h-6 mr-2"
-              />
-              Únete a la comunidad
-            </button>
-            </div>
-        </div>
-      </section>
+        <img
+          src="/blue-discord.svg" // Asegúrate de tener este archivo en tu carpeta pública
+          alt="Discord"
+          className="w-6 h-6 mr-2"
+        />
+        Únete a la comunidad
+      </button>
+    </div>
+
+    {/* Texto para Telegram */}
+    <p className="mt-4 text-white">
+      ¿No tienes Discord? Contacta con nosotros a través de{' '}
+      <a 
+        href="https://t.me/adanlg" // Reemplaza con tu enlace de Telegram
+        target="_blank"
+        className="underline"
+      >
+        Telegram
+      </a>
+    </p>
+  </div>
+</section>
+
 
       {/* Footer */}
       {/* Footer */}
