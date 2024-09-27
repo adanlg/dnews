@@ -358,7 +358,7 @@ const LandingPage = () => {
           <div className="mt-8">
             <iframe
               className="w-full h-64 md:h-96 rounded-lg shadow-lg"
-              src="https://www.youtube.com/embed/your-video-id"
+              src="https://www.youtube.com/watch?v=MERMfEVWSL0"
               title="Video Demo"
               frameBorder="0"
               allowFullScreen
