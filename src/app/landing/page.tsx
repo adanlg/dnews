@@ -424,7 +424,7 @@ const LandingPage = () => {
       >
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-white">Gana regalos y acceso a la preventa</h2>
-          <div className="flex justify-center md:justify-start">
+          <div className="flex justify-center">
             <button 
               className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
               onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
