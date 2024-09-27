@@ -400,14 +400,14 @@ const LandingPage = () => {
     <div className="mt-4 flex justify-center items-center space-x-4">
       <span>Do you have any question?</span>
       <a 
-        href="YOUR_DISCORD_LINK_HERE" 
+        href="https://discord.gg/49sVc6eK" 
         target="_blank" 
         rel="noopener noreferrer"
         className="hover:underline hover:text-blue-500 transition duration-300"
       >
         Join our discord server!
       </a>
-      <a href="YOUR_DISCORD_LINK_HERE" target="_blank" rel="noopener noreferrer">
+      <a href="https://discord.gg/49sVc6eK" target="_blank" rel="noopener noreferrer">
         <img
           src="/discord-icon.svg" // Ensure you have the Discord icon SVG in your public folder
           alt="Discord"
