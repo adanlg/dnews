@@ -14,6 +14,10 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/outline"; // Importing Heroicons
 
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, useGLTF } from '@react-three/drei';
+
+
 const LandingPage = () => {
   const heroRef = useRef<HTMLDivElement | null>(null);
   const featuresRef = useRef<HTMLDivElement | null>(null);
@@ -31,6 +35,11 @@ const LandingPage = () => {
       });
     }
   };
+
+  function SpinningCoin() {
+    const { scene } = useGLTF('/mario_coin.glb'); // Carga el modelo de la moneda
+    return <primitive object={scene} scale={2} />;
+  }
 
   const handleLaunchApp = () => {
     router.push("/"); // Redirect to the homepage
@@ -154,7 +163,7 @@ const LandingPage = () => {
             <p className="mt-6 text-lg md:text-xl text-gray-200">
               Súbete a la ola y disfruta de las ventajas por ser pionero
             </p>
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex justify-center md:justify-start">
             <button 
               className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
               onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
@@ -360,7 +369,7 @@ const LandingPage = () => {
       <section ref={demoRef} className="bg-gray-100 py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-gray-800">
-            Mira nuestra Demo
+      ¿Cómo funciona?
           </h2>
           <p className="mt-4 text-center text-gray-600">
             Aprende cómo The Simple Newspaper puede transformar la manera en que consumes noticias.
@@ -380,19 +389,31 @@ const LandingPage = () => {
       {/* Testimonials Section */}
       <section ref={testimonialsRef} className="container mx-auto px-6 py-20">
   <h2 className="text-4xl font-bold text-center text-gray-800">
-    Utilidad del token
+    Moneda TSN
   </h2>
   <p className="mt-4 text-center text-gray-600">
-    Nuestro token permite a los usuarios ganar recompensas por leer, escribir y participar activamente en la comunidad de The Simple Newspaper. También se puede usar para desbloquear contenido exclusivo y obtener descuentos en futuros servicios.
+    Permite crear noticias y opinar sobre ellas
+
   </p>
-  
+
+  <p className="mt-4 text-center text-gray-600">
+    Cuantas más personas se unan al ecosistema, mayor valor tendrá nuestro periódico
+  </p>
   <div className="mt-8 flex justify-center">
-    <img 
-      src="/tokenomics2.png"  // Asegúrate de tener esta imagen en tu carpeta pública
-      alt="Tokenomics del proyecto"
-      className="w-full max-w-md rounded-lg shadow-lg"
-    />
+    {/* Canvas para renderizar la moneda 3D */}
+    <Canvas style={{ width: '100%', height: '500px' }}>
+      {/* Controles para rotar la moneda */}
+      <OrbitControls enableZoom={false} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[2, 5, 2]} intensity={1} />
+      {/* Componente de la moneda giratoria */}
+      <SpinningCoin />
+    </Canvas>
   </div>
+
+  {/* <p className="mt-4 text-center text-gray-600">
+    Cuantas más personas se unan al ecosistema, mayor valor tendrá nuestro periódico
+  </p> */}
 </section>
 
 
@@ -402,13 +423,20 @@ const LandingPage = () => {
         className="bg-gradient-to-r from-teal-400 to-blue-500 py-20"
       >
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-white">Lanzar la App</h2>
-          <button
-            onClick={handleLaunchApp}
-            className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100"
-          >
-            Lanzar App
-          </button>
+          <h2 className="text-4xl font-bold text-white">Gana regalos y acceso a la preventa</h2>
+          <div className="flex justify-center md:justify-start">
+            <button 
+              className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
+              onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
+            >
+              <img
+                src="/blue-discord.svg" // Asegúrate de tener este archivo en tu carpeta pública
+                alt="Discord"
+                className="w-6 h-6 mr-2"
+              />
+              Únete a la comunidad
+            </button>
+            </div>
         </div>
       </section>
 
