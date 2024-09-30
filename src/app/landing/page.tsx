@@ -455,11 +455,11 @@ const LandingPage = () => {
     <p className="mt-4 text-white">
       ¿No tienes Discord? Contacta con nosotros a través de{' '}
       <a 
-        href="https://t.me/adanlg" // Reemplaza con tu enlace de Telegram
+        href="https://whatsapp.com/channel/0029Vapr6EEIN9igkuQctE1y" 
         target="_blank"
         className="underline"
       >
-        Telegram
+        WhatsApp
       </a>
     </p>
   </div>
