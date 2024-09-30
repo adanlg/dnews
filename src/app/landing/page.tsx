@@ -129,7 +129,7 @@ const LandingPage = () => {
               onClick={() => scrollToSection(testimonialsRef)}
               className="cursor-pointer text-gray-600 hover:text-blue-600"
             >
-              Testimonios
+              Token
             </button>
             <button
               onClick={() => scrollToSection(contactRef)}
@@ -271,7 +271,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Sección "Si eres redactor" */}
       <section className="w-full mx-auto px-6 py-20 bg-gray-100">
   <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
     Si eres redactor...
@@ -285,37 +284,40 @@ const LandingPage = () => {
         className="w-full rounded-lg"
       />
     </div>
-          {/* Lista de Tics */}
-          <div className="lg:w-1/2 lg:pl-12">
-            <ul className="space-y-4">
-              <li className="flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">
-                  Gana dinero escribiendo artículos.
-                </span>
-              </li>
-              <li className="flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">
-                  Publica tus ideas libremente.
-                </span>
-              </li>
-              <li className="flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">
-                  Llega a miles de lectores.
-                </span>
-              </li>
-              <li className="flex items-center">
-                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-                <span className="text-gray-700 text-lg">
-                  Sin intermediarios, el periódico no se lleva comisión.
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
+    {/* Lista de Tics */}
+    <div className="lg:w-1/2 lg:pl-12">
+      <ul className="space-y-4">
+        <li className="flex items-center">
+          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+          <span className="text-gray-700 text-lg">
+            Gana dinero escribiendo artículos.
+          </span>
+        </li>
+        <li className="flex items-center">
+          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+          <span className="text-gray-700 text-lg">
+            Publica tus ideas libremente.
+          </span>
+        </li>
+        <li className="flex items-center">
+          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+          <span className="text-gray-700 text-lg">
+            Llega a miles de lectores.
+          </span>
+        </li>
+        <li className="flex items-center">
+          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+          {/* Frase diferente según tamaño de pantalla */}
+          <span className="text-gray-700 text-lg">
+            <span className="block md:hidden">Sin intermediarios.</span>
+            <span className="hidden md:block">Sin intermediarios, el periódico no se lleva comisión.</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 
       {/* Sección "Si eres lector" */}
       <section className="w-full mx-auto px-6 py-20 bg-gradient-to-r from-blue-500 to-teal-400">
@@ -367,24 +369,33 @@ const LandingPage = () => {
 
       {/* Demo Section */}
       <section ref={demoRef} className="bg-gray-100 py-20">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center text-gray-800">
+  <div className="container mx-auto px-6">
+    <h2 className="text-4xl font-bold text-center text-gray-800">
       ¿Cómo funciona?
-          </h2>
-          <p className="mt-4 text-center text-gray-600">
-            Aprende cómo The Simple Newspaper puede transformar la manera en que consumes noticias.
-          </p>
-          <div className="mt-8">
-            <iframe
-              className="w-full h-64 md:h-96 rounded-lg shadow-lg"
-              src="https://www.youtube.com/watch?v=MERMfEVWSL0"
-              title="Video Demo"
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-      </section>
+    </h2>
+    <p className="mt-4 text-center text-gray-600">
+      Aprende cómo The Simple Newspaper puede transformar la manera en que consumes noticias.
+    </p>
+    <div className="mt-8 relative overflow-hidden" style={{ paddingBottom: '56.25%' /* 16:9 ratio */ }}>
+      <iframe
+        className="absolute top-0 left-0 w-full h-full"
+        src="https://www.youtube.com/embed/MERMfEVWSL0"
+        title="The Simple Newspaper | Demo Presentación"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+      {/* <iframe width="1280" height="720" src="https://www.youtube.com/embed/MERMfEVWSL0" title="The Simple Newspaper | Demo Presentación" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
+
 
       {/* Testimonials Section */}
       <section ref={testimonialsRef} className="container mx-auto px-6 py-20">
