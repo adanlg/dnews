@@ -5,8 +5,6 @@ import {
   CurrencyEuroIcon,
   NewspaperIcon,
   UsersIcon,
-  GlobeAltIcon,
-  BadgeCheckIcon,
   XCircleIcon,
   BanIcon,
   ShieldCheckIcon,
@@ -14,9 +12,8 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/outline"; // Importing Heroicons
 
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
-
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 
 const LandingPage = () => {
   const heroRef = useRef<HTMLDivElement | null>(null);
@@ -37,7 +34,7 @@ const LandingPage = () => {
   };
 
   function SpinningCoin() {
-    const { scene } = useGLTF('/mario_coin.glb'); // Carga el modelo de la moneda
+    const { scene } = useGLTF("/mario_coin.glb"); // Load the coin model
     return <primitive object={scene} scale={2} />;
   }
 
@@ -105,7 +102,9 @@ const LandingPage = () => {
       {/* Navigation Bar */}
       <nav className="bg-white fixed w-full z-10 shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold text-gray-800">The Simple Newspaper</div>
+          <div className="text-2xl font-bold text-gray-800">
+            The Simple Newspaper
+          </div>
           <div className="hidden md:flex space-x-6 items-center">
             <button
               onClick={() => scrollToSection(heroRef)}
@@ -164,17 +163,19 @@ const LandingPage = () => {
               Súbete a la ola y disfruta de las ventajas por ser pionero
             </p>
             <div className="flex justify-center md:justify-start">
-            <button 
-              className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
-              onClick={() => window.open('https://discord.gg/GbM6ZkuC', '_blank')}
-            >
-              <img
-                src="/blue-discord.svg" // Asegúrate de tener este archivo en tu carpeta pública
-                alt="Discord"
-                className="w-6 h-6 mr-2"
-              />
-              Únete a la comunidad
-            </button>
+              <button
+                className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
+                onClick={() =>
+                  window.open("https://discord.gg/GbM6ZkuC", "_blank")
+                }
+              >
+                <img
+                  src="/blue-discord.svg" // Ensure you have this file in your public folder
+                  alt="Discord"
+                  className="w-6 h-6 mr-2"
+                />
+                Únete a la comunidad
+              </button>
             </div>
           </div>
 
@@ -223,7 +224,6 @@ const LandingPage = () => {
             </p>
           </div>
 
-
           <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
             <div className="bg-green-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
               <CurrencyEuroIcon className="text-white w-8 h-8" />
@@ -234,7 +234,7 @@ const LandingPage = () => {
           </div>
           <div className="inline-block mr-6 p-4 rounded-lg shadow-lg bg-white max-w-xs sm:w-48 w-36">
             <div className="bg-gradient-to-r from-blue-500 to-teal-400 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto">
-            <BanIcon className="text-white w-8 h-8" />
+              <BanIcon className="text-white w-8 h-8" />
             </div>
             <p className="mt-4 text-center text-sm sm:text-lg text-gray-700 font-semibold">
               Sin clickbait
@@ -272,226 +272,227 @@ const LandingPage = () => {
       </section>
 
       <section className="w-full mx-auto px-6 py-20 bg-gray-100">
-  <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
-    Si eres redactor...
-  </h2>
-  <div className="flex flex-col lg:flex-row items-center justify-around text-center lg:space-x-12">
-    {/* Imagen */}
-    <div className="lg:w-1/3 mb-12 lg:mb-0">
-      <img
-        src="/redactor.png" // Imagen de ejemplo
-        alt="Redactor"
-        className="w-full rounded-lg"
-      />
-    </div>
-    {/* Lista de Tics */}
-    <div className="lg:w-1/2 lg:pl-12">
-      <ul className="space-y-4">
-        <li className="flex items-center">
-          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-          <span className="text-gray-700 text-lg">
-            Gana dinero escribiendo artículos.
-          </span>
-        </li>
-        <li className="flex items-center">
-          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-          <span className="text-gray-700 text-lg">
-            Publica tus ideas libremente.
-          </span>
-        </li>
-        <li className="flex items-center">
-          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-          <span className="text-gray-700 text-lg">
-            Llega a miles de lectores.
-          </span>
-        </li>
-        <li className="flex items-center">
-          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-          {/* Frase diferente según tamaño de pantalla */}
-          <span className="text-gray-700 text-lg">
-            <span className="block md:hidden">Sin intermediarios.</span>
-            <span className="hidden md:block">Sin intermediarios, el periódico no se lleva comisión.</span>
-          </span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
+        <h2 className="text-4xl font-bold text-gray-800 text-center mb-10">
+          Si eres redactor...
+        </h2>
+        <div className="flex flex-col lg:flex-row items-center justify-around text-center lg:space-x-12">
+          {/* Imagen */}
+          <div className="lg:w-1/3 mb-12 lg:mb-0">
+            <img
+              src="/redactor.png" // Imagen de ejemplo
+              alt="Redactor"
+              className="w-full rounded-lg"
+            />
+          </div>
+          {/* Lista de Tics */}
+          <div className="lg:w-1/2 lg:pl-12">
+            <ul className="space-y-4">
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">
+                  Gana dinero escribiendo artículos.
+                </span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">
+                  Publica tus ideas libremente.
+                </span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-gray-700 text-lg">
+                  Llega a miles de lectores.
+                </span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                {/* Frase diferente según tamaño de pantalla */}
+                <span className="text-gray-700 text-lg">
+                  <span className="block md:hidden">Sin intermediarios.</span>
+                  <span className="hidden md:block">
+                    Sin intermediarios, el periódico no se lleva comisión.
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
       {/* Sección "Si eres lector" */}
       <section className="w-full mx-auto px-6 py-20 bg-gradient-to-r from-blue-500 to-teal-400">
-  <h2 className="text-4xl font-bold text-white text-center mb-10">
-    Si eres lector...
-  </h2>
-  <div className="flex flex-col lg:flex-row items-center justify-center text-center">
-    {/* Lista de Tics */}
-    <div className="lg:w-1/2 lg:pr-12">
-      <ul className="space-y-4">
-        <li className="flex items-center">
-          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-          <span className="text-white text-lg">
-            Disfruta de noticias de calidad.
-          </span>
-        </li>
-        <li className="flex items-center">
-          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-          <span className="text-white text-lg">
-            Contenido sin clickbait ni fake news.
-          </span>
-        </li>
-        <li className="flex items-center">
-          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-          <span className="text-white text-lg">
-            No pierde tiempo con anuncios.
-          </span>
-        </li>
-        <li className="flex items-center">
-          <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
-          <span className="text-white text-lg">
-            Gana dinero por tu opinión.
-          </span>
-        </li>
-      </ul>
-    </div>
+        <h2 className="text-4xl font-bold text-white text-center mb-10">
+          Si eres lector...
+        </h2>
+        <div className="flex flex-col lg:flex-row items-center justify-center text-center">
+          {/* Lista de Tics */}
+          <div className="lg:w-1/2 lg:pr-12">
+            <ul className="space-y-4">
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-white text-lg">
+                  Disfruta de noticias de calidad.
+                </span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-white text-lg">
+                  Contenido sin clickbait ni fake news.
+                </span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-white text-lg">
+                  No pierde tiempo con anuncios.
+                </span>
+              </li>
+              <li className="flex items-center">
+                <CheckCircleIcon className="w-6 h-6 text-green-500 mr-2" />
+                <span className="text-white text-lg">
+                  Gana dinero por tu opinión.
+                </span>
+              </li>
+            </ul>
+          </div>
 
-    {/* Imagen */}
-    <div className="lg:w-1/4 mt-12 lg:mt-0">
-      <img
-        src="/lector.png" // Imagen de ejemplo
-        alt="Lector"
-        className="w-full rounded-lg"
-      />
-    </div>
-  </div>
-</section>
-
+          {/* Imagen */}
+          <div className="lg:w-1/4 mt-12 lg:mt-0">
+            <img
+              src="/lector.png" // Imagen de ejemplo
+              alt="Lector"
+              className="w-full rounded-lg"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Demo Section */}
       <section ref={demoRef} className="bg-gray-100 py-20">
-  <div className="container mx-auto px-6">
-    <h2 className="text-4xl font-bold text-center text-gray-800">
-      ¿Cómo funciona?
-    </h2>
-    <p className="mt-4 text-center text-gray-600">
-      Aprende cómo The Simple Newspaper puede transformar la manera en que consumes noticias.
-    </p>
-    <div className="mt-8 relative overflow-hidden" style={{ paddingBottom: '56.25%' /* 16:9 ratio */ }}>
-      <iframe
-        className="absolute top-0 left-0 w-full h-full"
-        src="https://www.youtube.com/embed/MERMfEVWSL0"
-        title="The Simple Newspaper | Demo Presentación"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      ></iframe>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-      {/* <iframe width="1280" height="720" src="https://www.youtube.com/embed/MERMfEVWSL0" title="The Simple Newspaper | Demo Presentación" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
-
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-gray-800">
+            ¿Cómo funciona?
+          </h2>
+          <p className="mt-4 text-center text-gray-600">
+            Aprende cómo The Simple Newspaper puede transformar la manera en que
+            consumes noticias.
+          </p>
+          <div
+            className="mt-8 relative overflow-hidden"
+            style={{ paddingBottom: "56.25%" /* 16:9 ratio */ }}
+          >
+            <iframe
+              className="absolute top-0 left-0 w-full h-full"
+              src="https://www.youtube.com/embed/MERMfEVWSL0"
+              title="The Simple Newspaper | Demo Presentación"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
 
       {/* Testimonials Section */}
       <section ref={testimonialsRef} className="container mx-auto px-6 py-20">
-  <h2 className="text-4xl font-bold text-center text-gray-800">
-    Moneda TSN
-  </h2>
-  <p className="mt-4 text-center text-gray-600">
-    Permite crear noticias y opinar sobre ellas
+        <h2 className="text-4xl font-bold text-center text-gray-800">
+          Moneda TSN
+        </h2>
+        <p className="mt-4 text-center text-gray-600">
+          Permite crear noticias y opinar sobre ellas
+        </p>
 
-  </p>
-
-  <p className="mt-4 text-center text-gray-600">
-    Cuantas más personas se unan al ecosistema, mayor valor tendrá nuestro periódico
-  </p>
-  <div className="mt-8 flex justify-center">
-    {/* Canvas para renderizar la moneda 3D */}
-    <Canvas style={{ width: '100%', height: '500px' }}>
-      {/* Controles para rotar la moneda */}
-      <OrbitControls enableZoom={false} />
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[2, 5, 2]} intensity={1} />
-      {/* Componente de la moneda giratoria */}
-      <SpinningCoin />
-    </Canvas>
-  </div>
-
-
-</section>
-
+        <p className="mt-4 text-center text-gray-600">
+          Cuantas más personas se unan al ecosistema, mayor valor tendrá
+          nuestro periódico
+        </p>
+        <div className="mt-8 flex justify-center">
+          <div className="w-64 h-64 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px]">
+            <Canvas className="w-full h-full pointer-events-none md:pointer-events-auto">
+              {/* Controls to rotate the coin */}
+              <OrbitControls enableZoom={false} />
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[2, 5, 2]} intensity={1} />
+              {/* Spinning coin component */}
+              <SpinningCoin />
+            </Canvas>
+          </div>
+        </div>
+      </section>
 
       {/* Contact Section */}
       <section
-  ref={contactRef}
-  className="bg-gradient-to-r from-teal-400 to-blue-500 py-20"
->
-  <div className="container mx-auto px-6 text-center">
-    <h2 className="text-4xl font-bold text-white">Gana regalos y acceso a la preventa</h2>
-    
-    <div className="flex justify-center">
-      {/* Botón de Discord */}
-      <button 
-        className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
-        onClick={() => window.open('https://discord.gg/GbM6ZkuC', '_blank')}
+        ref={contactRef}
+        className="bg-gradient-to-r from-teal-400 to-blue-500 py-20"
       >
-        <img
-          src="/blue-discord.svg" 
-          alt="Discord"
-          className="w-6 h-6 mr-2"
-        />
-        Únete a la comunidad
-      </button>
-    </div>
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold text-white">
+            Gana regalos y acceso a la preventa
+          </h2>
 
-    {/* Texto para Telegram */}
-    <p className="mt-4 text-white">
-      ¿No tienes Discord? Contacta con nosotros a través de{' '}
-      <a 
-        href="https://whatsapp.com/channel/0029Vapr6EEIN9igkuQctE1y" 
-        target="_blank"
-        className="underline"
-      >
-        WhatsApp
-      </a>
-    </p>
-  </div>
-</section>
+          <div className="flex justify-center">
+            {/* Botón de Discord */}
+            <button
+              className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
+              onClick={() =>
+                window.open("https://discord.gg/GbM6ZkuC", "_blank")
+              }
+            >
+              <img
+                src="/blue-discord.svg"
+                alt="Discord"
+                className="w-6 h-6 mr-2"
+              />
+              Únete a la comunidad
+            </button>
+          </div>
 
+          {/* Texto para WhatsApp */}
+          <p className="mt-4 text-white">
+            ¿No tienes Discord? Contacta con nosotros a través de{" "}
+            <a
+              href="https://whatsapp.com/channel/0029Vapr6EEIN9igkuQctE1y"
+              target="_blank"
+              className="underline"
+            >
+              WhatsApp
+            </a>
+          </p>
+        </div>
+      </section>
 
       <footer className="bg-gray-800">
-  <div className="container mx-auto px-6 py-8 text-center text-gray-400">
-    <div className="mt-4 flex justify-center items-center space-x-4">
-      <span>¿Tienes alguna pregunta?</span>
-      <a 
-        href="https://discord.gg/GbM6ZkuC" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="hover:underline hover:text-blue-500 transition duration-300"
-      >
-          ¡Pregúntanos en Discord!
+        <div className="container mx-auto px-6 py-8 text-center text-gray-400">
+          <div className="mt-4 flex justify-center items-center space-x-4">
+            <span>¿Tienes alguna pregunta?</span>
+            <a
+              href="https://discord.gg/GbM6ZkuC"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline hover:text-blue-500 transition duration-300"
+            >
+              ¡Pregúntanos en Discord!
+            </a>
+            <a
+              href="https://discord.gg/GbM6ZkuC"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="/discord-icon.svg" // Ensure you have the Discord icon SVG in your public folder
+                alt="Discord"
+                className="w-6 h-6 inline-block"
+              />
+            </a>
+          </div>
 
-      </a>
-      <a href="https://discord.gg/GbM6ZkuC" target="_blank" rel="noopener noreferrer">
-        <img
-          src="/discord-icon.svg" // Ensure you have the Discord icon SVG in your public folder
-          alt="Discord"
-          className="w-6 h-6 inline-block"
-        />
-      </a>
-    </div>
-
-    <div className="mt-4">
-      &copy; {new Date().getFullYear()} The Simple Newspaper. Todos los derechos reservados.
-    </div>
-  </div>
-</footer>
-
+          <div className="mt-4">
+            &copy; {new Date().getFullYear()} The Simple Newspaper. Todos los
+            derechos reservados.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
