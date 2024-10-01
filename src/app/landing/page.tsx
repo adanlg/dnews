@@ -422,9 +422,7 @@ const LandingPage = () => {
     </Canvas>
   </div>
 
-  {/* <p className="mt-4 text-center text-gray-600">
-    Cuantas más personas se unan al ecosistema, mayor valor tendrá nuestro periódico
-  </p> */}
+
 </section>
 
 
@@ -443,7 +441,7 @@ const LandingPage = () => {
         onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
       >
         <img
-          src="/blue-discord.svg" // Asegúrate de tener este archivo en tu carpeta pública
+          src="/blue-discord.svg" 
           alt="Discord"
           className="w-6 h-6 mr-2"
         />
@@ -466,8 +464,6 @@ const LandingPage = () => {
 </section>
 
 
-      {/* Footer */}
-      {/* Footer */}
       <footer className="bg-gray-800">
   <div className="container mx-auto px-6 py-8 text-center text-gray-400">
     <div className="mt-4 flex justify-center items-center space-x-4">
