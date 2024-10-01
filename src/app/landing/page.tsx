@@ -166,7 +166,7 @@ const LandingPage = () => {
             <div className="flex justify-center md:justify-start">
             <button 
               className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
-              onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
+              onClick={() => window.open('https://discord.gg/GbM6ZkuC', '_blank')}
             >
               <img
                 src="/blue-discord.svg" // Asegúrate de tener este archivo en tu carpeta pública
@@ -438,7 +438,7 @@ const LandingPage = () => {
       {/* Botón de Discord */}
       <button 
         className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
-        onClick={() => window.open('https://discord.gg/49sVc6eK', '_blank')}
+        onClick={() => window.open('https://discord.gg/GbM6ZkuC', '_blank')}
       >
         <img
           src="/blue-discord.svg" 
@@ -469,7 +469,7 @@ const LandingPage = () => {
     <div className="mt-4 flex justify-center items-center space-x-4">
       <span>¿Tienes alguna pregunta?</span>
       <a 
-        href="https://discord.gg/49sVc6eK" 
+        href="https://discord.gg/GbM6ZkuC" 
         target="_blank" 
         rel="noopener noreferrer"
         className="hover:underline hover:text-blue-500 transition duration-300"
@@ -477,7 +477,7 @@ const LandingPage = () => {
           ¡Pregúntanos en Discord!
 
       </a>
-      <a href="https://discord.gg/49sVc6eK" target="_blank" rel="noopener noreferrer">
+      <a href="https://discord.gg/GbM6ZkuC" target="_blank" rel="noopener noreferrer">
         <img
           src="/discord-icon.svg" // Ensure you have the Discord icon SVG in your public folder
           alt="Discord"
