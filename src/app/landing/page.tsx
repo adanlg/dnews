@@ -356,10 +356,9 @@ const LandingPage = () => {
             </ul>
           </div>
 
-          {/* Imagen */}
           <div className="lg:w-1/4 mt-12 lg:mt-0">
             <img
-              src="/lector.png" // Imagen de ejemplo
+              src="/lector.png"
               alt="Lector"
               className="w-full rounded-lg"
             />
@@ -367,7 +366,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Demo Section */}
       <section ref={demoRef} className="bg-gray-100 py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-gray-800">
@@ -394,7 +392,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section ref={testimonialsRef} className="container mx-auto px-6 py-20">
         <h2 className="text-4xl font-bold text-center text-gray-800">
           Moneda TSN
@@ -410,18 +407,15 @@ const LandingPage = () => {
         <div className="mt-8 flex justify-center">
           <div className="w-64 h-64 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px]">
             <Canvas className="w-full h-full pointer-events-none md:pointer-events-auto">
-              {/* Controls to rotate the coin */}
               <OrbitControls enableZoom={false} />
               <ambientLight intensity={0.5} />
               <directionalLight position={[2, 5, 2]} intensity={1} />
-              {/* Spinning coin component */}
               <SpinningCoin />
             </Canvas>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
       <section
         ref={contactRef}
         className="bg-gradient-to-r from-teal-400 to-blue-500 py-20"
@@ -432,7 +426,6 @@ const LandingPage = () => {
           </h2>
 
           <div className="flex justify-center">
-            {/* Botón de Discord */}
             <button
               className="mt-8 px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 flex items-center justify-center"
               onClick={() =>
@@ -448,7 +441,6 @@ const LandingPage = () => {
             </button>
           </div>
 
-          {/* Texto para WhatsApp */}
           <p className="mt-4 text-white">
             ¿No tienes Discord? Contacta con nosotros a través de{" "}
             <a
@@ -480,7 +472,7 @@ const LandingPage = () => {
               rel="noopener noreferrer"
             >
               <img
-                src="/discord-icon.svg" // Ensure you have the Discord icon SVG in your public folder
+                src="/discord-icon.svg" 
                 alt="Discord"
                 className="w-6 h-6 inline-block"
               />
