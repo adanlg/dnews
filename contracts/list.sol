@@ -11,9 +11,8 @@ contract NewsOwnership {
     IERC20 public acceptedToken;
     address public owner;
     uint256 public tokenAmount;
-    mapping(string => address) public newsOwners; // Asocia cada ID de noticia a una dirección
-    string[] private newsIds; // Array para almacenar los IDs de las noticias
-
+    mapping(string => address) public newsOwners;
+    string[] private newsIds; 
     modifier onlyOwner() {
         require(msg.sender == owner, "Not the owner");
         _;
@@ -28,14 +27,13 @@ contract NewsOwnership {
         tokenAmount = _tokenAmount;
     }
 
-    // Añade o actualiza el propietario de un ID de noticia dado.
     function receiveTokenAndUpdateOwner(string memory newsId) external {
         require(acceptedToken.transferFrom(msg.sender, address(this), tokenAmount), "Transfer failed");
 
-        if (newsOwners[newsId] == address(0)) { // Si es la primera vez que se añade este ID
+        if (newsOwners[newsId] == address(0)) { 
             newsIds.push(newsId);
         }
-        newsOwners[newsId] = msg.sender; // Asigna directamente el `msg.sender` como propietario de la noticia.
+        newsOwners[newsId] = msg.sender; 
     }
 
     function withdrawTokens() external onlyOwner {
@@ -51,7 +49,6 @@ contract NewsOwnership {
         require(sent, "Failed to send ETH");
     }
 
-    // Permite al propietario actual transferir el control del contrato a otra dirección.
     function transferOwnership(address newOwner) external onlyOwner {
         require(newOwner != address(0), "New owner is the zero address");
         owner = newOwner;
@@ -65,6 +62,5 @@ contract NewsOwnership {
         return (newsIds, owners);
     }
 
-    // Permitir al contrato recibir ETH directamente.
     receive() external payable {}
 }
