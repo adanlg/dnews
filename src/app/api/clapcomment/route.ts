@@ -1,10 +1,8 @@
 import prisma from "@/app/prismadb"
-// import { auth } from "@clerk/nextjs"
 import { NextResponse, NextRequest } from "next/server"
 
 export async function POST(request: NextRequest){
     const {userId} =await request.json();
-    //  auth()
     if(!userId) return NextResponse.next()
 
     try {
